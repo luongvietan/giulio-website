@@ -1,0 +1,121 @@
+"use client";
+
+import React from 'react';
+import NavigationHeader from "@/components/sections/navigation-header";
+import Footer from "@/components/sections/footer";
+
+export default function ContactPage() {
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0a0a0b]">
+      <NavigationHeader />
+      <main>
+        <section className="w-full bg-[#0a0a0b] py-24 px-6 md:px-12">
+          <div className="max-w-[1100px] mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+              <div>
+                <h1 className="text-[36px] md:text-[44px] font-medium tracking-[-0.03em] leading-[1.1] mb-6 text-white">
+                  Get in <span className="text-[#71717a]">Touch</span>
+                </h1>
+                <p className="text-[17px] text-[#52525b] font-normal leading-relaxed mb-10">
+                  Have questions about our services or want to discuss how we can help you? We&apos;d love to hear from you.
+                </p>
+                
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-[#1a1a1d] border border-[#27272a] rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-[#c9a227]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-[15px] font-semibold text-white mb-1">Email</h3>
+                      <a href="mailto:contact@gammacapital.com" className="text-[14px] text-[#c9a227] hover:underline">
+                        contact@gammacapital.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#111113] border border-[#27272a] rounded-xl p-7 md:p-8">
+                <h2 className="text-[20px] font-semibold text-white mb-6">Send us a message</h2>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <div>
+                    <label htmlFor="name" className="block text-[13px] font-medium text-[#a1a1aa] mb-2">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 border border-[#27272a] rounded-lg bg-[#0a0a0b] text-[14px] text-white placeholder-[#52525b] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/50 focus:border-[#c9a227]/50 transition-colors"
+                      placeholder="Your name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-[13px] font-medium text-[#a1a1aa] mb-2">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 border border-[#27272a] rounded-lg bg-[#0a0a0b] text-[14px] text-white placeholder-[#52525b] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/50 focus:border-[#c9a227]/50 transition-colors"
+                      placeholder="your@email.com"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="subject" className="block text-[13px] font-medium text-[#a1a1aa] mb-2">Subject</label>
+                    <select
+                      id="subject"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full px-4 py-3 border border-[#27272a] rounded-lg bg-[#0a0a0b] text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#c9a227]/50 focus:border-[#c9a227]/50 transition-colors"
+                      required
+                    >
+                      <option value="" className="bg-[#0a0a0b]">Select a topic</option>
+                      <option value="memberships" className="bg-[#0a0a0b]">Discord Memberships</option>
+                      <option value="consulting" className="bg-[#0a0a0b]">Consulting Services</option>
+                      <option value="general" className="bg-[#0a0a0b]">General Inquiry</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-[13px] font-medium text-[#a1a1aa] mb-2">Message</label>
+                    <textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      rows={4}
+                      className="w-full px-4 py-3 border border-[#27272a] rounded-lg bg-[#0a0a0b] text-[14px] text-white placeholder-[#52525b] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/50 focus:border-[#c9a227]/50 transition-colors resize-none"
+                      placeholder="How can we help you?"
+                      required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-white text-[#0a0a0b] py-3.5 rounded-md text-[14px] font-semibold hover:bg-[#e4e4e7] transition-colors mt-2"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+}
