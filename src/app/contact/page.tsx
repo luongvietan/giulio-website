@@ -4,6 +4,13 @@ import React from 'react';
 import NavigationHeader from "@/components/sections/navigation-header";
 import Footer from "@/components/sections/footer";
 
+const subjectOptions = [
+  { value: '', label: 'Select a topic' },
+  { value: 'memberships', label: 'Discord Memberships' },
+  { value: 'consulting', label: 'Consulting Services' },
+  { value: 'general', label: 'General Inquiry' },
+];
+
 export default function ContactPage() {
   const [formData, setFormData] = React.useState({
     name: '',
@@ -11,11 +18,25 @@ export default function ContactPage() {
     subject: '',
     message: '',
   });
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
   };
+
+  const selectedLabel = subjectOptions.find(opt => opt.value === formData.subject)?.label || 'Select a topic';
 
   return (
     <div className="min-h-screen bg-[#0a0a0b]">
@@ -76,20 +97,49 @@ export default function ContactPage() {
                       required
                     />
                   </div>
-                  <div>
-                    <label htmlFor="subject" className="block text-[13px] font-medium text-[#a1a1aa] mb-2">Subject</label>
-                    <select
-                      id="subject"
-                      value={formData.subject}
-                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 border border-[#27272a] rounded-lg bg-[#0a0a0b] text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#c9a227]/50 focus:border-[#c9a227]/50 transition-colors"
-                      required
+                  <div ref={dropdownRef} className="relative">
+                    <label className="block text-[13px] font-medium text-[#a1a1aa] mb-2">Subject</label>
+                    <button
+                      type="button"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      className={`w-full px-4 py-3 border rounded-lg bg-[#0a0a0b] text-[14px] text-left flex items-center justify-between transition-colors ${
+                        isDropdownOpen 
+                          ? 'border-[#c9a227]/50 ring-1 ring-[#c9a227]/50' 
+                          : 'border-[#27272a] hover:border-[#3f3f46]'
+                      } ${formData.subject ? 'text-white' : 'text-[#52525b]'}`}
                     >
-                      <option value="" className="bg-[#0a0a0b]">Select a topic</option>
-                      <option value="memberships" className="bg-[#0a0a0b]">Discord Memberships</option>
-                      <option value="consulting" className="bg-[#0a0a0b]">Consulting Services</option>
-                      <option value="general" className="bg-[#0a0a0b]">General Inquiry</option>
-                    </select>
+                      <span>{selectedLabel}</span>
+                      <svg 
+                        className={`w-4 h-4 text-[#71717a] transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {isDropdownOpen && (
+                      <div className="absolute z-50 w-full mt-2 py-1 bg-[#18181b] border border-[#27272a] rounded-lg shadow-xl shadow-black/40 overflow-hidden">
+                        {subjectOptions.map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => {
+                              setFormData({ ...formData, subject: option.value });
+                              setIsDropdownOpen(false);
+                            }}
+                            className={`w-full px-4 py-2.5 text-[14px] text-left transition-colors ${
+                              formData.subject === option.value
+                                ? 'bg-[#c9a227]/10 text-[#c9a227]'
+                                : 'text-[#a1a1aa] hover:bg-[#27272a] hover:text-white'
+                            }`}
+                          >
+                            {option.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    <input type="hidden" name="subject" value={formData.subject} required />
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-[13px] font-medium text-[#a1a1aa] mb-2">Message</label>
