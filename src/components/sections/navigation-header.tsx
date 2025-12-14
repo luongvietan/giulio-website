@@ -41,7 +41,7 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
   const ctaRef = useRef<HTMLDivElement>(null);
 
   // Use CMS data or fallback
-  const siteName = siteSettings?.siteName || 'Gamma Capital';
+  const siteName = siteSettings?.siteName || 'GAMMA CAPITAL';
   const logoText = siteSettings?.logoText || 'Γ';
   const navItems = siteSettings?.navItems || defaultNavItems;
   const navCTA = siteSettings?.navCTA || defaultNavCTA;
