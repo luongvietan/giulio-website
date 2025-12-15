@@ -73,9 +73,9 @@ const includedFeatures = [
 ];
 
 const educationalMiniCourse = [
-  'how options work',
-  'how to read institutional flows',
-  'how to operate with smart-money logic'
+  'How options work',
+  'How to read institutional flows',
+  'How to operate with smart-money logic'
 ];
 
 const additionalIncluded = [
@@ -168,10 +168,10 @@ const faqs = [
 
 // Section 8 - Coming Soon
 const comingSoonFeatures = [
-  'enhanced flow dashboards',
-  'educational modules',
-  'deeper analytical channels',
-  'periodic market breakdowns'
+  'Enhanced flow dashboards',
+  'Educational modules',
+  'Deeper analytical channels',
+  'Periodic market breakdowns'
 ];
 
 export default function MembershipsPageClient() {
@@ -563,8 +563,8 @@ export default function MembershipsPageClient() {
                 <div
                   key={plan.id}
                   className={`pricing-card relative bg-white rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl ${plan.popular
-                      ? 'border-[#0d9488] shadow-lg ring-1 ring-[#0d9488]/20'
-                      : 'border-[#e4e4e7] hover:border-[#0d9488]/40'
+                    ? 'border-[#0d9488] shadow-lg ring-1 ring-[#0d9488]/20'
+                    : 'border-[#e4e4e7] hover:border-[#0d9488]/40'
                     }`}
                 >
                   {plan.popular && (
@@ -597,8 +597,8 @@ export default function MembershipsPageClient() {
                     onClick={() => handleCheckout(plan.id)}
                     disabled={isLoading === plan.id}
                     className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl text-[14px] font-semibold transition-all duration-200 ${plan.popular
-                        ? 'bg-[#0d9488] text-white hover:bg-[#0f766e]'
-                        : 'bg-[#0a0a0b] text-white hover:bg-[#27272a]'
+                      ? 'bg-[#0d9488] text-white hover:bg-[#0f766e]'
+                      : 'bg-[#0a0a0b] text-white hover:bg-[#27272a]'
                       } disabled:opacity-70 disabled:cursor-not-allowed`}
                   >
                     {isLoading === plan.id ? (
