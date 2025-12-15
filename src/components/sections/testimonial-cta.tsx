@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { ArrowRight } from 'lucide-react';
 import type { TestimonialCTASectionData } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,18 +14,18 @@ gsap.registerPlugin(ScrollTrigger);
 const defaultData: TestimonialCTASectionData = {
   _key: 'default-cta',
   _type: 'testimonialCTASection',
-  badge: 'Trusted by institutional investors',
-  titleLine1: 'Ready to Gain an Edge',
-  titleLine2: "in Today's Markets?",
-  description: 'Join our community of sophisticated investors gaining access to institutional-grade insights and personalized guidance.',
+  badge: 'Get Started',
+  titleLine1: 'Built for Investors Who Want',
+  titleLine2: 'Structure and Clarity',
+  description: 'Whether you are looking for actionable market intelligence, a disciplined community, or strategic advisory support, Gamma Capital is designed to help you operate with confidence in complex markets.',
   primaryCTA: {
-    text: 'Explore Memberships',
+    text: 'Join Discord Memberships',
     href: '/memberships',
     variant: 'primary',
   },
   secondaryCTA: {
-    text: 'Contact Us',
-    href: '/contact',
+    text: 'Explore Our Solutions',
+    href: '/solutions',
     variant: 'secondary',
   },
 };
@@ -82,33 +83,38 @@ export default function TestimonialCTA({ data }: TestimonialCTAProps) {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#f4f4f5] py-24 px-6 md:px-12 border-t border-[#e4e4e7]">
+    <section ref={sectionRef} className="w-full bg-gradient-to-b from-[#f4f4f5] to-[#fafafa] py-28 px-6 md:px-12 border-t border-[#e4e4e7]">
       <div className="max-w-[900px] mx-auto text-center">
-        <div ref={badgeRef} className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-[#e4e4e7] rounded-full mb-8">
+        <div ref={badgeRef} className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-[#e4e4e7] rounded-full mb-8 shadow-sm">
           <span className="text-[12px] font-medium text-[#71717a] tracking-wide">{content.badge}</span>
         </div>
-        <h2 ref={titleRef} className="text-[32px] md:text-[44px] font-medium tracking-[-0.02em] leading-[1.15] mb-6 text-[#0a0a0b]">
+        <h2 ref={titleRef} className="text-[32px] md:text-[48px] font-medium tracking-[-0.02em] leading-[1.15] mb-6 text-[#0a0a0b]">
           {content.titleLine1}<br />
-          {content.titleLine2 && <span className="text-[#71717a]">{content.titleLine2}</span>}
+          {content.titleLine2 && (
+            <span className="bg-clip-text text-transparent italic font-['Playfair_Display'] bg-gradient-to-r from-[#52525b] via-[#0d9488] to-[#14b8a6]">
+              {content.titleLine2}
+            </span>
+          )}
         </h2>
         {content.description && (
-          <p ref={paragraphRef} className="text-[17px] text-[#a1a1aa] font-normal leading-relaxed max-w-xl mx-auto mb-10">
+          <p ref={paragraphRef} className="text-[16px] md:text-[17px] text-[#71717a] font-normal leading-relaxed max-w-2xl mx-auto mb-12">
             {content.description}
           </p>
         )}
-        <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-3 justify-center">
+        <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center">
           {content.primaryCTA && (
             <Link
               href={content.primaryCTA.href}
-              className="bg-[#0a0a0b] text-white px-7 py-3.5 rounded-md text-[14px] font-semibold hover:bg-[#27272a] transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-[#0d9488] text-white px-8 py-4 rounded-xl text-[15px] font-semibold hover:bg-[#0f766e] transition-colors shadow-lg shadow-[#0d9488]/20"
             >
               {content.primaryCTA.text}
+              <ArrowRight className="w-4 h-4" />
             </Link>
           )}
           {content.secondaryCTA && (
             <Link
               href={content.secondaryCTA.href}
-              className="bg-transparent text-[#0a0a0b] px-7 py-3.5 rounded-md text-[14px] font-medium border border-[#e4e4e7] hover:border-[#a1a1aa] hover:bg-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-white text-[#0a0a0b] px-8 py-4 rounded-xl text-[15px] font-medium border border-[#e4e4e7] hover:border-[#a1a1aa] hover:bg-[#f4f4f5] transition-colors"
             >
               {content.secondaryCTA.text}
             </Link>

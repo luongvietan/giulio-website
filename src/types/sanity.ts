@@ -49,7 +49,7 @@ export interface Stat {
 
 export interface ServiceCard {
     _key: string
-    icon?: 'BarChart3' | 'Users' | 'Building2' | 'Network' | 'Rocket' | 'Discord'
+    icon?: 'BarChart3' | 'Users' | 'Building2' | 'Network' | 'Rocket' | 'Discord' | 'Briefcase'
     title: string
     description: string
     href: string

@@ -2,6 +2,8 @@ import { draftMode } from 'next/headers'
 import NavigationHeader from "@/components/sections/navigation-header";
 import HeroSection from "@/components/sections/hero-section";
 import WhatWeDo from "@/components/sections/what-we-do";
+import MultiAssetSection from "@/components/sections/multi-asset-section";
+import WhyGammaSection from "@/components/sections/why-gamma-section";
 import TestimonialCTA from "@/components/sections/testimonial-cta";
 import Footer from "@/components/sections/footer";
 import { PageBuilder } from "@/components/page-builder";
@@ -42,6 +44,8 @@ export default async function Home() {
           <>
             <HeroSection />
             <WhatWeDo />
+            <MultiAssetSection />
+            <WhyGammaSection />
             <TestimonialCTA />
           </>
         )}
