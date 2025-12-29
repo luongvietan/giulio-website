@@ -203,12 +203,12 @@ export default function ConsultingPageClient() {
 
   // Feature Card Component
   const FeatureCard = ({ icon: Icon, title, desc }: { icon: React.ElementType; title: string; desc: string }) => (
-    <div className="feature-card group bg-white rounded-2xl p-6 border border-[#e4e4e7] hover:border-[#0d9488]/30 hover:shadow-lg hover:shadow-[#0d9488]/5 transition-all duration-300">
-      <div className="w-12 h-12 bg-gradient-to-br from-[#0d9488]/10 to-[#0d9488]/5 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-        <Icon className="w-6 h-6 text-[#0d9488]" />
+    <div className="feature-card group bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-lg hover:shadow-[#2563EB]/5 transition-all duration-300">
+      <div className="w-12 h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+        <Icon className="w-6 h-6 text-[#2563EB]" />
       </div>
-      <h4 className="text-[16px] font-semibold text-[#0a0a0b] mb-2">{title}</h4>
-      <p className="text-[14px] text-[#71717a] leading-relaxed">{desc}</p>
+      <h4 className="text-[16px] font-semibold text-[#111827] mb-2">{title}</h4>
+      <p className="text-[14px] text-[#6B7280] leading-relaxed">{desc}</p>
     </div>
   );
 
@@ -221,8 +221,8 @@ export default function ConsultingPageClient() {
     highlight,
     features,
     bgAlt = false,
-    iconGradient = "from-[#0d9488] to-[#0f766e]",
-    shadowColor = "shadow-[#0d9488]/20"
+    iconGradient = "from-[#2563EB] to-[#1E3A8A]",
+    shadowColor = "shadow-[#2563EB]/20"
   }: {
     id: string;
     icon: React.ElementType;
@@ -234,7 +234,7 @@ export default function ConsultingPageClient() {
     iconGradient?: string;
     shadowColor?: string;
   }) => (
-    <section id={id} className={`service-section w-full py-12 md:py-24 px-6 md:px-12 ${bgAlt ? 'bg-[#f4f4f5]' : 'bg-[#fafafa]'}`}>
+    <section id={id} className={`service-section w-full py-12 md:py-24 px-6 md:px-12 ${bgAlt ? 'bg-[#F8F9FB]' : 'bg-white'}`}>
       <div className="max-w-[1200px] mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left: Content */}
@@ -243,22 +243,22 @@ export default function ConsultingPageClient() {
               <div className={`w-14 h-14 bg-gradient-to-br ${iconGradient} rounded-2xl flex items-center justify-center shadow-lg ${shadowColor}`}>
                 <Icon className="w-7 h-7 text-white" />
               </div>
-              <h2 className="text-[28px] md:text-[36px] font-semibold text-[#0a0a0b] tracking-[-0.02em]">{title}</h2>
+              <h2 className="text-[28px] md:text-[36px] font-semibold text-[#111827] tracking-[-0.02em]">{title}</h2>
             </div>
 
             <div className="space-y-4 mb-8">
               {description.map((text, index) => (
-                <p key={index} className="text-[16px] text-[#52525b] leading-[1.8]">
+                <p key={index} className="text-[16px] text-[#374151] leading-[1.8]">
                   {text}
                 </p>
               ))}
             </div>
 
             {/* Highlight Box */}
-            <div className="bg-gradient-to-r from-[#0d9488]/5 to-transparent border-l-4 border-[#0d9488] pl-5 py-4 pr-4 rounded-r-lg">
+            <div className="bg-gradient-to-r from-[#2563EB]/5 to-transparent border-l-4 border-[#2563EB] pl-5 py-4 pr-4 rounded-r-lg">
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#0d9488] mt-0.5 flex-shrink-0" />
-                <p className="text-[15px] text-[#0a0a0b] font-medium leading-relaxed">
+                <CheckCircle2 className="w-5 h-5 text-[#2563EB] mt-0.5 flex-shrink-0" />
+                <p className="text-[15px] text-[#111827] font-medium leading-relaxed">
                   {highlight}
                 </p>
               </div>
@@ -277,11 +277,11 @@ export default function ConsultingPageClient() {
   );
 
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen bg-white">
       <NavigationHeader />
       <main>
         {/* Hero Section */}
-        <section ref={heroRef} className="w-full bg-gradient-to-b from-[#0a0a0b] to-[#18181b] py-16 md:py-28 px-6 md:px-12 relative overflow-hidden">
+        <section ref={heroRef} className="w-full bg-gradient-to-b from-[#0A1A2F] to-[#111827] py-16 md:py-28 px-6 md:px-12 relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-[0.03]">
             <div className="absolute inset-0" style={{
@@ -291,20 +291,20 @@ export default function ConsultingPageClient() {
           </div>
 
           {/* Gradient Orbs */}
-          <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#0d9488]/10 rounded-full blur-[120px] pointer-events-none"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-[#0d9488]/5 rounded-full blur-[100px] pointer-events-none"></div>
+          <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#2563EB]/10 rounded-full blur-[120px] pointer-events-none"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-[#2563EB]/5 rounded-full blur-[100px] pointer-events-none"></div>
 
           <div className="max-w-[1200px] mx-auto text-center relative z-10">
-            <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-[#0d9488]/20 border border-[#0d9488]/30 rounded-full mb-8">
-              <span className="w-2 h-2 bg-[#0d9488] rounded-full animate-pulse"></span>
-              <span className="text-[13px] font-medium text-[#0d9488] tracking-wide uppercase">Advisory Services</span>
+            <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-[#2563EB]/20 border border-[#2563EB]/30 rounded-full mb-8">
+              <span className="w-2 h-2 bg-[#2563EB] rounded-full animate-pulse"></span>
+              <span className="text-[13px] font-medium text-[#2563EB] tracking-wide uppercase">Advisory Services</span>
             </div>
 
-            <h1 className="hero-title text-[42px] md:text-[56px] lg:text-[64px] font-medium tracking-[-0.03em] leading-[1.05] mb-8 text-white">
+            <h1 className="hero-title text-[42px] md:text-[56px] lg:text-[64px] font-display font-medium tracking-[-0.03em] leading-[1.05] mb-8 text-white">
               Consulting
             </h1>
 
-            <p className="hero-subtitle text-[18px] md:text-[20px] text-[#a1a1aa] font-normal leading-relaxed max-w-3xl mx-auto mb-12">
+            <p className="hero-subtitle text-[18px] md:text-[20px] text-[#9CA3AF] font-normal leading-relaxed max-w-3xl mx-auto mb-12">
               Institution-level advisory designed for private investors who demand precision,
               clarity, and actionable insight across every major asset class.
             </p>
@@ -313,21 +313,21 @@ export default function ConsultingPageClient() {
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-12">
               <div className="text-center">
                 <div className="text-[32px] md:text-[40px] font-bold text-white mb-1">6</div>
-                <div className="text-[13px] text-[#71717a] uppercase tracking-wider">Core Services</div>
+                <div className="text-[13px] text-[#9CA3AF] uppercase tracking-wider">Core Services</div>
               </div>
               <div className="text-center">
                 <div className="text-[32px] md:text-[40px] font-bold text-white mb-1">Multi-Asset</div>
-                <div className="text-[13px] text-[#71717a] uppercase tracking-wider">Coverage</div>
+                <div className="text-[13px] text-[#9CA3AF] uppercase tracking-wider">Coverage</div>
               </div>
               <div className="text-center">
                 <div className="text-[32px] md:text-[40px] font-bold text-white mb-1">Institutional</div>
-                <div className="text-[13px] text-[#71717a] uppercase tracking-wider">Precision</div>
+                <div className="text-[13px] text-[#9CA3AF] uppercase tracking-wider">Precision</div>
               </div>
             </div>
 
             <button
               onClick={() => scrollToSection('service-nav')}
-              className="hero-scroll-indicator inline-flex flex-col items-center gap-2 text-[#71717a] hover:text-[#0d9488] transition-colors cursor-pointer"
+              className="hero-scroll-indicator inline-flex flex-col items-center gap-2 text-[#9CA3AF] hover:text-[#2563EB] transition-colors cursor-pointer"
             >
               <span className="text-[13px] font-medium">Explore Services</span>
               <ChevronDown className="w-5 h-5 animate-bounce" />
@@ -336,11 +336,11 @@ export default function ConsultingPageClient() {
         </section>
 
         {/* Service Navigation Cards */}
-        <section id="service-nav" className="w-full bg-white py-12 md:py-16 px-6 md:px-12 border-b border-[#e4e4e7]">
+        <section id="service-nav" className="w-full bg-white py-12 md:py-16 px-6 md:px-12 border-b border-[#E5E7EB]">
           <div className="max-w-[1200px] mx-auto">
             <div className="text-center mb-10">
-              <h2 className="text-[24px] md:text-[28px] font-semibold text-[#0a0a0b] mb-3">Our Advisory Services</h2>
-              <p className="text-[15px] text-[#71717a]">Click to explore each service in detail</p>
+              <h2 className="text-[24px] md:text-[28px] font-semibold text-[#111827] mb-3">Our Advisory Services</h2>
+              <p className="text-[15px] text-[#6B7280]">Click to explore each service in detail</p>
             </div>
             <div ref={navCardsRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {serviceNavItems.map((item) => {
@@ -350,22 +350,22 @@ export default function ConsultingPageClient() {
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
                     className={`group flex flex-col items-center gap-3 p-5 rounded-2xl border transition-all duration-300 text-center ${activeSection === item.id
-                      ? 'bg-[#0d9488] border-[#0d9488] shadow-lg shadow-[#0d9488]/20'
-                      : 'bg-white border-[#e4e4e7] hover:border-[#0d9488]/30 hover:shadow-md'
+                      ? 'bg-[#2563EB] border-[#2563EB] shadow-lg shadow-[#2563EB]/20'
+                      : 'bg-white border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-md'
                       }`}
                   >
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${activeSection === item.id
                       ? 'bg-white/20'
-                      : 'bg-[#f4f4f5] group-hover:bg-[#0d9488]/10'
+                      : 'bg-[#F8F9FB] group-hover:bg-[#2563EB]/10'
                       }`}>
                       <IconComponent className={`w-6 h-6 transition-colors ${activeSection === item.id
                         ? 'text-white'
-                        : 'text-[#71717a] group-hover:text-[#0d9488]'
+                        : 'text-[#6B7280] group-hover:text-[#2563EB]'
                         }`} />
                     </div>
                     <h3 className={`text-[13px] font-semibold leading-tight transition-colors ${activeSection === item.id
                       ? 'text-white'
-                      : 'text-[#0a0a0b]'
+                      : 'text-[#111827]'
                       }`}>
                       {item.title}
                     </h3>
@@ -462,7 +462,7 @@ export default function ConsultingPageClient() {
         />
 
         {/* Final CTA Section */}
-        <section className="w-full bg-gradient-to-b from-[#0a0a0b] to-[#18181b] py-16 md:py-24 px-6 md:px-12 relative overflow-hidden">
+        <section className="w-full bg-gradient-to-b from-[#0A1A2F] to-[#111827] py-16 md:py-24 px-6 md:px-12 relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-[0.03]">
             <div className="absolute inset-0" style={{
@@ -472,7 +472,7 @@ export default function ConsultingPageClient() {
           </div>
 
           {/* Gradient Orb */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#0d9488]/10 rounded-full blur-[120px] pointer-events-none"></div>
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#2563EB]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
           <div className="max-w-[800px] mx-auto text-center relative z-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8">
@@ -482,13 +482,13 @@ export default function ConsultingPageClient() {
             <h2 className="text-[32px] md:text-[42px] font-medium text-white mb-6 tracking-[-0.02em]">
               Ready to Elevate Your<br />Investment Process?
             </h2>
-            <p className="text-[17px] text-[#a1a1aa] mb-10 leading-relaxed max-w-xl mx-auto">
+            <p className="text-[17px] text-[#9CA3AF] mb-10 leading-relaxed max-w-xl mx-auto">
               Schedule a consultation to discuss how Gamma Capital can bring institutional-level
               precision and clarity to your portfolio.
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 bg-[#0d9488] text-white px-8 py-4 rounded-xl text-[15px] font-semibold hover:bg-[#0f766e] transition-all duration-300 group shadow-lg shadow-[#0d9488]/20"
+              className="inline-flex items-center gap-3 bg-[#2563EB] text-white px-8 py-4 rounded-xl text-[15px] font-semibold hover:bg-[#1E3A8A] transition-all duration-300 group shadow-lg shadow-[#2563EB]/20"
             >
               Get in Touch
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

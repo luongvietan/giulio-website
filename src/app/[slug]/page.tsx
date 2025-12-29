@@ -81,7 +81,7 @@ export default async function CMSPage({ params }: PageProps) {
     }
 
     return (
-        <div className="min-h-screen bg-[#fafafa]">
+        <div className="min-h-screen bg-[#F8F9FB]">
             <NavigationHeader siteSettings={siteSettings} />
             <main>
                 {page.sections && page.sections.length > 0 ? (
@@ -96,7 +96,7 @@ export default async function CMSPage({ params }: PageProps) {
 
             {/* Draft mode indicator */}
             {isDraftMode && (
-                <div className="fixed bottom-4 right-4 z-50 bg-[#0d9488] text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium flex items-center gap-2">
+                <div className="fixed bottom-4 right-4 z-50 bg-[#2563EB] text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium flex items-center gap-2">
                     <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
                     Draft Mode
                     <a

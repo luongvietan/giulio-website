@@ -18,7 +18,7 @@ const solutions = [
     description: 'Data-driven market analysis, research reports, and actionable insights to help you make informed investment decisions with confidence.',
     features: ['Deep market analysis', 'Sector research', 'Technical signals', 'Risk assessment'],
     href: '/solutions/strategy-insights',
-    color: '#0d9488',
+    color: '#2563EB',
   },
   {
     icon: () => (
@@ -38,7 +38,7 @@ const solutions = [
     description: 'Work directly with experienced analysts on portfolio reviews, strategy design, and risk framework development.',
     features: ['Portfolio review', 'Strategy design', 'Risk frameworks', '1-on-1 sessions'],
     href: '/consulting',
-    color: '#0d9488',
+    color: '#2563EB',
   },
   {
     icon: Building2,
@@ -46,7 +46,7 @@ const solutions = [
     description: 'Strategic guidance for real estate investments including market analysis, due diligence, and portfolio optimization.',
     features: ['Market analysis', 'Due diligence', 'Investment strategy', 'Portfolio diversification'],
     href: '/solutions/real-estate',
-    color: '#0d9488',
+    color: '#2563EB',
   },
   {
     icon: Network,
@@ -54,7 +54,7 @@ const solutions = [
     description: 'Gain access to exclusive deal flow, institutional connections, and curated investment opportunities.',
     features: ['Deal flow access', 'Institutional connections', 'Co-investment opportunities', 'Exclusive events'],
     href: '/solutions/network',
-    color: '#0d9488',
+    color: '#2563EB',
   },
 ];
 
@@ -130,15 +130,15 @@ export default function SolutionsPageClient() {
       <main>
         <section ref={heroRef} className="w-full bg-[#fafafa] py-16 md:py-24 px-6 md:px-12">
           <div className="max-w-[1200px] mx-auto text-center">
-            <div ref={badgeRef} className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#0d9488]/10 border border-[#0d9488]/20 rounded-full mb-8">
-              <TrendingUp className="w-4 h-4 text-[#0d9488]" />
-              <span className="text-[12px] font-medium text-[#0d9488] tracking-wide uppercase">Our Solutions</span>
+            <div ref={badgeRef} className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-full mb-8">
+              <TrendingUp className="w-4 h-4 text-[#2563EB]" />
+              <span className="text-[12px] font-medium text-[#2563EB] tracking-wide uppercase">Our Solutions</span>
             </div>
-            <h1 ref={titleRef} className="text-[36px] md:text-[48px] font-medium tracking-[-0.03em] leading-[1.1] mb-6 text-[#0a0a0b]">
+            <h1 ref={titleRef} className="text-[36px] md:text-[48px] font-display font-medium tracking-[-0.03em] leading-[1.1] mb-6 text-[#111827]">
               Comprehensive<br />
-              <span className="text-[#71717a]">Investment Solutions</span>
+              <span className="text-[#6B7280]">Investment Solutions</span>
             </h1>
-            <p ref={paragraphRef} className="text-[17px] text-[#71717a] font-normal leading-relaxed max-w-xl mx-auto">
+            <p ref={paragraphRef} className="text-[17px] text-[#6B7280] font-normal leading-relaxed max-w-xl mx-auto">
               From market intelligence to personalized consulting, we provide the tools and insights you need to succeed in today&apos;s markets.
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function SolutionsPageClient() {
                   <Link
                     key={index}
                     href={solution.href}
-                    className="group relative border border-[#e4e4e7] rounded-xl p-8 bg-white hover:border-[#0a0a0b]/20 hover:shadow-md transition-all duration-300"
+                    className="group relative border border-[#E5E7EB] rounded-xl p-8 bg-white hover:border-[#2563EB]/30 hover:shadow-md transition-all duration-300"
                   >
                     <div className="flex flex-col lg:flex-row lg:items-center gap-6">
                       <div className="flex-shrink-0">
@@ -168,15 +168,15 @@ export default function SolutionsPageClient() {
                       </div>
 
                       <div className="flex-1">
-                        <h3 className="text-[20px] font-semibold text-[#0a0a0b] mb-2">{solution.title}</h3>
-                        <p className="text-[15px] text-[#71717a] leading-relaxed mb-4">{solution.description}</p>
+                        <h3 className="text-[20px] font-semibold text-[#111827] mb-2">{solution.title}</h3>
+                        <p className="text-[15px] text-[#6B7280] leading-relaxed mb-4">{solution.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {solution.features.map((feature, i) => (
                             <span
                               key={i}
-                              className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#f4f4f5] border border-[#e4e4e7] rounded-full text-[12px] text-[#52525b]"
+                              className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F8F9FB] border border-[#E5E7EB] rounded-full text-[12px] text-[#374151]"
                             >
-                              <Shield className="w-3 h-3 text-[#0d9488]" />
+                              <Shield className="w-3 h-3 text-[#2563EB]" />
                               {feature}
                             </span>
                           ))}
@@ -184,7 +184,7 @@ export default function SolutionsPageClient() {
                       </div>
 
                       <div className="flex-shrink-0 lg:self-center">
-                        <div className="inline-flex items-center gap-2 text-[#0d9488] font-medium text-[14px] group-hover:gap-3 transition-all">
+                        <div className="inline-flex items-center gap-2 text-[#2563EB] font-medium text-[14px] group-hover:gap-3 transition-all">
                           <span>Explore</span>
                           <ArrowRight className="w-4 h-4" />
                         </div>
@@ -197,22 +197,22 @@ export default function SolutionsPageClient() {
           </div>
         </section>
 
-        <section ref={ctaRef} className="w-full bg-[#f4f4f5] py-12 md:py-20 px-6 md:px-12 border-t border-[#e4e4e7]">
+        <section ref={ctaRef} className="w-full bg-[#f4f4f5] py-12 md:py-20 px-6 md:px-12 border-t border-[#E5E7EB]">
           <div className="max-w-[700px] mx-auto text-center">
-            <h2 className="text-[28px] md:text-[36px] font-medium text-[#0a0a0b] mb-5">Not Sure Where to Start?</h2>
-            <p className="text-[16px] text-[#71717a] mb-8">
+            <h2 className="text-[28px] md:text-[36px] font-medium text-[#111827] mb-5">Not Sure Where to Start?</h2>
+            <p className="text-[16px] text-[#6B7280] mb-8">
               Book a free consultation call to discuss your goals and find the right solution for your investment needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/contact"
-                className="bg-[#0a0a0b] text-white px-7 py-3.5 rounded-md text-[14px] font-semibold hover:bg-[#27272a] transition-colors"
+                className="bg-[#0A1A2F] text-white px-7 py-3.5 rounded-md text-[14px] font-semibold hover:bg-[#1E3A8A] transition-colors"
               >
                 Schedule a Call
               </Link>
               <Link
                 href="/memberships"
-                className="bg-transparent text-[#0a0a0b] px-7 py-3.5 rounded-md text-[14px] font-medium border border-[#e4e4e7] hover:border-[#a1a1aa] hover:bg-white transition-colors"
+                className="bg-transparent text-[#111827] px-7 py-3.5 rounded-md text-[14px] font-medium border border-[#E5E7EB] hover:border-[#6B7280] hover:bg-white transition-colors"
               >
                 View Memberships
               </Link>

@@ -1,60 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro');
+@import url('https://fonts.cdnfonts.com/css/untitled-sans');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-background: #fafafa;
-  --color-foreground: #0a0a0b;
+  /* Primary Palette */
+  --color-background: #FFFFFF;
+  --color-foreground: #111827;
 
-  --color-card: #ffffff;
-  --color-card-foreground: #0a0a0b;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #111827;
 
-  --color-popover: #ffffff;
-  --color-popover-foreground: #0a0a0b;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #111827;
 
-  --color-primary: #0a0a0b;
-  --color-primary-foreground: #fafafa;
+  --color-primary: #0A1A2F;
+  --color-primary-foreground: #FFFFFF;
 
-  --color-secondary: #f4f4f5;
-  --color-secondary-foreground: #0a0a0b;
+  --color-secondary: #F8F9FB;
+  --color-secondary-foreground: #111827;
 
-  --color-muted: #f4f4f5;
-  --color-muted-foreground: #71717a;
+  --color-muted: #F8F9FB;
+  --color-muted-foreground: #6B7280;
 
-  --color-accent: #f4f4f5;
-  --color-accent-foreground: #0a0a0b;
+  --color-accent: #2563EB;
+  --color-accent-foreground: #FFFFFF;
 
-  --color-destructive: #dc2626;
-  --color-destructive-foreground: #fafafa;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #FFFFFF;
 
-  --color-border: #e4e4e7;
-  --color-input: #e4e4e7;
-  --color-ring: #0a0a0b;
+  --color-border: #E5E7EB;
+  --color-input: #E5E7EB;
+  --color-ring: #2563EB;
 
+  /* Chart Colors (Keeping defaults or adjusting if needed) */
   --color-chart-1: #3b82f6;
   --color-chart-2: #22c55e;
   --color-chart-3: #eab308;
   --color-chart-4: #ef4444;
   --color-chart-5: #8b5cf6;
 
-  --color-sidebar: #fafafa;
-  --color-sidebar-foreground: #52525b;
-  --color-sidebar-primary: #0a0a0b;
-  --color-sidebar-primary-foreground: #fafafa;
-  --color-sidebar-accent: #f4f4f5;
-  --color-sidebar-accent-foreground: #0a0a0b;
-  --color-sidebar-border: #e4e4e7;
-  --color-sidebar-ring: #3b82f6;
+  /* Sidebar Colors */
+  --color-sidebar: #FFFFFF;
+  --color-sidebar-foreground: #6B7280;
+  --color-sidebar-primary: #0A1A2F;
+  --color-sidebar-primary-foreground: #FFFFFF;
+  --color-sidebar-accent: #E8F1FF;
+  --color-sidebar-accent-foreground: #0A1A2F;
+  --color-sidebar-border: #E5E7EB;
+  --color-sidebar-ring: #2563EB;
 
-  --color-text-secondary: #71717a;
-  --color-surface-elevated: #ffffff;
-  --color-accent-gold: #0d9488;
-  --color-accent-gold-muted: rgba(13, 148, 136, 0.1);
+  /* Custom Colors from User Request */
+  --color-support-blue: #E8F1FF;
+  --color-success: #16A34A;
+  --color-warning: #F59E0B;
+  --color-navy: #0A1A2F;
+  --color-cta: #2563EB;
+  --color-cta-hover: #1E3A8A;
+  --color-gray-body: #6B7280;
 
-  --font-primary: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Playfair Display", Georgia, serif;
+  --color-text-secondary: #6B7280;
+  --color-surface-elevated: #FFFFFF;
+  --color-accent-gold: #2563EB;
+  /* Replacing gold with Blue/CTA as main accent */
+  --color-accent-gold-muted: rgba(37, 99, 235, 0.1);
+
+  --font-primary: "Untitled Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Neue Haas Grotesk Display Pro", "Neue Haas Grotesk", "Inter", sans-serif;
 
   --radius-lg: 0.75rem;
   --radius-md: calc(0.75rem - 2px);
@@ -68,38 +82,82 @@
   --animate-slideInBlur: slideInBlur 0.8s ease-out forwards;
 
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
+
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
   }
+
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
+
   @keyframes slide-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+
   @keyframes scroll-fade {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+
   @keyframes slideInBlur {
-    from { opacity: 0; filter: blur(8px); transform: translateY(10px); }
-    to { opacity: 1; filter: blur(0); transform: translateY(0); }
+    from {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
   }
 }
 
 @layer base {
+
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: #e4e4e7;
+    border-color: #E5E7EB;
   }
 }
 
@@ -111,39 +169,39 @@
 
 @layer base {
   :root {
-    --background: #fafafa;
-    --foreground: #0a0a0b;
-    --card: #ffffff;
-    --card-foreground: #0a0a0b;
-    --popover: #ffffff;
-    --popover-foreground: #0a0a0b;
-    --primary: #0a0a0b;
-    --primary-foreground: #fafafa;
-    --secondary: #f4f4f5;
-    --secondary-foreground: #0a0a0b;
-    --muted: #f4f4f5;
-    --muted-foreground: #71717a;
-    --accent: #f4f4f5;
-    --accent-foreground: #0a0a0b;
-    --destructive: #dc2626;
-    --destructive-foreground: #fafafa;
-    --border: #e4e4e7;
-    --input: #e4e4e7;
-    --ring: #0a0a0b;
+    --background: #FFFFFF;
+    --foreground: #111827;
+    --card: #FFFFFF;
+    --card-foreground: #111827;
+    --popover: #FFFFFF;
+    --popover-foreground: #111827;
+    --primary: #0A1A2F;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F8F9FB;
+    --secondary-foreground: #111827;
+    --muted: #F8F9FB;
+    --muted-foreground: #6B7280;
+    --accent: #2563EB;
+    --accent-foreground: #FFFFFF;
+    --destructive: #ef4444;
+    --destructive-foreground: #FFFFFF;
+    --border: #E5E7EB;
+    --input: #E5E7EB;
+    --ring: #2563EB;
     --chart-1: #3b82f6;
     --chart-2: #22c55e;
     --chart-3: #eab308;
     --chart-4: #ef4444;
     --chart-5: #8b5cf6;
     --radius: 0.75rem;
-    --sidebar-background: #fafafa;
-    --sidebar-foreground: #52525b;
-    --sidebar-primary: #0a0a0b;
-    --sidebar-primary-foreground: #fafafa;
-    --sidebar-accent: #f4f4f5;
-    --sidebar-accent-foreground: #0a0a0b;
-    --sidebar-border: #e4e4e7;
-    --sidebar-ring: #3b82f6;
+    --sidebar-background: #FFFFFF;
+    --sidebar-foreground: #6B7280;
+    --sidebar-primary: #0A1A2F;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #E8F1FF;
+    --sidebar-accent-foreground: #0A1A2F;
+    --sidebar-border: #E5E7EB;
+    --sidebar-ring: #2563EB;
   }
 }
 
@@ -157,6 +215,7 @@
   }
 
   h1 {
+    font-family: var(--font-display);
     font-size: 56px;
     font-weight: 500;
     letter-spacing: -0.03em;
@@ -164,6 +223,7 @@
   }
 
   h2 {
+    font-family: var(--font-display);
     font-size: 32px;
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -171,6 +231,7 @@
   }
 
   h3 {
+    font-family: var(--font-display);
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -196,14 +257,14 @@
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #0d9488 100%);
+  background: linear-gradient(135deg, #0A1A2F 0%, #2563EB 50%, #0A1A2F 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gold-glow {
-  box-shadow: 0 0 40px rgba(13, 148, 136, 0.15);
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.15);
 }
 
 .card-hover {
@@ -242,20 +303,16 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    200px circle at var(--x, 50%) var(--y, 50%),
-    rgba(0, 0, 0, 0.08),
-    transparent 40%
-  );
+  background: radial-gradient(200px circle at var(--x, 50%) var(--y, 50%),
+      rgba(0, 0, 0, 0.08),
+      transparent 40%);
   opacity: var(--o, 0);
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
 .glow {
-  background: radial-gradient(
-    50% 80% at 50% 100%,
-    rgba(0, 0, 0, 0.04) 0%,
-    transparent 100%
-  );
+  background: radial-gradient(50% 80% at 50% 100%,
+      rgba(0, 0, 0, 0.04) 0%,
+      transparent 100%);
 }

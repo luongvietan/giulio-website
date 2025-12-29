@@ -36,23 +36,23 @@ export async function POST(request: Request) {
       subject: subjectLine,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="border-bottom: 2px solid #0d9488; padding-bottom: 20px; margin-bottom: 20px;">
-            <h1 style="color: #0a0a0b; font-size: 24px; margin: 0;">New Contact Request</h1>
+          <div style="border-bottom: 2px solid #2563EB; padding-bottom: 20px; margin-bottom: 20px;">
+            <h1 style="color: #111827; font-size: 24px; margin: 0;">New Contact Request</h1>
           </div>
           
-          <div style="background: #f4f4f5; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+          <div style="background: #F8F9FB; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
             <p style="margin: 0 0 12px 0;"><strong>Full Name:</strong> ${name}</p>
-            <p style="margin: 0 0 12px 0;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #0d9488;">${email}</a></p>
+            <p style="margin: 0 0 12px 0;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #2563EB;">${email}</a></p>
             <p style="margin: 0 0 12px 0;"><strong>Country of Residence:</strong> ${country}</p>
             <p style="margin: 0;"><strong>Area of Interest:</strong> ${areaLabel}</p>
           </div>
           
-          <div style="background: #fff; border: 1px solid #e4e4e7; border-radius: 8px; padding: 20px;">
-            <h2 style="color: #0a0a0b; font-size: 16px; margin: 0 0 12px 0;">Message:</h2>
-            <p style="color: #52525b; line-height: 1.6; margin: 0; white-space: pre-wrap;">${message}</p>
+          <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 8px; padding: 20px;">
+            <h2 style="color: #111827; font-size: 16px; margin: 0 0 12px 0;">Message:</h2>
+            <p style="color: #374151; line-height: 1.6; margin: 0; white-space: pre-wrap;">${message}</p>
           </div>
           
-          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e4e4e7; text-align: center;">
+          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #E5E7EB; text-align: center;">
             <p style="color: #a1a1aa; font-size: 12px; margin: 0;">
               This email was sent from the Gamma Capital website contact form.
             </p>

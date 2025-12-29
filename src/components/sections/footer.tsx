@@ -113,7 +113,7 @@ export default function Footer({ siteSettings }: FooterProps) {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-[#fafafa] border-t border-[#e4e4e7] text-[#0a0a0b]">
+    <footer ref={footerRef} className="bg-[#F8F9FB] border-t border-[#E5E7EB] text-[#111827]">
       <div className="w-full max-w-[1200px] mx-auto px-6 md:px-12 py-16">
         <div ref={columnsRef} className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="flex flex-col gap-4 md:col-span-1">
@@ -127,13 +127,13 @@ export default function Footer({ siteSettings }: FooterProps) {
                   className="rounded"
                 />
               ) : (
-                <div className="w-8 h-8 border border-[#0d9488]/30 rounded flex items-center justify-center bg-[#0d9488]/5">
-                  <span className="text-[#0d9488] font-semibold text-base tracking-tight">{logoText}</span>
+                <div className="w-8 h-8 border border-[#2563EB]/30 rounded flex items-center justify-center bg-[#2563EB]/5">
+                  <span className="text-[#2563EB] font-display font-semibold text-base tracking-tight">{logoText}</span>
                 </div>
               )}
-              <span className="text-[15px] font-semibold text-[#0a0a0b] tracking-tight">{siteName}</span>
+              <span className="text-[15px] font-display font-semibold text-[#111827] tracking-tight">{siteName}</span>
             </Link>
-            <p className="text-[13px] text-[#a1a1aa] leading-relaxed">
+            <p className="text-[13px] text-[#6B7280] leading-relaxed">
               {footerDescription}
             </p>
             <div className="flex items-center gap-3 mt-2">
@@ -144,11 +144,11 @@ export default function Footer({ siteSettings }: FooterProps) {
                   <a
                     key={index}
                     href={href}
-                    className="w-8 h-8 border border-[#e4e4e7] rounded-lg flex items-center justify-center hover:border-[#0d9488]/50 hover:bg-[#0d9488]/5 transition-colors"
+                    className="w-8 h-8 border border-[#E5E7EB] rounded-lg flex items-center justify-center hover:border-[#2563EB]/50 hover:bg-[#2563EB]/5 transition-colors"
                     target={social.platform !== 'email' ? '_blank' : undefined}
                     rel={social.platform !== 'email' ? 'noopener noreferrer' : undefined}
                   >
-                    <IconComponent className="w-4 h-4 text-[#71717a] hover:text-[#0d9488]" />
+                    <IconComponent className="w-4 h-4 text-[#6B7280] hover:text-[#2563EB]" />
                   </a>
                 );
               })}
@@ -157,13 +157,13 @@ export default function Footer({ siteSettings }: FooterProps) {
 
           {footerColumns.map((column, colIndex) => (
             <div key={colIndex} className="flex flex-col gap-4">
-              <h3 className="text-[11px] font-semibold text-[#a1a1aa] uppercase tracking-wider mb-1">{column.title}</h3>
+              <h3 className="text-[11px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-1 font-display">{column.title}</h3>
               <div className="flex flex-col gap-2.5">
                 {column.links?.map((link, linkIndex) => (
                   <Link
                     key={linkIndex}
                     href={link.href}
-                    className="text-[13px] font-medium text-[#52525b] hover:text-[#0a0a0b] transition-colors"
+                    className="text-[13px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors"
                   >
                     {link.text}
                   </Link>
@@ -173,9 +173,9 @@ export default function Footer({ siteSettings }: FooterProps) {
           ))}
 
           <div className="flex flex-col gap-4">
-            <h3 className="text-[11px] font-semibold text-[#a1a1aa] uppercase tracking-wider mb-1">Connect</h3>
+            <h3 className="text-[11px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-1 font-display">Connect</h3>
             <div className="flex flex-col gap-2.5">
-              <a href={`mailto:${contactEmail}`} className="text-[13px] font-medium text-[#52525b] hover:text-[#0a0a0b] transition-colors flex items-center gap-2">
+              <a href={`mailto:${contactEmail}`} className="text-[13px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5" />
                 {contactEmail}
               </a>
@@ -183,13 +183,13 @@ export default function Footer({ siteSettings }: FooterProps) {
           </div>
         </div>
 
-        <div className="w-full h-px bg-[#e4e4e7] mb-8"></div>
+        <div className="w-full h-px bg-[#E5E7EB] mb-8"></div>
 
         <div ref={bottomRef} className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[12px] text-[#a1a1aa]">
+          <p className="text-[12px] text-[#9CA3AF]">
             {copyrightText}
           </p>
-          <p className="text-[11px] text-[#a1a1aa] max-w-2xl text-center md:text-right leading-relaxed">
+          <p className="text-[11px] text-[#9CA3AF] max-w-2xl text-center md:text-right leading-relaxed">
             {disclaimer}
           </p>
         </div>

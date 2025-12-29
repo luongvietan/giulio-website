@@ -130,14 +130,14 @@ export default function WhatWeDo({ data }: WhatWeDoProps) {
     <section ref={sectionRef} className="w-full bg-white py-12 md:py-24 px-6 md:px-12 border-t border-[#e4e4e7]">
       <div className="max-w-[1200px] mx-auto">
         <div ref={headerRef} className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-wide border rounded-full px-3 py-1 text-[#52525b] bg-[#0a0a0b]/5 border-[#0a0a0b]/10 mb-6">
+          <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-wide border rounded-full px-3 py-1 text-[#6B7280] bg-[#0A1A2F]/5 border-[#0A1A2F]/10 mb-6">
             {content.badge}
           </span>
-          <h2 className="text-[32px] md:text-[40px] font-medium tracking-[-0.02em] leading-[1.15] text-[#0a0a0b] mb-6">
+          <h2 className="text-[32px] md:text-[40px] font-display font-medium tracking-[-0.02em] leading-[1.15] text-[#111827] mb-6">
             {content.title}
           </h2>
           {content.description && (
-            <p className="text-[16px] md:text-[17px] text-[#71717a] max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[16px] md:text-[17px] text-[#6B7280] max-w-3xl mx-auto leading-relaxed">
               {content.description}
             </p>
           )}
@@ -150,16 +150,16 @@ export default function WhatWeDo({ data }: WhatWeDoProps) {
               <Link
                 key={service._key}
                 href={service.href}
-                className="group relative border border-[#e4e4e7] rounded-2xl p-8 bg-gradient-to-b from-[#fafafa] to-white hover:border-[#0d9488]/30 hover:shadow-lg hover:shadow-[#0d9488]/5 transition-all duration-300 flex flex-col h-full"
+                className="group relative border border-[#E5E7EB] rounded-2xl p-8 bg-gradient-to-b from-[#F8F9FB] to-white hover:border-[#2563EB]/30 hover:shadow-lg hover:shadow-[#2563EB]/5 transition-all duration-300 flex flex-col h-full"
               >
-                <div className="w-12 h-12 bg-[#0d9488]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#0d9488]/15 transition-colors">
-                  <div className="text-[#0d9488]">
+                <div className="w-12 h-12 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#2563EB]/15 transition-colors">
+                  <div className="text-[#2563EB]">
                     <IconComponent className="w-6 h-6" />
                   </div>
                 </div>
-                <h3 className="text-[18px] font-semibold text-[#0a0a0b] mb-4 leading-tight">{service.title}</h3>
-                <p className="text-[14px] text-[#71717a] leading-relaxed mb-6 flex-1">{service.description}</p>
-                <div className="flex items-center gap-1.5 text-[#0d9488] text-[13px] font-medium">
+                <h3 className="text-[18px] font-display font-semibold text-[#111827] mb-4 leading-tight">{service.title}</h3>
+                <p className="text-[14px] text-[#6B7280] leading-relaxed mb-6 flex-1">{service.description}</p>
+                <div className="flex items-center gap-1.5 text-[#2563EB] text-[13px] font-medium">
                   <span>{service.linkText || 'Learn more'}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>

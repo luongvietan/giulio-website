@@ -86,7 +86,7 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
 
   return (
     <>
-      <nav ref={navRef} className="sticky top-0 z-50 w-full bg-[#fafafa]/95 backdrop-blur-md border-b border-[#e4e4e7]">
+      <nav ref={navRef} className="sticky top-0 z-50 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E5E7EB]">
         <div className="relative flex h-[72px] items-center justify-between px-6 md:px-12 max-w-[1400px] mx-auto">
           <div ref={logoRef} className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-3">
@@ -99,11 +99,11 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
                   className="rounded"
                 />
               ) : (
-                <div className="w-9 h-9 border border-[#0d9488]/30 rounded flex items-center justify-center bg-[#0d9488]/5">
-                  <span className="text-[#0d9488] font-semibold text-lg tracking-tight">{logoText}</span>
+                <div className="w-9 h-9 border border-[#2563EB]/30 rounded flex items-center justify-center bg-[#2563EB]/5">
+                  <span className="text-[#2563EB] font-display font-semibold text-lg tracking-tight">{logoText}</span>
                 </div>
               )}
-              <span className="text-[17px] font-semibold text-[#0a0a0b] tracking-tight">{siteName}</span>
+              <span className="text-[17px] font-display font-semibold text-[#0A1A2F] tracking-tight">{siteName}</span>
             </Link>
           </div>
 
@@ -117,17 +117,17 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
                     onMouseEnter={() => setIsSolutionsOpen(true)}
                     onMouseLeave={() => setIsSolutionsOpen(false)}
                   >
-                    <button className="flex items-center h-[72px] px-5 relative hover:text-[#0a0a0b] transition-colors gap-1.5">
-                      <span className="text-[14px] font-medium text-[#52525b] hover:text-[#0a0a0b] transition-colors">{item.text}</span>
-                      <ChevronDown className="w-3.5 h-3.5 text-[#a1a1aa]" />
+                    <button className="flex items-center h-[72px] px-5 relative hover:text-[#2563EB] transition-colors gap-1.5">
+                      <span className="text-[14px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">{item.text}</span>
+                      <ChevronDown className="w-3.5 h-3.5 text-[#9CA3AF]" />
                     </button>
                     {isSolutionsOpen && item.dropdownItems && (
-                      <div className="absolute top-full left-0 w-56 bg-white border border-[#e4e4e7] rounded-lg shadow-lg py-2 mt-0">
+                      <div className="absolute top-full left-0 w-56 bg-white border border-[#E5E7EB] rounded-lg shadow-lg py-2 mt-0">
                         {item.dropdownItems.map((dropdownItem, dropIndex) => (
-                          <Link key={dropIndex} href={dropdownItem.href} className="block px-4 py-3 hover:bg-[#f4f4f5] transition-colors">
-                            <span className="text-[14px] font-medium text-[#0a0a0b]">{dropdownItem.text}</span>
+                          <Link key={dropIndex} href={dropdownItem.href} className="block px-4 py-3 hover:bg-[#F8F9FB] transition-colors">
+                            <span className="text-[14px] font-medium text-[#111827]">{dropdownItem.text}</span>
                             {dropdownItem.description && (
-                              <p className="text-[12px] text-[#71717a] mt-0.5">{dropdownItem.description}</p>
+                              <p className="text-[12px] text-[#6B7280] mt-0.5">{dropdownItem.description}</p>
                             )}
                           </Link>
                         ))}
@@ -141,10 +141,10 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
             </div>
 
             <div ref={ctaRef} className="hidden lg:flex items-center ml-8 gap-5">
-              <div className="w-px h-5 bg-[#e4e4e7]" />
+              <div className="w-px h-5 bg-[#E5E7EB]" />
               <Link
                 href={navCTA.href}
-                className="bg-[#0a0a0b] text-white px-5 py-2.5 rounded-md text-[13px] font-semibold hover:bg-[#27272a] transition-colors"
+                className="bg-[#2563EB] text-white px-5 py-2.5 rounded-md text-[13px] font-semibold hover:bg-[#1E3A8A] transition-colors"
               >
                 {navCTA.text}
               </Link>
@@ -153,7 +153,7 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
             <div className="lg:hidden ml-4 relative z-50">
               <button
                 onClick={toggleMobileMenu}
-                className="p-2 -mr-2 text-[#0a0a0b] focus:outline-none"
+                className="p-2 -mr-2 text-[#111827] focus:outline-none"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (
@@ -173,12 +173,12 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
           <div className="flex flex-col min-h-full px-8 pt-6 pb-12 bg-white">
             {/* Search Bar */}
             <div className="relative mb-8">
-              <div className="flex items-center border-b border-[#0d9488]/20 pb-3">
-                <Search className="w-5 h-5 text-[#0d9488]/60" />
+              <div className="flex items-center border-b border-[#2563EB]/20 pb-3">
+                <Search className="w-5 h-5 text-[#2563EB]/60" />
                 <input
                   type="text"
                   placeholder="Find insights..."
-                  className="bg-transparent border-none outline-none flex-1 ml-4 text-[17px] placeholder-[#0d9488]/30 font-medium text-[#0a0a0b]"
+                  className="bg-transparent border-none outline-none flex-1 ml-4 text-[17px] placeholder-[#2563EB]/30 font-medium text-[#111827]"
                   autoFocus
                 />
               </div>
@@ -193,8 +193,8 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="flex items-center justify-between py-6 group"
                   >
-                    <span className="text-[25px] font-medium tracking-tight text-[#0a0a0b]">{item.text}</span>
-                    <ChevronRight className="w-6 h-6 text-[#a1a1aa] group-active:text-[#0d9488] transition-colors" />
+                    <span className="text-[25px] font-display font-medium tracking-tight text-[#111827]">{item.text}</span>
+                    <ChevronRight className="w-6 h-6 text-[#9CA3AF] group-active:text-[#2563EB] transition-colors" />
                   </Link>
 
                   {/* Optional: Brief sub-links hint if it has dropdown */}
@@ -205,13 +205,13 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
                           key={i}
                           href={sub.href}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className="text-[13px] text-[#71717a] font-medium hover:text-[#0d9488] transition-colors"
+                          className="text-[13px] text-[#6B7280] font-medium hover:text-[#2563EB] transition-colors"
                         >
                           {sub.text}
                         </Link>
                       ))}
                       {item.dropdownItems.length > 2 && (
-                        <span className="text-[13px] text-[#a1a1aa]">...</span>
+                        <span className="text-[13px] text-[#9CA3AF]">...</span>
                       )}
                     </div>
                   )}
@@ -226,7 +226,7 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
                   key={index}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[#0d9488] text-[15px] font-semibold tracking-tight hover:opacity-80 transition-opacity"
+                  className="text-[#2563EB] text-[15px] font-semibold tracking-tight hover:opacity-80 transition-opacity"
                 >
                   {item.text}
                 </Link>
@@ -234,8 +234,8 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
             </div>
 
             <div className="mt-auto pt-8 border-t border-gray-100">
-              <p className="text-[12px] text-[#a1a1aa] font-medium mb-1">GAMMA CAPITAL</p>
-              <p className="text-[11px] text-[#a1a1aa] leading-relaxed">
+              <p className="text-[12px] text-[#9CA3AF] font-medium mb-1">GAMMA CAPITAL</p>
+              <p className="text-[11px] text-[#9CA3AF] leading-relaxed">
                 Institutional-grade market intelligence.
               </p>
             </div>
@@ -248,8 +248,8 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
 
 function NavLink({ text, href }: { text: string; href: string }) {
   return (
-    <Link href={href} className="group flex items-center h-[72px] px-5 relative hover:text-[#0a0a0b] transition-colors">
-      <span className="text-[14px] font-medium text-[#52525b] group-hover:text-[#0a0a0b] transition-colors">{text}</span>
+    <Link href={href} className="group flex items-center h-[72px] px-5 relative hover:text-[#111827] transition-colors">
+      <span className="text-[14px] font-medium text-[#6B7280] group-hover:text-[#111827] transition-colors">{text}</span>
     </Link>
   )
 }

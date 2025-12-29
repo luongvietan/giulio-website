@@ -61,7 +61,7 @@ export default function ThreeServicesCards({ data }: ThreeServicesCardsProps) {
   };
 
   return (
-    <section className="w-full bg-white py-12 md:py-24 px-6 md:px-12 border-t border-[#e4e4e7]">
+    <section className="w-full bg-white py-12 md:py-24 px-6 md:px-12 border-t border-[#E5E7EB]">
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {cards.map((card) => {
           const IconComponent = getIcon(card.icon);
@@ -69,20 +69,20 @@ export default function ThreeServicesCards({ data }: ThreeServicesCardsProps) {
             <Link
               key={card._key}
               href={card.href}
-              className="group relative border border-[#0a0a0b]/10 rounded-xl p-7 bg-[#fafafa] hover:bg-white hover:border-[#0a0a0b]/20 hover:shadow-sm flex flex-col h-full transition-all duration-300"
+              className="group relative border border-[#0A1A2F]/10 rounded-xl p-7 bg-[#F8F9FB] hover:bg-white hover:border-[#0A1A2F]/20 hover:shadow-sm flex flex-col h-full transition-all duration-300"
             >
-              <div className="w-10 h-10 bg-white border border-[#e4e4e7] rounded-lg flex items-center justify-center mb-5 group-hover:border-[#0d9488]/30 transition-colors">
-                <div className="text-[#0d9488]">
+              <div className="w-10 h-10 bg-white border border-[#E5E7EB] rounded-lg flex items-center justify-center mb-5 group-hover:border-[#2563EB]/30 transition-colors">
+                <div className="text-[#2563EB]">
                   <IconComponent className="w-5 h-5" />
                 </div>
               </div>
-              <h3 className="text-[18px] font-semibold leading-[1.3] mb-2 tracking-tight text-[#0a0a0b]">
+              <h3 className="text-[18px] font-display font-semibold leading-[1.3] mb-2 tracking-tight text-[#111827]">
                 {card.title}
               </h3>
-              <p className="text-[14px] leading-relaxed text-[#71717a] mb-5 flex-1">
+              <p className="text-[14px] leading-relaxed text-[#6B7280] mb-5 flex-1">
                 {card.description}
               </p>
-              <div className="flex items-center gap-2 text-[#0d9488] font-medium text-[13px]">
+              <div className="flex items-center gap-2 text-[#2563EB] font-medium text-[13px]">
                 <span>{card.linkText || 'Learn more'}</span>
                 <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>

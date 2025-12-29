@@ -154,32 +154,32 @@ export default function ContactPageClient() {
         {/* HERO SECTION */}
         <section ref={heroRef} className="w-full bg-[#fafafa] pt-20 pb-10 md:pt-32 md:pb-16 px-6 md:px-12">
           <div className="max-w-[900px] mx-auto text-center">
-            <h1 className="hero-animate text-[36px] md:text-[48px] lg:text-[56px] font-medium tracking-[-0.03em] leading-[1.1] mb-6 text-[#0a0a0b]">
-              Get in Touch with <span className="text-[#0d9488]">Gamma Capital</span>
+            <h1 className="hero-animate text-[36px] md:text-[48px] lg:text-[56px] font-display font-medium tracking-[-0.03em] leading-[1.1] mb-6 text-[#111827]">
+              Get in Touch with <span className="text-[#2563EB]">Gamma Capital</span>
             </h1>
-            <p className="hero-animate text-[17px] md:text-[19px] text-[#71717a] font-normal leading-relaxed max-w-[700px] mx-auto">
+            <p className="hero-animate text-[17px] md:text-[19px] text-[#6B7280] font-normal leading-relaxed max-w-[700px] mx-auto">
               Whether you are interested in our Discord memberships, consulting services, or a strategic collaboration, you can contact us here.
               <br /><br />
-              <span className="text-[#52525b] font-medium">We review every request carefully and respond selectively.</span>
+              <span className="text-[#374151] font-medium">We review every request carefully and respond selectively.</span>
             </p>
           </div>
         </section>
 
         {/* INTRO SECTION - How We Can Help */}
-        <section ref={introRef} className="w-full bg-[#fafafa] py-8 md:py-12 px-6 md:px-12">
+        <section ref={introRef} className="w-full bg-[#F8F9FB] py-8 md:py-12 px-6 md:px-12">
           <div className="max-w-[800px] mx-auto text-center">
-            <h2 className="intro-animate text-[28px] md:text-[32px] font-medium tracking-[-0.02em] leading-[1.2] mb-5 text-[#0a0a0b]">
+            <h2 className="intro-animate text-[28px] md:text-[32px] font-display font-medium tracking-[-0.02em] leading-[1.2] mb-5 text-[#111827]">
               How to Contact Us
             </h2>
-            <p className="intro-animate text-[16px] md:text-[17px] text-[#71717a] font-normal leading-relaxed mb-6">
+            <p className="intro-animate text-[16px] md:text-[17px] text-[#6B7280] font-normal leading-relaxed mb-6">
               Gamma Capital works with investors, professionals and partners who value clarity, structure and disciplined decision-making.
               <br /><br />
               Use the form below to reach us regarding memberships, consulting, or other professional inquiries.
             </p>
-            <div className="intro-animate inline-flex items-center gap-3 px-5 py-3 bg-white border border-[#e4e4e7] rounded-lg">
-              <Mail className="w-5 h-5 text-[#0d9488]" />
-              <span className="text-[15px] text-[#52525b]">For general communication:</span>
-              <a href="mailto:contact@gammacap.ch" className="text-[15px] text-[#0d9488] font-medium hover:underline">
+            <div className="intro-animate inline-flex items-center gap-3 px-5 py-3 bg-white border border-[#E5E7EB] rounded-lg">
+              <Mail className="w-5 h-5 text-[#2563EB]" />
+              <span className="text-[15px] text-[#374151]">For general communication:</span>
+              <a href="mailto:contact@gammacap.ch" className="text-[15px] text-[#2563EB] font-medium hover:underline">
                 contact@gammacap.ch
               </a>
             </div>
@@ -187,22 +187,22 @@ export default function ContactPageClient() {
         </section>
 
         {/* CONTACT FORM SECTION */}
-        <section ref={formSectionRef} className="w-full bg-[#fafafa] py-8 md:py-12 px-6 md:px-12">
+        <section ref={formSectionRef} className="w-full bg-[#F8F9FB] py-8 md:py-12 px-6 md:px-12">
           <div className="max-w-[600px] mx-auto">
-            <div className="form-card bg-white border border-[#e4e4e7] rounded-xl p-7 md:p-10 shadow-sm">
+            <div className="form-card bg-white border border-[#E5E7EB] rounded-xl p-7 md:p-10 shadow-sm">
               <div className="mb-8">
-                <h2 className="text-[22px] md:text-[24px] font-semibold text-[#0a0a0b] mb-2">Contact Request</h2>
-                <p className="text-[15px] text-[#71717a]">
+                <h2 className="text-[22px] md:text-[24px] font-display font-semibold text-[#111827] mb-2">Contact Request</h2>
+                <p className="text-[15px] text-[#6B7280]">
                   Please provide a few details so we can better understand your request and respond appropriately.
                 </p>
               </div>
 
               {submitStatus === 'success' && (
-                <div className="mb-6 p-4 bg-[#0d9488]/10 border border-[#0d9488]/20 rounded-lg flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#0d9488] flex-shrink-0 mt-0.5" />
+                <div className="mb-6 p-4 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-lg flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#2563EB] flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-[14px] font-medium text-[#0d9488]">Request submitted successfully!</p>
-                    <p className="text-[13px] text-[#0d9488]/80">We&apos;ll review your request and get back to you within 1–2 business days.</p>
+                    <p className="text-[14px] font-medium text-[#2563EB]">Request submitted successfully!</p>
+                    <p className="text-[13px] text-[#2563EB]/80">We&apos;ll review your request and get back to you within 1–2 business days.</p>
                   </div>
                 </div>
               )}
@@ -228,7 +228,7 @@ export default function ContactPageClient() {
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e4e4e7] rounded-lg bg-[#fafafa] text-[14px] text-[#0a0a0b] placeholder-[#a1a1aa] focus:outline-none focus:ring-2 focus:ring-[#0d9488]/30 focus:border-[#0d9488] transition-all"
+                    className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
                     placeholder="Your full name"
                     required
                   />
@@ -244,7 +244,7 @@ export default function ContactPageClient() {
                     id="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e4e4e7] rounded-lg bg-[#fafafa] text-[14px] text-[#0a0a0b] placeholder-[#a1a1aa] focus:outline-none focus:ring-2 focus:ring-[#0d9488]/30 focus:border-[#0d9488] transition-all"
+                    className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
                     placeholder="your@email.com"
                     required
                   />
@@ -260,7 +260,7 @@ export default function ContactPageClient() {
                     id="country"
                     value={formData.country}
                     onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#e4e4e7] rounded-lg bg-[#fafafa] text-[14px] text-[#0a0a0b] placeholder-[#a1a1aa] focus:outline-none focus:ring-2 focus:ring-[#0d9488]/30 focus:border-[#0d9488] transition-all"
+                    className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
                     placeholder="e.g., Switzerland, United States, etc."
                     required
                   />
@@ -274,10 +274,10 @@ export default function ContactPageClient() {
                   <button
                     type="button"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className={`w-full px-4 py-3 border rounded-lg bg-[#fafafa] text-[14px] text-left flex items-center justify-between transition-all ${isDropdownOpen
-                      ? 'border-[#0d9488] ring-2 ring-[#0d9488]/30'
-                      : 'border-[#e4e4e7] hover:border-[#a1a1aa]'
-                      } ${formData.areaOfInterest ? 'text-[#0a0a0b]' : 'text-[#a1a1aa]'}`}
+                    className={`w-full px-4 py-3 border rounded-lg bg-[#F8F9FB] text-[14px] text-left flex items-center justify-between transition-all ${isDropdownOpen
+                      ? 'border-[#2563EB] ring-2 ring-[#2563EB]/30'
+                      : 'border-[#E5E7EB] hover:border-[#9CA3AF]'
+                      } ${formData.areaOfInterest ? 'text-[#111827]' : 'text-[#9CA3AF]'}`}
                   >
                     <span>{selectedLabel}</span>
                     <ChevronDown className={`w-4 h-4 text-[#71717a] transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -293,8 +293,8 @@ export default function ContactPageClient() {
                             setIsDropdownOpen(false);
                           }}
                           className={`w-full px-4 py-2.5 text-[14px] text-left transition-colors ${formData.areaOfInterest === option.value
-                            ? 'bg-[#0d9488]/10 text-[#0d9488]'
-                            : 'text-[#52525b] hover:bg-[#f4f4f5] hover:text-[#0a0a0b]'
+                            ? 'bg-[#2563EB]/10 text-[#2563EB]'
+                            : 'text-[#6B7280] hover:bg-[#F8F9FB] hover:text-[#111827]'
                             }`}
                         >
                           {option.label}
@@ -315,7 +315,7 @@ export default function ContactPageClient() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={5}
-                    className="w-full px-4 py-3 border border-[#e4e4e7] rounded-lg bg-[#fafafa] text-[14px] text-[#0a0a0b] placeholder-[#a1a1aa] focus:outline-none focus:ring-2 focus:ring-[#0d9488]/30 focus:border-[#0d9488] transition-all resize-none"
+                    className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all resize-none"
                     placeholder="Briefly describe your situation, objectives, or question."
                     required
                   />
@@ -325,7 +325,7 @@ export default function ContactPageClient() {
                 <button
                   type="submit"
                   disabled={isSubmitting || !formData.areaOfInterest}
-                  className="form-field w-full bg-[#0d9488] text-white py-3.5 rounded-lg text-[15px] font-semibold hover:bg-[#0f766e] transition-all mt-2 inline-flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+                  className="form-field w-full bg-[#2563EB] text-white py-3.5 rounded-lg text-[15px] font-semibold hover:bg-[#1E3A8A] transition-all mt-2 inline-flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
                 >
                   {isSubmitting ? (
                     <>
@@ -354,10 +354,10 @@ export default function ContactPageClient() {
               {expectationItems.map((item, index) => (
                 <div
                   key={index}
-                  className="expectation-item flex items-start gap-4 p-4 bg-white border border-[#e4e4e7] rounded-lg"
+                  className="expectation-item flex items-start gap-4 p-4 bg-white border border-[#E5E7EB] rounded-lg"
                 >
-                  <div className="w-9 h-9 bg-[#0d9488]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <item.icon className="w-4 h-4 text-[#0d9488]" />
+                  <div className="w-9 h-9 bg-[#2563EB]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <item.icon className="w-4 h-4 text-[#2563EB]" />
                   </div>
                   <p className="text-[15px] text-[#52525b] leading-relaxed pt-1.5">
                     {item.text}

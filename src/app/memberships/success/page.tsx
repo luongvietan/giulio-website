@@ -59,25 +59,25 @@ function SuccessContent() {
     <div ref={containerRef} className="max-w-md w-full text-center">
       {loading ? (
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-12 h-12 text-[#0d9488] animate-spin" />
-          <p className="text-[#71717a]">Processing your payment...</p>
+          <Loader2 className="w-12 h-12 text-[#2563EB] animate-spin" />
+          <p className="text-[#6B7280]">Processing your payment...</p>
         </div>
       ) : (
         <>
-          <div ref={iconRef} className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#0d9488]/10 mb-6">
-            <CheckCircle className="w-10 h-10 text-[#0d9488]" strokeWidth={1.5} />
+          <div ref={iconRef} className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#2563EB]/10 mb-6">
+            <CheckCircle className="w-10 h-10 text-[#2563EB]" strokeWidth={1.5} />
           </div>
 
-          <h1 ref={titleRef} className="text-[32px] font-semibold text-[#0a0a0b] mb-4">
+          <h1 ref={titleRef} className="text-[32px] font-semibold text-[#111827] mb-4">
             Welcome to the Community!
           </h1>
 
           <div ref={textRef} className="space-y-4 mb-8">
-            <p className="text-[#71717a] text-[16px] leading-relaxed">
+            <p className="text-[#6B7280] text-[16px] leading-relaxed">
               Your membership has been activated successfully. You&apos;ll receive an email with your exclusive Discord invite link within 24 hours.
             </p>
             {sessionId && (
-              <p className="text-[12px] text-[#a1a1aa] font-mono">
+              <p className="text-[12px] text-[#9CA3AF] font-mono">
                 Order reference: {sessionId.slice(0, 20)}...
               </p>
             )}
@@ -86,14 +86,14 @@ function SuccessContent() {
           <div ref={buttonRef} className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0a0a0b] text-white hover:bg-[#27272a] h-11 px-6 text-sm font-medium transition"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0A1A2F] text-white hover:bg-[#1E3A8A] h-11 px-6 text-sm font-medium transition"
             >
               Return Home
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-[#0a0a0b] border border-[#e4e4e7] hover:bg-[#f4f4f5] h-11 px-6 text-sm font-medium transition"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-[#111827] border border-[#E5E7EB] hover:bg-[#F3F4F6] h-11 px-6 text-sm font-medium transition"
             >
               Contact Support
             </Link>
@@ -106,13 +106,13 @@ function SuccessContent() {
 
 export default function SuccessPage() {
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen bg-[#F8F9FB]">
       <NavigationHeader />
       <main className="flex items-center justify-center min-h-[80vh] px-6">
         <Suspense fallback={
           <div className="flex flex-col items-center gap-4">
-            <Loader2 className="w-12 h-12 text-[#0d9488] animate-spin" />
-            <p className="text-[#71717a]">Loading...</p>
+            <Loader2 className="w-12 h-12 text-[#2563EB] animate-spin" />
+            <p className="text-[#6B7280]">Loading...</p>
           </div>
         }>
           <SuccessContent />
