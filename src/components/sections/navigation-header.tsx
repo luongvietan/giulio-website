@@ -198,23 +198,7 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
                   </Link>
 
                   {/* Optional: Brief sub-links hint if it has dropdown */}
-                  {item.hasDropdown && item.dropdownItems && (
-                    <div className="flex flex-wrap gap-x-4 gap-y-2 pb-4">
-                      {item.dropdownItems.slice(0, 2).map((sub, i) => (
-                        <Link
-                          key={i}
-                          href={sub.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="text-[13px] text-[#6B7280] font-medium hover:text-[#2563EB] transition-colors"
-                        >
-                          {sub.text}
-                        </Link>
-                      ))}
-                      {item.dropdownItems.length > 2 && (
-                        <span className="text-[13px] text-[#9CA3AF]">...</span>
-                      )}
-                    </div>
-                  )}
+
                 </div>
               ))}
             </div>
