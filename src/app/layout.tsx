@@ -5,6 +5,8 @@ import { VisualEditsMessenger } from "orchids-visual-edits";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
+import { headers } from "next/headers";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,14 +30,18 @@ export default async function RootLayout({
 }>) {
   const { isEnabled: isDraftMode } = await draftMode();
 
+  const headersList = await headers();
+  const pathname = headersList.get("x-invoke-path") || "";
+  const isAdminPage = pathname.startsWith("/admin");
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <VisualEditsMessenger />
-        {isDraftMode && (
+        {!isAdminPage && <VisualEditsMessenger />}
+        {isDraftMode && !isAdminPage && (
           <>
             <VisualEditing />
             <DisableDraftMode />

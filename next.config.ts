@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ['sanity', '@sanity/ui', '@sanity/vision', '@sanity/presentation', 'styled-components'],
   turbopack: {
     rules: {
-      "*.{jsx,tsx}": {
+      "src/{components,app/!(admin)}/**/*.{jsx,tsx}": {
         loaders: [loaderPath]
       }
     }

@@ -1,16 +1,35 @@
 'use client'
 
-import { NextStudio } from 'next-sanity/studio'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+
+// Lazy load NextStudio to reduce initial bundle
+const NextStudio = dynamic(
+    () => import('next-sanity/studio').then((mod) => mod.NextStudio),
+    {
+        ssr: false,
+        loading: () => (
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100vh',
+                background: '#1a1a1a',
+                color: '#fff'
+            }}>
+                <div>Loading Sanity Studio...</div>
+            </div>
+        )
+    }
+)
+
+// Inline config to avoid cross-module resolution
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { presentationTool } from 'sanity/presentation'
 
-// Schema imports - properly typed for Next.js sanity module
-// Note: We duplicate the schema structure here because importing from /sanity folder
-// causes type conflicts between the two separate node_modules (sanity/ vs root)
-
-// Objects
+// Schema definitions (kept inline to avoid cross-node_modules imports)
 const link = {
     name: 'link',
     title: 'Link',
@@ -81,7 +100,6 @@ const serviceCard = {
     ],
 }
 
-// Sections
 const heroSection = {
     name: 'heroSection',
     title: 'Hero Section',
@@ -155,7 +173,6 @@ const richTextSection = {
     ],
 }
 
-// Documents
 const siteSettings = {
     name: 'siteSettings',
     title: 'Site Settings',
@@ -272,5 +289,9 @@ const config = defineConfig({
 })
 
 export function Studio() {
-    return <NextStudio config={config} />
+    return (
+        <Suspense fallback={<div style={{ height: '100vh', background: '#1a1a1a' }} />}>
+            <NextStudio config={config} />
+        </Suspense>
+    )
 }
