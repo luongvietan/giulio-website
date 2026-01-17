@@ -28,6 +28,21 @@ export default defineType({
             options: {
                 hotspot: true,
             },
+            fields: [
+                defineField({
+                    name: 'alt',
+                    title: 'Alt Text',
+                    type: 'string',
+                    description: 'Important for accessibility and SEO',
+                    validation: (Rule) => Rule.custom((alt, context) => {
+                        // @ts-expect-error - parent access
+                        if (context?.parent?.asset && !alt) {
+                            return 'Alt text is recommended for accessibility'
+                        }
+                        return true
+                    }).warning(),
+                }),
+            ],
         }),
         defineField({
             name: 'logoText',
@@ -86,6 +101,18 @@ export default defineType({
                             name: 'url',
                             title: 'URL',
                             type: 'string',
+                            validation: (Rule) => Rule.custom((value, context) => {
+                                if (!value) return true
+                                // @ts-expect-error - parent access
+                                const platform = context?.parent?.platform
+                                if (platform === 'email') {
+                                    return value.includes('@') || 'Please enter a valid email address'
+                                }
+                                if (value.startsWith('http://') || value.startsWith('https://')) {
+                                    return true
+                                }
+                                return 'URL must start with http:// or https://'
+                            }),
                         }),
                     ],
                     preview: {

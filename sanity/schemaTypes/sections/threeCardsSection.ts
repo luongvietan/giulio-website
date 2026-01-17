@@ -10,7 +10,7 @@ export default defineType({
             title: 'Cards',
             type: 'array',
             of: [defineArrayMember({ type: 'serviceCard' })],
-            validation: (Rule) => Rule.max(3).min(1),
+            validation: (Rule) => Rule.min(1).error('At least 1 card is required').max(3).warning('Maximum 3 cards recommended'),
         }),
     ],
     preview: {

@@ -29,6 +29,7 @@ export default defineType({
             title: 'Services',
             type: 'array',
             of: [defineArrayMember({ type: 'serviceCard' })],
+            validation: (Rule) => Rule.max(12).warning('Too many services may impact page performance'),
         }),
         defineField({
             name: 'showViewAllButton',

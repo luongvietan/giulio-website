@@ -3,6 +3,9 @@ import { client } from './client'
 
 const builder = imageUrlBuilder(client)
 
+// Default quality for optimized images (85 provides good balance of quality/size)
+const DEFAULT_QUALITY = 85
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function urlFor(source: any) {
     return builder.image(source)
@@ -35,9 +38,8 @@ export function getImageUrl(
         if (options?.height) {
             imageBuilder = imageBuilder.height(options.height)
         }
-        if (options?.quality) {
-            imageBuilder = imageBuilder.quality(options.quality)
-        }
+        // Apply quality (use default if not specified)
+        imageBuilder = imageBuilder.quality(options?.quality || DEFAULT_QUALITY)
 
         return imageBuilder.auto('format').url()
     } catch (error) {

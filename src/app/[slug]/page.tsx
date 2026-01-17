@@ -60,17 +60,44 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const title = page.seoTitle || page.title || siteSettings?.seoTitle
     const description = page.seoDescription || siteSettings?.seoDescription || ''
     const ogImage = page.ogImage || siteSettings?.ogImage
+    const ogImageUrl = ogImage ? getImageUrl(ogImage, { width: 1200 }) || '' : ''
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gammacapital.com'
 
     return {
         title,
         description,
+        ...(page.noIndex && {
+            robots: {
+                index: false,
+                follow: false,
+            },
+        }),
+        alternates: {
+            canonical: `${siteUrl}/${slug}`,
+        },
         openGraph: {
             title,
             description,
-            images: ogImage ? [getImageUrl(ogImage, { width: 1200 }) || ''] : [],
+            url: `${siteUrl}/${slug}`,
+            images: ogImageUrl ? [{
+                url: ogImageUrl,
+                width: 1200,
+                height: 630,
+                alt: ogImage?.alt || title || 'Page image',
+            }] : [],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: ogImageUrl ? [{
+                url: ogImageUrl,
+                alt: ogImage?.alt || title || 'Page image',
+            }] : [],
         },
     }
 }
+
 
 export default async function CMSPage({ params }: PageProps) {
     const { slug } = await params

@@ -1,5 +1,6 @@
 'use client'
 
+import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
 import type {
     PageSection,
     HeroSectionData,
@@ -18,6 +19,47 @@ interface PageBuilderProps {
     sections?: PageSection[]
 }
 
+// Error fallback component - shows details in dev, silent in production
+function SectionErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+    if (process.env.NODE_ENV === 'development') {
+        return (
+            <div className="p-6 my-4 bg-red-50 border border-red-200 rounded-lg">
+                <h3 className="text-red-800 font-semibold mb-2">Section Error</h3>
+                <p className="text-red-600 text-sm font-mono mb-3">
+                    {error instanceof Error ? error.message : 'Unknown error'}
+                </p>
+                <button
+                    onClick={resetErrorBoundary}
+                    className="text-sm px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                >
+                    Retry
+                </button>
+            </div>
+        )
+    }
+    // Silent fail in production - render nothing
+    return null
+}
+
+function renderSection(section: PageSection) {
+    switch (section._type) {
+        case 'heroSection':
+            return <HeroSection key={section._key} data={section as HeroSectionData} />
+        case 'whatWeDoSection':
+            return <WhatWeDo key={section._key} data={section as WhatWeDoSectionData} />
+        case 'testimonialCTASection':
+            return <TestimonialCTA key={section._key} data={section as TestimonialCTASectionData} />
+        case 'threeCardsSection':
+            return <ThreeServicesCards key={section._key} data={section as ThreeCardsSectionData} />
+        case 'richTextSection':
+            return <RichTextSection key={section._key} data={section as RichTextSectionData} />
+        default:
+            // Handle unknown section types gracefully
+            console.warn(`Unknown section type: ${(section as PageSection)._type}`)
+            return null
+    }
+}
+
 export function PageBuilder({ sections }: PageBuilderProps) {
     if (!sections || sections.length === 0) {
         return null
@@ -25,26 +67,20 @@ export function PageBuilder({ sections }: PageBuilderProps) {
 
     return (
         <>
-            {sections.map((section) => {
-                switch (section._type) {
-                    case 'heroSection':
-                        return <HeroSection key={section._key} data={section as HeroSectionData} />
-                    case 'whatWeDoSection':
-                        return <WhatWeDo key={section._key} data={section as WhatWeDoSectionData} />
-                    case 'testimonialCTASection':
-                        return <TestimonialCTA key={section._key} data={section as TestimonialCTASectionData} />
-                    case 'threeCardsSection':
-                        return <ThreeServicesCards key={section._key} data={section as ThreeCardsSectionData} />
-                    case 'richTextSection':
-                        return <RichTextSection key={section._key} data={section as RichTextSectionData} />
-                    default:
-                        // Handle unknown section types gracefully
-                        console.warn(`Unknown section type: ${(section as PageSection)._type}`)
-                        return null
-                }
-            })}
+            {sections.map((section) => (
+                <ErrorBoundary
+                    key={section._key}
+                    FallbackComponent={SectionErrorFallback}
+                    onError={(error) => {
+                        console.error(`[PageBuilder] Section ${section._type} error:`, error)
+                    }}
+                >
+                    {renderSection(section)}
+                </ErrorBoundary>
+            ))}
         </>
     )
 }
 
 export default PageBuilder
+

@@ -49,7 +49,7 @@ export interface Stat {
 
 export interface ServiceCard {
     _key: string
-    icon?: 'BarChart3' | 'Users' | 'Building2' | 'Network' | 'Rocket' | 'Discord' | 'Briefcase'
+    icon?: 'BarChart3' | 'Users' | 'Building2' | 'Network' | 'Rocket' | 'Discord'
     title: string
     description: string
     href: string
@@ -153,6 +153,7 @@ export interface Page {
         current: string
     }
     isHomepage?: boolean
+    noIndex?: boolean
     sections?: PageSection[]
     seoTitle?: string
     seoDescription?: string

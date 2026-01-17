@@ -41,7 +41,9 @@ export default defineConfig({
         origin: process.env.SANITY_STUDIO_PREVIEW_ORIGIN || 'http://localhost:3000',
         preview: '/',
         previewMode: {
-          enable: '/api/draft',
+          enable: '/api/draft' + (process.env.SANITY_PREVIEW_SECRET
+            ? `?secret=${process.env.SANITY_PREVIEW_SECRET}`
+            : ''),
         },
       },
     }),

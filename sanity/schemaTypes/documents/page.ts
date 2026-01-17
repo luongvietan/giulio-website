@@ -26,6 +26,11 @@ export default defineType({
             options: {
                 source: 'title',
                 maxLength: 96,
+                slugify: (input) => input
+                    .toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^a-z0-9-]/g, '')
+                    .slice(0, 96),
                 isUnique: async (slug, context) => {
                     const { document, getClient } = context
                     const client = getClient({ apiVersion: '2024-01-01' })
@@ -37,7 +42,14 @@ export default defineType({
                     return result === 0
                 },
             },
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) => [
+                Rule.required(),
+                Rule.custom((slug) => {
+                    if (!slug?.current) return true
+                    const valid = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug.current)
+                    return valid || 'Slug must be lowercase letters, numbers, and hyphens only'
+                }),
+            ],
         }),
         defineField({
             name: 'isHomepage',
@@ -97,6 +109,14 @@ export default defineType({
             ],
         }),
         defineField({
+            name: 'noIndex',
+            title: 'Hide from Search Engines?',
+            type: 'boolean',
+            group: 'seo',
+            description: 'Enable this to add a noindex meta tag, preventing search engines from indexing this page.',
+            initialValue: false,
+        }),
+        defineField({
             name: 'ogImage',
             title: 'Social Share Image',
             type: 'image',
@@ -110,6 +130,13 @@ export default defineType({
                     title: 'Alt Text',
                     type: 'string',
                     description: 'Describe this image for accessibility and SEO',
+                    validation: (Rule) => Rule.custom((alt, context) => {
+                        // @ts-expect-error - parent access
+                        if (context?.parent?.asset && !alt) {
+                            return 'Alt text is recommended for social share images'
+                        }
+                        return true
+                    }).warning(),
                 }),
             ],
         }),

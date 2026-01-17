@@ -61,13 +61,15 @@ const portableTextComponents: PortableTextComponents = {
             if (!value?.asset?._ref) return null
             return (
                 <figure className="my-8">
-                    <Image
-                        src={urlFor(value).width(1200).url()}
-                        alt={value.alt || 'Image'}
-                        width={1200}
-                        height={675}
-                        className="w-full h-auto rounded-xl"
-                    />
+                    <div className="relative w-full aspect-video">
+                        <Image
+                            src={urlFor(value).width(1200).url()}
+                            alt={value.alt || 'Content image'}
+                            fill
+                            sizes="(max-width: 800px) 100vw, 800px"
+                            className="object-contain rounded-xl"
+                        />
+                    </div>
                     {value.caption && (
                         <figcaption className="text-center text-[14px] text-[#9CA3AF] mt-3">
                             {value.caption}
@@ -80,6 +82,8 @@ const portableTextComponents: PortableTextComponents = {
 }
 
 export default function RichTextSection({ data }: RichTextSectionProps) {
+    if (!data) return null
+
     const bgColorClasses = {
         white: 'bg-white',
         gray: 'bg-[#F8F9FB]',

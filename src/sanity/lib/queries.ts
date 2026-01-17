@@ -1,6 +1,55 @@
 import { defineQuery } from 'next-sanity'
 
 // ============================================
+// Reusable Query Fragments
+// ============================================
+
+// Sections projection used in page queries
+const SECTIONS_PROJECTION = `
+  sections[] {
+    _key,
+    _type,
+    // Common section fields
+    badge,
+    title,
+    titleLine1,
+    titleLine2,
+    description,
+    backgroundColor,
+    showViewAllButton,
+    viewAllButtonText,
+    viewAllButtonHref,
+    // CTA buttons
+    primaryCTA { text, href, variant, showArrow },
+    secondaryCTA { text, href, variant, showArrow },
+    // Hero Section
+    featureCards[] { _key, icon, title, description, href, linkText },
+    stats[] { _key, value, label },
+    // What We Do / Three Cards Section
+    services[] { _key, icon, title, description, href, linkText },
+    cards[] { _key, icon, title, description, href, linkText },
+    // Rich Text Section - expand inline images
+    content[] {
+      ...,
+      _type == "image" => {
+        ...,
+        asset-> { _id, url }
+      }
+    }
+  }
+`
+
+// SEO fields projection
+const SEO_PROJECTION = `
+  seoTitle,
+  seoDescription,
+  ogImage {
+    ...,
+    asset-> { _id, url }
+  }
+`
+
+// ============================================
 // Site Settings Queries
 // ============================================
 
@@ -40,9 +89,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     contactEmail,
     copyrightText,
     disclaimer,
-    seoTitle,
-    seoDescription,
-    ogImage
+    ${SEO_PROJECTION}
   }
 `)
 
@@ -55,34 +102,8 @@ export const HOMEPAGE_QUERY = defineQuery(`
     _id,
     title,
     slug,
-    sections[] {
-      _key,
-      _type,
-      // Common section fields
-      badge,
-      title,
-      titleLine1,
-      titleLine2,
-      description,
-      backgroundColor,
-      showViewAllButton,
-      viewAllButtonText,
-      viewAllButtonHref,
-      // CTA buttons
-      primaryCTA { text, href, variant, showArrow },
-      secondaryCTA { text, href, variant, showArrow },
-      // Hero Section
-      featureCards[] { _key, icon, title, description, href, linkText },
-      stats[] { _key, value, label },
-      // What We Do / Three Cards Section
-      services[] { _key, icon, title, description, href, linkText },
-      cards[] { _key, icon, title, description, href, linkText },
-      // Rich Text Section
-      content
-    },
-    seoTitle,
-    seoDescription,
-    ogImage
+    ${SECTIONS_PROJECTION},
+    ${SEO_PROJECTION}
   }
 `)
 
@@ -92,34 +113,9 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(`
     title,
     slug,
     isHomepage,
-    sections[] {
-      _key,
-      _type,
-      // Common section fields
-      badge,
-      title,
-      titleLine1,
-      titleLine2,
-      description,
-      backgroundColor,
-      showViewAllButton,
-      viewAllButtonText,
-      viewAllButtonHref,
-      // CTA buttons
-      primaryCTA { text, href, variant, showArrow },
-      secondaryCTA { text, href, variant, showArrow },
-      // Hero Section
-      featureCards[] { _key, icon, title, description, href, linkText },
-      stats[] { _key, value, label },
-      // What We Do / Three Cards Section
-      services[] { _key, icon, title, description, href, linkText },
-      cards[] { _key, icon, title, description, href, linkText },
-      // Rich Text Section
-      content
-    },
-    seoTitle,
-    seoDescription,
-    ogImage
+    noIndex,
+    ${SECTIONS_PROJECTION},
+    ${SEO_PROJECTION}
   }
 `)
 
