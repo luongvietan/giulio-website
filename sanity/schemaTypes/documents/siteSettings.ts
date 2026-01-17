@@ -175,6 +175,17 @@ export default defineType({
             title: 'Default OG Image',
             type: 'image',
             group: 'seo',
+            options: {
+                hotspot: true,
+            },
+            fields: [
+                defineField({
+                    name: 'alt',
+                    title: 'Alt Text',
+                    type: 'string',
+                    description: 'Describe this image for accessibility and SEO',
+                }),
+            ],
         }),
     ],
     preview: {

@@ -24,7 +24,7 @@ export function getClient(previewToken?: string) {
     })
 }
 
-// Utility function for fetching data
+// Utility function for fetching data with error handling
 export async function sanityFetch<T>({
     query,
     params = {},
@@ -35,11 +35,17 @@ export async function sanityFetch<T>({
     params?: QueryParams
     revalidate?: number | false
     tags?: string[]
-}): Promise<T> {
-    return client.fetch<T>(query, params, {
-        next: {
-            revalidate,
-            tags,
-        },
-    })
+}): Promise<T | null> {
+    try {
+        return await client.fetch<T>(query, params, {
+            next: {
+                revalidate,
+                tags,
+            },
+        })
+    } catch (error) {
+        console.error('[Sanity] Fetch error:', error)
+        // Return null instead of crashing the page
+        return null
+    }
 }

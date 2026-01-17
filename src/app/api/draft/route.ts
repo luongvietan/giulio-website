@@ -7,9 +7,14 @@ export async function GET(request: NextRequest) {
     const slug = searchParams.get('slug')
     const secret = searchParams.get('secret')
 
-    // Validate secret if you want to protect the endpoint
-    // For now we just enable draft mode for any request from Sanity Studio
+    // Validate secret to protect the endpoint
     const previewSecret = process.env.SANITY_PREVIEW_SECRET
+
+    // Require secret in production
+    if (!previewSecret && process.env.NODE_ENV === 'production') {
+        console.error('[Draft API] SANITY_PREVIEW_SECRET is not configured')
+        return NextResponse.json({ message: 'Preview not configured' }, { status: 500 })
+    }
 
     if (previewSecret && secret !== previewSecret) {
         return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })

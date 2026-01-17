@@ -25,33 +25,49 @@ export async function generateStaticParams() {
         tags: ['page'],
     })
 
+    // Handle null case (fetch failed)
+    if (!slugs) return []
+
     return slugs.map((slug) => ({
         slug,
     }))
 }
 
-// Generate metadata for SEO
+// Generate metadata for SEO - cascades to site-level defaults
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params
 
-    const page = await sanityFetch<Page | null>({
-        query: PAGE_BY_SLUG_QUERY,
-        params: { slug },
-        revalidate: 60,
-        tags: ['page', slug],
-    })
+    // Fetch page and site settings in parallel for fallback
+    const [page, siteSettings] = await Promise.all([
+        sanityFetch<Page | null>({
+            query: PAGE_BY_SLUG_QUERY,
+            params: { slug },
+            revalidate: 60,
+            tags: ['page', slug],
+        }),
+        sanityFetch<SiteSettings | null>({
+            query: SITE_SETTINGS_QUERY,
+            revalidate: 60,
+            tags: ['siteSettings'],
+        }),
+    ])
 
     if (!page) {
         return {}
     }
 
+    // Cascade: page-level > site-level > empty
+    const title = page.seoTitle || page.title || siteSettings?.seoTitle
+    const description = page.seoDescription || siteSettings?.seoDescription || ''
+    const ogImage = page.ogImage || siteSettings?.ogImage
+
     return {
-        title: page.seoTitle || page.title,
-        description: page.seoDescription,
+        title,
+        description,
         openGraph: {
-            title: page.seoTitle || page.title,
-            description: page.seoDescription || '',
-            images: page.ogImage ? [getImageUrl(page.ogImage, { width: 1200 }) || ''] : [],
+            title,
+            description,
+            images: ogImage ? [getImageUrl(ogImage, { width: 1200 }) || ''] : [],
         },
     }
 }

@@ -26,6 +26,16 @@ export default defineType({
             options: {
                 source: 'title',
                 maxLength: 96,
+                isUnique: async (slug, context) => {
+                    const { document, getClient } = context
+                    const client = getClient({ apiVersion: '2024-01-01' })
+                    const id = document?._id?.replace('drafts.', '')
+                    const result = await client.fetch(
+                        `count(*[_type == "page" && slug.current == $slug && _id != $id && !(_id in path("drafts.**"))])`,
+                        { slug, id }
+                    )
+                    return result === 0
+                },
             },
             validation: (Rule) => Rule.required(),
         }),
@@ -94,6 +104,14 @@ export default defineType({
             options: {
                 hotspot: true,
             },
+            fields: [
+                defineField({
+                    name: 'alt',
+                    title: 'Alt Text',
+                    type: 'string',
+                    description: 'Describe this image for accessibility and SEO',
+                }),
+            ],
         }),
     ],
     preview: {

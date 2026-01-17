@@ -58,51 +58,27 @@ export const HOMEPAGE_QUERY = defineQuery(`
     sections[] {
       _key,
       _type,
-      ...,
-      // Hero Section expansions
-      featureCards[] {
-        _key,
-        icon,
-        title,
-        description,
-        href,
-        linkText
-      },
-      stats[] {
-        _key,
-        value,
-        label
-      },
-      primaryCTA {
-        text,
-        href,
-        variant,
-        showArrow
-      },
-      secondaryCTA {
-        text,
-        href,
-        variant,
-        showArrow
-      },
-      // What We Do Section expansions
-      services[] {
-        _key,
-        icon,
-        title,
-        description,
-        href,
-        linkText
-      },
-      // Cards Section expansions
-      cards[] {
-        _key,
-        icon,
-        title,
-        description,
-        href,
-        linkText
-      }
+      // Common section fields
+      badge,
+      title,
+      titleLine1,
+      titleLine2,
+      description,
+      backgroundColor,
+      showViewAllButton,
+      viewAllButtonText,
+      viewAllButtonHref,
+      // CTA buttons
+      primaryCTA { text, href, variant, showArrow },
+      secondaryCTA { text, href, variant, showArrow },
+      // Hero Section
+      featureCards[] { _key, icon, title, description, href, linkText },
+      stats[] { _key, value, label },
+      // What We Do / Three Cards Section
+      services[] { _key, icon, title, description, href, linkText },
+      cards[] { _key, icon, title, description, href, linkText },
+      // Rich Text Section
+      content
     },
     seoTitle,
     seoDescription,
@@ -119,48 +95,27 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(`
     sections[] {
       _key,
       _type,
-      ...,
-      featureCards[] {
-        _key,
-        icon,
-        title,
-        description,
-        href,
-        linkText
-      },
-      stats[] {
-        _key,
-        value,
-        label
-      },
-      primaryCTA {
-        text,
-        href,
-        variant,
-        showArrow
-      },
-      secondaryCTA {
-        text,
-        href,
-        variant,
-        showArrow
-      },
-      services[] {
-        _key,
-        icon,
-        title,
-        description,
-        href,
-        linkText
-      },
-      cards[] {
-        _key,
-        icon,
-        title,
-        description,
-        href,
-        linkText
-      }
+      // Common section fields
+      badge,
+      title,
+      titleLine1,
+      titleLine2,
+      description,
+      backgroundColor,
+      showViewAllButton,
+      viewAllButtonText,
+      viewAllButtonHref,
+      // CTA buttons
+      primaryCTA { text, href, variant, showArrow },
+      secondaryCTA { text, href, variant, showArrow },
+      // Hero Section
+      featureCards[] { _key, icon, title, description, href, linkText },
+      stats[] { _key, value, label },
+      // What We Do / Three Cards Section
+      services[] { _key, icon, title, description, href, linkText },
+      cards[] { _key, icon, title, description, href, linkText },
+      // Rich Text Section
+      content
     },
     seoTitle,
     seoDescription,
