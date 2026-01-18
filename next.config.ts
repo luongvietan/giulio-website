@@ -25,11 +25,18 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  
-  // Transpile only essential Sanity packages for embedded Studio
-  // Reduced from 5 to 3 packages - @sanity/ui will be auto-included by sanity
-  transpilePackages: ['sanity', '@sanity/vision', '@sanity/presentation'],
-  
+
+  // Transpile only essential Sanity packages for embedded Studio (client-side only)
+  // Note: 'sanity' is excluded as it's marked as serverExternalPackages
+  transpilePackages: ['@sanity/vision', '@sanity/presentation'],
+
+  // External packages - don't bundle these in the server bundle
+  serverExternalPackages: [
+    '@sanity/client',
+    '@sanity/image-url',
+    '@sanity/ui',
+  ],
+
   // Modular imports to automatically transform imports for better tree-shaking
   modularizeImports: {
     'lucide-react': {
@@ -37,7 +44,7 @@ const nextConfig: NextConfig = {
       skipDefaultConversion: true,
     },
   },
-  
+
   turbopack: {
     rules: {
       "src/{components,app/!(admin)}/**/*.{jsx,tsx}": {
@@ -45,14 +52,13 @@ const nextConfig: NextConfig = {
       }
     }
   },
-  
-  // External packages for server components (moved from experimental in Next.js 15+)
-  serverExternalPackages: ['@sanity/client'],
-  
-  // Improve build caching
+
+  // Improve build caching and performance
   experimental: {
     // Optimize CSS imports
     optimizeCss: true,
+    // Use lighter build for faster dev
+    webpackBuildWorker: true,
   },
 } as NextConfig;
 

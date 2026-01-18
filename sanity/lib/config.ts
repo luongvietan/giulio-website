@@ -30,7 +30,7 @@ export const createSanityConfig = (options?: {
   origin?: string
 }) => {
   const origin = options?.origin || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
-  
+
   return defineConfig({
     name: 'default',
     title: 'Gamma Capital CMS',
