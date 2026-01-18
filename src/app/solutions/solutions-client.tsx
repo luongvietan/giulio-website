@@ -36,9 +36,9 @@ export default function SolutionsPageClient({ pageData, siteSettings, uiStrings 
   const ctaTitle = pageData?.ctaTitle ?? '';
   const ctaDescription = pageData?.ctaDescription ?? '';
   const primaryCtaText = pageData?.primaryCtaText ?? '';
-  const primaryCtaLink = pageData?.primaryCtaLink ?? '/contact';
+  const primaryCtaLink = uiStrings?.contactRoute ?? '/contact';
   const secondaryCtaText = pageData?.secondaryCtaText ?? '';
-  const secondaryCtaLink = pageData?.secondaryCtaLink ?? '/memberships';
+  const secondaryCtaLink = uiStrings?.membershipsRoute ?? '/memberships';
   const exploreLabel = uiStrings?.exploreLabel ?? '';
   const heroRef = useRef<HTMLElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);

@@ -350,6 +350,8 @@ export const UI_STRINGS_QUERY = defineQuery(`
     mobileMenuOpenLabel,
     mobileMenuCloseLabel,
     navigationBackLabel,
+    logoAriaLabel,
+    skipToContentLabel,
     draftModeLabel,
     draftModeExitText,
     paginationPrev,
@@ -384,7 +386,12 @@ export const UI_STRINGS_QUERY = defineQuery(`
     dialogCloseLabel,
     breadcrumbAriaLabel,
     breadcrumbMoreLabel,
-    adminLoadingText
+    adminLoadingText,
+    contactRoute,
+    membershipsRoute,
+    solutionsRoute,
+    loginRoute,
+    disableDraftRoute
   }
 `)
 

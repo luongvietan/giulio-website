@@ -38,6 +38,7 @@ export default function NavigationHeader({ siteSettings, uiStrings }: Navigation
   const mobileMenuOpenLabel = uiStrings?.mobileMenuOpenLabel;
   const mobileMenuCloseLabel = uiStrings?.mobileMenuCloseLabel;
   const navigationBackLabel = uiStrings?.navigationBackLabel;
+  const logoAriaLabel = uiStrings?.logoAriaLabel ?? 'Go to Homepage';
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
@@ -74,7 +75,7 @@ export default function NavigationHeader({ siteSettings, uiStrings }: Navigation
       <nav ref={navRef} className="sticky top-0 z-50 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E5E7EB]">
         <div className="relative flex h-[72px] items-center justify-between px-6 md:px-12 max-w-[1400px] mx-auto">
           <div ref={logoRef} className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3" aria-label={logoAriaLabel}>
               {logoImage && (
                 <Image
                   src={urlFor(logoImage).width(36).height(36).url()}

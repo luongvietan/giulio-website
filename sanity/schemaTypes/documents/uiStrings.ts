@@ -13,6 +13,8 @@ export default defineType({
         { name: 'accessibility', title: 'Accessibility' },
         { name: 'forms', title: 'Forms & Validation' },
         { name: 'memberships', title: 'Memberships' },
+        { name: 'routes', title: 'Route Paths' },
+        { name: 'forms', title: 'Forms & Validation' },
         { name: 'general', title: 'General' },
     ],
     fields: [
@@ -143,6 +145,21 @@ export default defineType({
             type: 'string',
             group: 'navigation',
             initialValue: 'Explore Services',
+        }),
+        defineField({
+            name: 'logoAriaLabel',
+            title: 'Logo Aria Label (Home Link)',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Go to Homepage',
+            validation: Rule => Rule.required(),
+        }),
+        defineField({
+            name: 'skipToContentLabel',
+            title: 'Skip to Content Label',
+            type: 'string',
+            group: 'accessibility',
+            initialValue: 'Skip to content',
         }),
 
         // Memberships Strings
@@ -474,6 +491,47 @@ export default defineType({
             group: 'system',
             initialValue: 'Loading Sanity Studio...',
             description: 'Text shown while Sanity Studio is loading',
+        }),
+        // Route Paths (Centralized Management)
+        defineField({
+            name: 'contactRoute',
+            title: 'Contact Page Route',
+            type: 'string',
+            group: 'routes',
+            initialValue: '/contact',
+            validation: Rule => Rule.required(),
+        }),
+        defineField({
+            name: 'membershipsRoute',
+            title: 'Memberships Page Route',
+            type: 'string',
+            group: 'routes',
+            initialValue: '/memberships',
+            validation: Rule => Rule.required(),
+        }),
+        defineField({
+            name: 'solutionsRoute',
+            title: 'Solutions Page Route',
+            type: 'string',
+            group: 'routes',
+            initialValue: '/solutions',
+            validation: Rule => Rule.required(),
+        }),
+        defineField({
+            name: 'loginRoute',
+            title: 'Login Page Route',
+            type: 'string',
+            group: 'routes',
+            initialValue: '/login',
+            validation: Rule => Rule.required(),
+        }),
+        defineField({
+            name: 'disableDraftRoute',
+            title: 'Disable Draft Mode Route',
+            type: 'string',
+            group: 'routes',
+            initialValue: '/api/disable-draft',
+            validation: Rule => Rule.required(),
         }),
     ],
     preview: {

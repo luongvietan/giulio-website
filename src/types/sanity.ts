@@ -391,6 +391,8 @@ export interface UIStrings {
     mobileMenuCloseLabel?: string
     navigationBackLabel?: string
     exploreServicesLabel?: string
+    logoAriaLabel?: string
+    skipToContentLabel?: string
     // General
     draftModeLabel?: string
     draftModeExitText?: string
@@ -448,4 +450,10 @@ export interface UIStrings {
     breadcrumbAriaLabel?: string
     breadcrumbMoreLabel?: string
     adminLoadingText?: string
+    // Routes
+    contactRoute?: string
+    membershipsRoute?: string
+    solutionsRoute?: string
+    loginRoute?: string
+    disableDraftRoute?: string
 }
