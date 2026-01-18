@@ -27,14 +27,12 @@ const nextConfig: NextConfig = {
   },
 
   // Transpile only essential Sanity packages for embedded Studio (client-side only)
-  // Note: 'sanity' is excluded as it's marked as serverExternalPackages
-  transpilePackages: ['@sanity/vision', '@sanity/presentation'],
+  transpilePackages: ['@sanity/vision', '@sanity/presentation', 'styled-components'],
 
   // External packages - don't bundle these in the server bundle
   serverExternalPackages: [
     '@sanity/client',
     '@sanity/image-url',
-    '@sanity/ui',
   ],
 
   // Modular imports to automatically transform imports for better tree-shaking
