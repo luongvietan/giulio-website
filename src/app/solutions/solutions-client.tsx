@@ -128,48 +128,67 @@ export default function SolutionsPageClient({ pageData, siteSettings }: Solution
             <div ref={cardsRef} className="flex flex-col gap-6">
               {solutions.map((solution, index) => {
                 const IconComponent = iconMap[solution.icon || ''] || BarChart3;
-                return (
-                  <Link
-                    key={index}
-                    href={solution.href}
-                    className="group relative border border-[#E5E7EB] rounded-xl p-8 bg-white hover:border-[#2563EB]/30 hover:shadow-md transition-all duration-300"
-                  >
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                      <div className="flex-shrink-0">
-                        <div
-                          className="w-14 h-14 rounded-xl flex items-center justify-center"
-                          style={{ backgroundColor: `${solution.color}15` }}
-                        >
-                          <div style={{ color: solution.color }}>
-                            <IconComponent className="w-6 h-6" />
-                          </div>
+                const hasLink = !!solution.href;
+
+                const CardContent = (
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+                    <div className="flex-shrink-0">
+                      <div
+                        className="w-14 h-14 rounded-xl flex items-center justify-center"
+                        style={{ backgroundColor: `${solution.color}15` }}
+                      >
+                        <div style={{ color: solution.color }}>
+                          <IconComponent className="w-6 h-6" />
                         </div>
                       </div>
+                    </div>
 
-                      <div className="flex-1">
-                        <h3 className="text-[20px] font-semibold text-[#111827] mb-2">{solution.title}</h3>
-                        <p className="text-[15px] text-[#6B7280] leading-relaxed mb-4">{solution.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {(solution.features || []).map((feature, i) => (
-                            <span
-                              key={i}
-                              className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F8F9FB] border border-[#E5E7EB] rounded-full text-[12px] text-[#374151]"
-                            >
-                              <Shield className="w-3 h-3 text-[#2563EB]" />
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
+                    <div className="flex-1">
+                      <h3 className="text-[20px] font-semibold text-[#111827] mb-2">{solution.title}</h3>
+                      <p className="text-[15px] text-[#6B7280] leading-relaxed mb-4">{solution.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {(solution.features || []).map((feature, i) => (
+                          <span
+                            key={i}
+                            className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F8F9FB] border border-[#E5E7EB] rounded-full text-[12px] text-[#374151]"
+                          >
+                            <Shield className="w-3 h-3 text-[#2563EB]" />
+                            {feature}
+                          </span>
+                        ))}
                       </div>
+                    </div>
 
+                    {hasLink && (
                       <div className="flex-shrink-0 lg:self-center">
                         <div className="inline-flex items-center gap-2 text-[#2563EB] font-medium text-[14px] group-hover:gap-3 transition-all">
                           <span>Explore</span>
                           <ArrowRight className="w-4 h-4" />
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    )}
+                  </div>
+                );
+
+                if (hasLink) {
+                  return (
+                    <Link
+                      key={index}
+                      href={solution.href!} // We know it exists because of the check
+                      className="group relative border border-[#E5E7EB] rounded-xl p-8 bg-white hover:border-[#2563EB]/30 hover:shadow-md transition-all duration-300"
+                    >
+                      {CardContent}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
+                    key={index}
+                    className="group relative border border-[#E5E7EB] rounded-xl p-8 bg-white"
+                  >
+                    {CardContent}
+                  </div>
                 );
               })}
             </div>

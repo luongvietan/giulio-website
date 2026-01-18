@@ -10,7 +10,6 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { SITE_SETTINGS_QUERY, UI_STRINGS_QUERY } from "@/sanity/lib/queries";
 import type { SiteSettings, UIStrings } from "@/types/sanity";
 import { UIStringsProvider } from "@/components/providers/ui-strings-provider";
-import { SanityThemeProvider } from "@/components/providers/SanityThemeProvider";
 
 
 const geistSans = Geist({
@@ -35,13 +34,15 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+import StyledComponentsRegistry from '@/lib/registry'
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // ... (keep existing code like draftMode check) ...
   const { isEnabled: isDraftMode } = await draftMode();
-
   const headersList = await headers();
   const pathname = headersList.get("x-invoke-path") || "";
   const isAdminPage = pathname.startsWith("/admin");
@@ -58,10 +59,10 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <UIStringsProvider uiStrings={uiStrings}>
-          {children}
-        </UIStringsProvider>
-        <SanityThemeProvider>
+        <StyledComponentsRegistry>
+          <UIStringsProvider uiStrings={uiStrings}>
+            {children}
+          </UIStringsProvider>
           {!isAdminPage && <VisualEditsMessenger />}
           {isDraftMode && !isAdminPage && (
             <>
@@ -69,7 +70,7 @@ export default async function RootLayout({
               <DisableDraftMode />
             </>
           )}
-        </SanityThemeProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
