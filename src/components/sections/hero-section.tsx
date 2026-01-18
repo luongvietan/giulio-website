@@ -5,10 +5,17 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { ArrowRight, TrendingUp, Activity, Shield } from 'lucide-react';
+import { ArrowRight, TrendingUp, Activity, Shield, type LucideIcon } from 'lucide-react';
 import type { HeroSectionData } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Icon mapping for CMS-driven icons
+const iconMap: Record<string, LucideIcon> = {
+  TrendingUp,
+  Activity,
+  Shield,
+};
 
 // Default content (fallback when no CMS data)
 const defaultData: HeroSectionData = {
@@ -31,23 +38,13 @@ const defaultData: HeroSectionData = {
   },
   featureCards: [],
   stats: [],
+  bulletPoints: [
+    { icon: 'TrendingUp', text: 'Options flow, volatility dynamics, and institutional market signals' },
+    { icon: 'Activity', text: 'Structured strategy insights across derivatives, yield and risk management' },
+    { icon: 'Shield', text: 'Premium Discord access, education, and professional consulting' },
+  ],
+  supportingTagline: 'Research · Consulting · Private Community',
 };
-
-// Key bullets for the hero section
-const keyBullets = [
-  {
-    icon: TrendingUp,
-    text: 'Options flow, volatility dynamics, and institutional market signals',
-  },
-  {
-    icon: Activity,
-    text: 'Structured strategy insights across derivatives, yield and risk management',
-  },
-  {
-    icon: Shield,
-    text: 'Premium Discord access, education, and professional consulting',
-  },
-];
 
 interface HeroSectionProps {
   data?: HeroSectionData;
@@ -56,6 +53,12 @@ interface HeroSectionProps {
 export default function HeroSection({ data }: HeroSectionProps) {
   // Use CMS data or fallback to defaults
   const content = data ?? defaultData;
+
+  // Get bulletPoints with fallback
+  const bulletPoints = content.bulletPoints?.length
+    ? content.bulletPoints
+    : defaultData.bulletPoints ?? [];
+  const supportingTagline = content.supportingTagline ?? defaultData.supportingTagline;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -160,14 +163,17 @@ export default function HeroSection({ data }: HeroSectionProps) {
 
           {/* Key Bullets */}
           <div ref={bulletsRef} className="flex flex-col gap-4 mt-10 max-w-2xl mx-auto">
-            {keyBullets.map((bullet, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-[#2563EB]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <bullet.icon className="w-3.5 h-3.5 text-[#2563EB]" />
+            {bulletPoints.map((bullet: { icon?: string; text: string }, index: number) => {
+              const IconComponent = iconMap[bullet.icon ?? ''] ?? TrendingUp;
+              return (
+                <div key={index} className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-[#2563EB]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <IconComponent className="w-3.5 h-3.5 text-[#2563EB]" />
+                  </div>
+                  <span className="text-[15px] text-[#6B7280] leading-relaxed">{bullet.text}</span>
                 </div>
-                <span className="text-[15px] text-[#6B7280] leading-relaxed">{bullet.text}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* CTA Buttons */}

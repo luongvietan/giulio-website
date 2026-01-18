@@ -7,176 +7,142 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import NavigationHeader from "@/components/sections/navigation-header";
 import Footer from "@/components/sections/footer";
-import { ArrowRight, Check, ChevronDown, Loader2, Zap, Eye, Users, BookOpen, Target, Sparkles, Clock, Shield, TrendingUp, Bell, MessageSquare, GraduationCap, Award, ChevronRight } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, Loader2, Zap, Eye, Users, BookOpen, Target, Sparkles, Clock, Shield, TrendingUp, Bell, MessageSquare, GraduationCap, Award, ChevronRight, type LucideIcon } from 'lucide-react';
+import type { MembershipsPage, SiteSettings } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Section 2 - What You Will Find Inside
-const insideFeatures = [
-  {
-    icon: TrendingUp,
-    text: 'Real-time monitoring of institutional flows and unusual options activity'
-  },
-  {
-    icon: Eye,
-    text: 'Daily market analysis on key U.S. equities and macro drivers'
-  },
-  {
-    icon: Bell,
-    text: 'Fast alerts on anomalous moves and high-potential setups'
-  },
-  {
-    icon: MessageSquare,
-    text: 'Private discussions within a high-quality community of motivated members'
-  },
-  {
-    icon: GraduationCap,
-    text: 'Educational material, including introductory modules on options and flow interpretation'
-  }
+// Icon mapping for CMS-driven icons
+const iconMap: Record<string, LucideIcon> = {
+  TrendingUp,
+  Eye,
+  Bell,
+  MessageSquare,
+  GraduationCap,
+  Target,
+  Zap,
+  Users,
+  BookOpen,
+  Award,
+  Clock,
+  Shield,
+};
+
+// Default data (fallback when CMS is empty)
+const defaultInsideFeatures = [
+  { icon: 'TrendingUp', text: 'Real-time monitoring of institutional flows and unusual options activity' },
+  { icon: 'Eye', text: 'Daily market analysis on key U.S. equities and macro drivers' },
+  { icon: 'Bell', text: 'Fast alerts on anomalous moves and high-potential setups' },
+  { icon: 'MessageSquare', text: 'Private discussions within a high-quality community of motivated members' },
+  { icon: 'GraduationCap', text: 'Educational material, including introductory modules on options and flow interpretation' },
 ];
 
-// Section 3 - Key Benefits
-const keyBenefits = [
-  {
-    icon: Target,
-    title: 'Structured Insights',
-    description: 'Receive disciplined, well-organized market insights — not noise or speculation.'
-  },
-  {
-    icon: Zap,
-    title: 'Early Information Advantage',
-    description: 'Monitor institutional behavior and unusual activity before the majority of retail traders even notice what is happening.'
-  },
-  {
-    icon: Users,
-    title: 'A Clean, Serious Community',
-    description: 'A curated space for investors who want focus, clarity and real analysis.'
-  },
-  {
-    icon: BookOpen,
-    title: 'Educational Foundation',
-    description: 'Access introductory material that helps you understand options, flows and smart money logic.'
-  },
-  {
-    icon: Award,
-    title: 'Proven Methodology',
-    description: 'The same analytical approach used in our consulting work — adapted for daily operational use.'
-  }
+const defaultKeyBenefits = [
+  { icon: 'Target', title: 'Structured Insights', description: 'Receive disciplined, well-organized market insights — not noise or speculation.' },
+  { icon: 'Zap', title: 'Early Information Advantage', description: 'Monitor institutional behavior and unusual activity before the majority of retail traders even notice what is happening.' },
+  { icon: 'Users', title: 'A Clean, Serious Community', description: 'A curated space for investors who want focus, clarity and real analysis.' },
+  { icon: 'BookOpen', title: 'Educational Foundation', description: 'Access introductory material that helps you understand options, flows and smart money logic.' },
+  { icon: 'Award', title: 'Proven Methodology', description: 'The same analytical approach used in our consulting work — adapted for daily operational use.' },
 ];
 
-// Section 4 - What's Included
-const includedFeatures = [
+const defaultIncludedFeatures = [
   'Access to all private Discord channels',
   'Real-time monitoring of institutional options flow',
   'Daily commentary on high-impact market events',
-  'Fast alerts on unusual activity and high-potential setups'
+  'Fast alerts on unusual activity and high-potential setups',
 ];
 
-const educationalMiniCourse = [
+const defaultEducationalItems = [
   'How options work',
   'How to read institutional flows',
-  'How to operate with smart-money logic'
+  'How to operate with smart-money logic',
 ];
 
-const additionalIncluded = [
+const defaultAdditionalIncluded = [
   'Priority access to community discussions',
-  'Automatic Premium role assignment after purchase'
+  'Automatic Premium role assignment after purchase',
 ];
 
-// Section 5 - Membership Tiers
-const membershipPlans = [
-  {
-    id: 'monthly',
-    name: 'Monthly Plan',
-    price: '€19.99',
-    priceValue: 19.99,
-    trial: '3 days',
-    description: 'Best for testing the community and its value.',
-    cta: 'Join Monthly',
-    priceId: 'price_monthly'
-  },
-  {
-    id: 'quarterly',
-    name: 'Quarterly Plan',
-    price: '€54.99',
-    priceValue: 54.99,
-    trial: '7 days',
-    description: 'Saves money compared to the monthly plan.',
-    cta: 'Join Quarterly',
-    popular: true,
-    priceId: 'price_quarterly'
-  },
-  {
-    id: 'annual',
-    name: 'Annual Plan',
-    price: '€219.99',
-    priceValue: 219.99,
-    trial: '30 days',
-    description: 'The best value for dedicated members.',
-    cta: 'Join Annual',
-    priceId: 'price_annual'
-  }
+const defaultPlans = [
+  { id: 'monthly', name: 'Monthly Plan', price: '€19.99', priceValue: 19.99, trial: '3 days', description: 'Best for testing the community and its value.', cta: 'Join Monthly', popular: false, stripePriceId: 'price_monthly' },
+  { id: 'quarterly', name: 'Quarterly Plan', price: '€54.99', priceValue: 54.99, trial: '7 days', description: 'Saves money compared to the monthly plan.', cta: 'Join Quarterly', popular: true, stripePriceId: 'price_quarterly' },
+  { id: 'annual', name: 'Annual Plan', price: '€219.99', priceValue: 219.99, trial: '30 days', description: 'The best value for dedicated members.', cta: 'Join Annual', popular: false, stripePriceId: 'price_annual' },
 ];
 
-// Section 6 - How Access Works
-const accessSteps = [
-  {
-    step: 1,
-    title: 'Select your plan',
-    description: 'Choose your preferred duration and complete the checkout via Stripe.'
-  },
-  {
-    step: 2,
-    title: 'Automatic activation',
-    description: 'Your Premium role on Discord is activated automatically.'
-  },
-  {
-    step: 3,
-    title: 'Instant access',
-    description: 'You gain instant access to all private channels and educational materials.'
-  },
-  {
-    step: 4,
-    title: 'Flexible renewal',
-    description: 'At expiration, you can renew or cancel freely — your role adjusts accordingly.'
-  }
+const defaultAccessSteps = [
+  { step: 1, title: 'Select your plan', description: 'Choose your preferred duration and complete the checkout via Stripe.' },
+  { step: 2, title: 'Automatic activation', description: 'Your Premium role on Discord is activated automatically.' },
+  { step: 3, title: 'Instant access', description: 'You gain instant access to all private channels and educational materials.' },
+  { step: 4, title: 'Flexible renewal', description: 'At expiration, you can renew or cancel freely — your role adjusts accordingly.' },
 ];
 
-// Section 7 - FAQ
-const faqs = [
-  {
-    question: "Do I need trading experience to join?",
-    answer: "Basic market knowledge helps, but the community is designed to be accessible even for investors who are still learning.",
-  },
-  {
-    question: "Are signals provided?",
-    answer: "No. We offer structure, context and strategic insights — not blind trade calls.",
-  },
-  {
-    question: "Can I cancel anytime?",
-    answer: "Yes. You can cancel at any moment; access remains valid until the end of your billing cycle.",
-  },
-  {
-    question: "How do free trials work?",
-    answer: "You get full access during the trial period. If you cancel before it ends, you will not be charged.",
-  },
-  {
-    question: "What markets do you focus on?",
-    answer: "Primarily U.S. equities, options and flow-based market signals.",
-  },
+const defaultFaqs = [
+  { question: "Do I need trading experience to join?", answer: "Basic market knowledge helps, but the community is designed to be accessible even for investors who are still learning." },
+  { question: "Are signals provided?", answer: "No. We offer structure, context and strategic insights — not blind trade calls." },
+  { question: "Can I cancel anytime?", answer: "Yes. You can cancel at any moment; access remains valid until the end of your billing cycle." },
+  { question: "How do free trials work?", answer: "You get full access during the trial period. If you cancel before it ends, you will not be charged." },
+  { question: "What markets do you focus on?", answer: "Primarily U.S. equities, options and flow-based market signals." },
 ];
 
-// Section 8 - Coming Soon
-const comingSoonFeatures = [
+const defaultComingSoon = [
   'Enhanced flow dashboards',
   'Educational modules',
   'Deeper analytical channels',
-  'Periodic market breakdowns'
+  'Periodic market breakdowns',
 ];
 
-export default function MembershipsPageClient() {
+interface MembershipsPageClientProps {
+  pageData?: MembershipsPage | null;
+  siteSettings?: SiteSettings | null;
+}
+
+export default function MembershipsPageClient({ pageData, siteSettings }: MembershipsPageClientProps) {
+  // Extract CMS data with fallbacks
+  const heroBadge = pageData?.heroBadge ?? 'Premium Discord Access';
+  const heroTitle = pageData?.heroTitle ?? 'Premium Discord Access for';
+  const heroSubtitle = pageData?.heroSubtitle ?? 'Serious Market Participants';
+  const heroDescription = pageData?.heroDescription ?? 'Join a private environment dedicated to actionable insights, options flow interpretation, unusual activity monitoring and structured, real-time market guidance — without noise, hype or confusion.';
+  const heroPrimaryCta = pageData?.heroPrimaryCta ?? 'Join the Membership';
+  const heroSecondaryCta = pageData?.heroSecondaryCta ?? "Discover What's Inside";
+
+  const insideSectionTitle = pageData?.insideSectionTitle ?? 'What You Will Find Inside the Discord';
+  const insideSectionDescription = pageData?.insideSectionDescription ?? 'The Gamma Capital Discord is designed for investors who want real clarity in fast-moving markets.';
+  const insideFeatures = pageData?.insideFeatures?.length ? pageData.insideFeatures : defaultInsideFeatures;
+
+  const benefitsSectionTitle = pageData?.benefitsSectionTitle ?? 'Key Benefits of Joining';
+  const keyBenefits = pageData?.keyBenefits?.length ? pageData.keyBenefits : defaultKeyBenefits;
+
+  const includedSectionTitle = pageData?.includedSectionTitle ?? "What's Included in the Membership";
+  const includedFeatures = pageData?.includedFeatures?.length ? pageData.includedFeatures : defaultIncludedFeatures;
+  const educationalMiniCourseTitle = pageData?.educationalMiniCourseTitle ?? 'Educational mini-course:';
+  const educationalItems = pageData?.educationalItems?.length ? pageData.educationalItems : defaultEducationalItems;
+  const additionalIncluded = pageData?.additionalIncluded?.length ? pageData.additionalIncluded : defaultAdditionalIncluded;
+  const includedTagline = pageData?.includedTagline ?? 'Everything is designed to support your decision-making with clarity and focus.';
+
+  const pricingSectionTitle = pageData?.pricingSectionTitle ?? 'Membership Tiers';
+  const pricingSectionDescription = pageData?.pricingSectionDescription ?? 'All plans include the full premium experience.\nThe only difference is the duration.';
+  const plans = pageData?.plans?.length ? pageData.plans : defaultPlans;
+  const popularBadgeText = pageData?.popularBadgeText ?? 'Most Popular';
+
+  const accessSectionTitle = pageData?.accessSectionTitle ?? 'How Access Works';
+  const accessSteps = pageData?.accessSteps?.length ? pageData.accessSteps : defaultAccessSteps;
+  const accessTagline = pageData?.accessTagline ?? 'No friction, no manual steps, no waiting.';
+
+  const faqSectionTitle = pageData?.faqSectionTitle ?? 'Frequently Asked Questions';
+  const faqs = pageData?.faqs?.length ? pageData.faqs : defaultFaqs;
+
+  const comingSoonTitle = pageData?.comingSoonTitle ?? 'Coming Soon';
+  const comingSoonDescription = pageData?.comingSoonDescription ?? 'Gamma Capital constantly evolves. New tools and channels will be added progressively, including:';
+  const comingSoonFeatures = pageData?.comingSoonFeatures?.length ? pageData.comingSoonFeatures : defaultComingSoon;
+  const comingSoonNote = pageData?.comingSoonNote ?? 'Premium members will receive access automatically as these features roll out.';
+
+  const finalCtaTitle = pageData?.finalCtaTitle ?? 'Join the Gamma Capital Discord';
+  const finalCtaDescription = pageData?.finalCtaDescription ?? 'Gain clarity, structure and early insight in markets that reward prepared investors.';
+  const finalCtaButton = pageData?.finalCtaButton ?? 'Choose Your Membership Plan';
+
   const [openFaq, setOpenFaq] = React.useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<string | null>(null);
+
 
   const heroRef = useRef<HTMLElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -442,10 +408,10 @@ export default function MembershipsPageClient() {
           <div className="max-w-[900px] mx-auto">
             <div className="text-center mb-12 animate-item">
               <h2 className="text-[28px] md:text-[36px] font-semibold text-[#0a0a0b] mb-4">
-                What You Will Find Inside the Discord
+                {insideSectionTitle}
               </h2>
               <p className="text-[16px] text-[#71717a] max-w-2xl mx-auto">
-                The Gamma Capital Discord is designed for investors who want real clarity in fast-moving markets.
+                {insideSectionDescription}
               </p>
             </div>
             <div className="bg-[#F8F9FB] rounded-2xl p-8 border border-[#E5E7EB]">
@@ -453,16 +419,19 @@ export default function MembershipsPageClient() {
                 Inside the private channels you will find:
               </p>
               <div className="space-y-4">
-                {insideFeatures.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-4 animate-item">
-                    <div className="w-10 h-10 bg-[#2563EB]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="w-5 h-5 text-[#2563EB]" />
+                {insideFeatures.map((feature, index) => {
+                  const IconComponent = iconMap[feature.icon ?? ''] ?? TrendingUp;
+                  return (
+                    <div key={index} className="flex items-start gap-4 animate-item">
+                      <div className="w-10 h-10 bg-[#2563EB]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <IconComponent className="w-5 h-5 text-[#2563EB]" />
+                      </div>
+                      <p className="text-[15px] text-[#374151] leading-relaxed pt-2">
+                        {feature.text}
+                      </p>
                     </div>
-                    <p className="text-[15px] text-[#374151] leading-relaxed pt-2">
-                      {feature.text}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -522,10 +491,10 @@ export default function MembershipsPageClient() {
               <div className="bg-white/10 rounded-xl p-6 mb-8 animate-item">
                 <div className="flex items-center gap-2 mb-4">
                   <GraduationCap className="w-5 h-5 text-[#2563EB]" />
-                  <span className="text-[14px] font-semibold text-white">Educational mini-course:</span>
+                  <span className="text-[14px] font-semibold text-white">{educationalMiniCourseTitle}</span>
                 </div>
                 <div className="space-y-2 pl-7">
-                  {educationalMiniCourse.map((item, index) => (
+                  {educationalItems.map((item: string, index: number) => (
                     <div key={index} className="flex items-center gap-2 animate-item">
                       <ChevronRight className="w-4 h-4 text-[#2563EB]" />
                       <span className="text-[14px] text-white/80">{item}</span>
@@ -557,16 +526,15 @@ export default function MembershipsPageClient() {
           <div className="max-w-[1100px] mx-auto">
             <div className="text-center mb-6">
               <h2 className="text-[28px] md:text-[36px] font-semibold text-[#111827] mb-4">
-                Membership Tiers
+                {pricingSectionTitle}
               </h2>
-              <p className="text-[16px] text-[#6B7280] max-w-xl mx-auto">
-                All plans include the full premium experience.<br />
-                <span className="font-medium text-[#374151]">The only difference is the duration.</span>
+              <p className="text-[16px] text-[#6B7280] max-w-xl mx-auto whitespace-pre-line">
+                {pricingSectionDescription}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              {membershipPlans.map((plan) => (
+              {plans.map((plan) => (
                 <div
                   key={plan.id}
                   className={`pricing-card relative bg-white rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl ${plan.popular
@@ -578,7 +546,7 @@ export default function MembershipsPageClient() {
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                       <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#2563EB] text-white text-[11px] font-semibold uppercase tracking-wide rounded-full">
                         <Sparkles className="w-3 h-3" />
-                        Most Popular
+                        {popularBadgeText}
                       </span>
                     </div>
                   )}
@@ -694,23 +662,26 @@ export default function MembershipsPageClient() {
           <div className="max-w-[1100px] mx-auto">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-[24px] md:text-[36px] font-semibold text-[#111827] mb-4">
-                Key Benefits of Joining
+                {benefitsSectionTitle}
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {keyBenefits.map((benefit, index) => (
-                <div key={index} className="benefit-card bg-white rounded-2xl p-5 md:p-6 border border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-lg transition-all duration-300">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 md:mb-5">
-                    <benefit.icon className="w-5 h-5 md:w-6 md:h-6 text-[#2563EB]" />
+              {keyBenefits.map((benefit, index) => {
+                const BenefitIcon = iconMap[benefit.icon ?? ''] ?? Target;
+                return (
+                  <div key={index} className="benefit-card bg-white rounded-2xl p-5 md:p-6 border border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-lg transition-all duration-300">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 md:mb-5">
+                      <BenefitIcon className="w-5 h-5 md:w-6 md:h-6 text-[#2563EB]" />
+                    </div>
+                    <h3 className="text-[16px] md:text-[18px] font-semibold text-[#111827] mb-2">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-[13px] md:text-[14px] text-[#71717a] leading-relaxed">
+                      {benefit.description}
+                    </p>
                   </div>
-                  <h3 className="text-[16px] md:text-[18px] font-semibold text-[#111827] mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-[13px] md:text-[14px] text-[#71717a] leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -719,16 +690,16 @@ export default function MembershipsPageClient() {
         <section ref={ctaRef} className="w-full bg-gradient-to-b from-[#F8F9FB] to-[#F3F4F6] py-16 md:py-24 px-6 md:px-12 border-t border-[#E5E7EB]">
           <div className="max-w-[700px] mx-auto text-center">
             <h2 className="text-[32px] md:text-[42px] font-semibold text-[#111827] mb-5 tracking-tight">
-              Join the Gamma Capital Discord
+              {finalCtaTitle}
             </h2>
             <p className="text-[17px] text-[#6B7280] mb-10 max-w-xl mx-auto">
-              Gain clarity, structure and early insight in markets that reward prepared investors.
+              {finalCtaDescription}
             </p>
             <button
               onClick={scrollToPricing}
               className="inline-flex items-center justify-center gap-2 bg-[#0A1A2F] text-white px-8 py-4 rounded-xl text-[15px] font-semibold hover:bg-[#1E3A8A] transition-all duration-200 shadow-lg shadow-[#0A1A2F]/10 hover:shadow-xl hover:-translate-y-0.5"
             >
-              Choose Your Membership Plan
+              {finalCtaButton}
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>

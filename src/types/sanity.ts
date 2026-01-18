@@ -71,6 +71,26 @@ export interface HeroSectionData {
     secondaryCTA?: CTAButton
     featureCards?: ServiceCard[]
     stats?: Stat[]
+    bulletPoints?: Array<{ icon?: string; text: string }>
+    supportingTagline?: string
+}
+
+export interface MultiAssetSectionData {
+    _key: string
+    _type: 'multiAssetSection'
+    badge?: string
+    title?: string
+    description?: string
+    secondaryDescription?: string
+    assetClasses?: Array<{ icon?: string; label: string }>
+}
+
+export interface WhyGammaSectionData {
+    _key: string
+    _type: 'whyGammaSection'
+    badge?: string
+    title?: string
+    reasons?: Array<{ icon?: string; text: string }>
 }
 
 export interface WhatWeDoSectionData {
@@ -158,4 +178,147 @@ export interface Page {
     seoTitle?: string
     seoDescription?: string
     ogImage?: SanityImage
+}
+
+// ============================================
+// Page Singleton Types
+// ============================================
+
+export interface ContactPage {
+    heroTitle?: string
+    heroDescription?: string
+    heroHighlight?: string
+    introHeading?: string
+    introDescription?: string
+    introEmailLabel?: string
+    introEmail?: string
+    formTitle?: string
+    formSubtitle?: string
+    formSuccessTitle?: string
+    formSuccessMessage?: string
+    formErrorTitle?: string
+    formErrorMessage?: string
+    areaOfInterestOptions?: Array<{
+        value: string
+        label: string
+    }>
+    expectationsHeading?: string
+    expectationItems?: Array<{
+        icon?: string
+        text: string
+    }>
+    disclaimer?: string
+    seoTitle?: string
+    seoDescription?: string
+}
+
+export interface MembershipsPage {
+    heroBadge?: string
+    heroTitle?: string
+    heroSubtitle?: string
+    heroDescription?: string
+    heroPrimaryCta?: string
+    heroSecondaryCta?: string
+    insideSectionTitle?: string
+    insideSectionDescription?: string
+    insideFeatures?: Array<{
+        icon?: string
+        text: string
+    }>
+    benefitsSectionTitle?: string
+    keyBenefits?: Array<{
+        icon?: string
+        title: string
+        description: string
+    }>
+    includedSectionTitle?: string
+    includedFeatures?: string[]
+    educationalMiniCourseTitle?: string
+    educationalItems?: string[]
+    additionalIncluded?: string[]
+    includedTagline?: string
+    pricingSectionTitle?: string
+    pricingSectionDescription?: string
+    plans?: Array<{
+        id: string
+        name: string
+        price: string
+        priceValue: number
+        trial: string
+        description: string
+        cta: string
+        popular?: boolean
+        stripePriceId?: string
+    }>
+    popularBadgeText?: string
+    accessSectionTitle?: string
+    accessSteps?: Array<{
+        step: number
+        title: string
+        description: string
+    }>
+    accessTagline?: string
+    faqSectionTitle?: string
+    faqs?: Array<{
+        question: string
+        answer: string
+    }>
+    comingSoonTitle?: string
+    comingSoonDescription?: string
+    comingSoonFeatures?: string[]
+    comingSoonNote?: string
+    finalCtaTitle?: string
+    finalCtaDescription?: string
+    finalCtaButton?: string
+    seoTitle?: string
+    seoDescription?: string
+}
+
+export interface ConsultingPage {
+    heroBadge?: string
+    heroTitle?: string
+    heroSubtitle?: string
+    heroDescription?: string
+    serviceNavItems?: Array<{
+        id: string
+        title: string
+        icon?: string
+    }>
+    serviceSections?: Array<{
+        id: string
+        icon?: string
+        title: string
+        description?: string[]
+        highlight?: string
+        iconGradient?: string
+        shadowColor?: string
+        features?: Array<{
+            icon?: string
+            title: string
+            desc: string
+        }>
+    }>
+    ctaTitle?: string
+    ctaDescription?: string
+    ctaButtonText?: string
+    ctaButtonHref?: string
+    seoTitle?: string
+    seoDescription?: string
+}
+
+// UI Strings singleton (system messages and labels)
+export interface UIStrings {
+    _type: 'uiStrings'
+    _id: string
+    // 404 Page
+    notFoundBadge?: string
+    notFoundTitle?: string
+    notFoundDescription?: string
+    notFoundHomeButtonText?: string
+    notFoundContactButtonText?: string
+    notFoundQuickLinksTitle?: string
+    notFoundQuickLinks?: Array<{ label: string; href: string }>
+    // General
+    draftModeLabel?: string
+    draftModeExitText?: string
 }

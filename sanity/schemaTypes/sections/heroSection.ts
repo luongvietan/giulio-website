@@ -56,6 +56,40 @@ export default defineType({
             of: [defineArrayMember({ type: 'stat' })],
             validation: (Rule) => Rule.max(4),
         }),
+        defineField({
+            name: 'bulletPoints',
+            title: 'Key Bullet Points',
+            description: 'Feature highlights shown below the hero description',
+            type: 'array',
+            of: [{
+                type: 'object',
+                fields: [
+                    defineField({
+                        name: 'icon',
+                        title: 'Icon',
+                        type: 'string',
+                        options: {
+                            list: [
+                                { title: 'Trending Up', value: 'TrendingUp' },
+                                { title: 'Activity', value: 'Activity' },
+                                { title: 'Shield', value: 'Shield' },
+                            ],
+                        },
+                    }),
+                    defineField({ name: 'text', title: 'Text', type: 'string' }),
+                ],
+                preview: {
+                    select: { title: 'text', subtitle: 'icon' },
+                },
+            }],
+            validation: (Rule) => Rule.max(4),
+        }),
+        defineField({
+            name: 'supportingTagline',
+            title: 'Supporting Tagline',
+            description: 'Small italic text below CTAs',
+            type: 'string',
+        }),
     ],
     preview: {
         select: {

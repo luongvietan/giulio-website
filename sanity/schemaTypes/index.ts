@@ -11,10 +11,16 @@ import whatWeDoSection from './sections/whatWeDoSection'
 import testimonialCTASection from './sections/ctaSection'
 import threeCardsSection from './sections/threeCardsSection'
 import richTextSection from './sections/richTextSection'
+import multiAssetSection from './sections/multiAssetSection'
+import whyGammaSection from './sections/whyGammaSection'
 
 // Document Types
 import siteSettings from './documents/siteSettings'
 import page from './documents/page'
+import contactPage from './documents/contactPage'
+import membershipsPage from './documents/membershipsPage'
+import consultingPage from './documents/consultingPage'
+import uiStrings from './documents/uiStrings'
 
 export const schemaTypes = [
     // Objects (reusable)
@@ -30,8 +36,15 @@ export const schemaTypes = [
     testimonialCTASection,
     threeCardsSection,
     richTextSection,
+    multiAssetSection,
+    whyGammaSection,
 
     // Documents
     siteSettings,
     page,
+    contactPage,
+    membershipsPage,
+    consultingPage,
+    uiStrings,
 ]
+

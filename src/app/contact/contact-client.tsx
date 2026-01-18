@@ -5,9 +5,19 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import NavigationHeader from "@/components/sections/navigation-header";
 import Footer from "@/components/sections/footer";
-import { Mail, ChevronDown, Send, Loader2, CheckCircle, AlertCircle, Clock, UserCheck, MessageSquare, ShieldCheck } from 'lucide-react';
+import { Mail, ChevronDown, Send, Loader2, CheckCircle, AlertCircle, Clock, UserCheck, MessageSquare, ShieldCheck, type LucideIcon } from 'lucide-react';
+import type { ContactPage, SiteSettings } from '@/types/sanity';
 
-const areaOfInterestOptions = [
+// Icon mapping for CMS-driven icons
+const iconMap: Record<string, LucideIcon> = {
+  UserCheck,
+  Clock,
+  MessageSquare,
+  ShieldCheck,
+};
+
+// Fallback data (used when CMS is empty)
+const defaultAreaOptions = [
   { value: '', label: 'Select an area of interest' },
   { value: 'discord-memberships', label: 'Discord Memberships' },
   { value: 'consulting-portfolio-review', label: 'Consulting & Portfolio Review' },
@@ -19,26 +29,54 @@ const areaOfInterestOptions = [
   { value: 'partnerships-other', label: 'Partnerships / Other' },
 ];
 
-const expectationItems = [
-  {
-    icon: UserCheck,
-    text: 'Every request is reviewed personally',
-  },
-  {
-    icon: Clock,
-    text: 'We typically respond within 1–2 business days',
-  },
-  {
-    icon: MessageSquare,
-    text: 'Not all requests may receive a response',
-  },
-  {
-    icon: ShieldCheck,
-    text: 'Consulting engagements are subject to availability and fit',
-  },
+const defaultExpectations = [
+  { icon: 'UserCheck', text: 'Every request is reviewed personally' },
+  { icon: 'Clock', text: 'We typically respond within 1–2 business days' },
+  { icon: 'MessageSquare', text: 'Not all requests may receive a response' },
+  { icon: 'ShieldCheck', text: 'Consulting engagements are subject to availability and fit' },
 ];
 
-export default function ContactPageClient() {
+interface ContactPageClientProps {
+  pageData?: ContactPage | null;
+  siteSettings?: SiteSettings | null;
+}
+
+export default function ContactPageClient({ pageData, siteSettings }: ContactPageClientProps) {
+  // Use CMS data with fallbacks
+  const heroTitle = pageData?.heroTitle ?? 'Get in Touch with {brand}Gamma Capital{/brand}';
+  const heroDescription = pageData?.heroDescription ?? 'Whether you are interested in our Discord memberships, consulting services, or a strategic collaboration, you can contact us here.';
+  const heroHighlight = pageData?.heroHighlight ?? 'We review every request carefully and respond selectively.';
+  const introHeading = pageData?.introHeading ?? 'How to Contact Us';
+  const introDescription = pageData?.introDescription ?? 'Gamma Capital works with investors, professionals and partners who value clarity, structure and disciplined decision-making.\n\nUse the form below to reach us regarding memberships, consulting, or other professional inquiries.';
+  const introEmailLabel = pageData?.introEmailLabel ?? 'For general communication:';
+  const introEmail = pageData?.introEmail ?? 'contact@gammacap.ch';
+  const formTitle = pageData?.formTitle ?? 'Contact Request';
+  const formSubtitle = pageData?.formSubtitle ?? 'Please provide a few details so we can better understand your request and respond appropriately.';
+  const successTitle = pageData?.formSuccessTitle ?? 'Request submitted successfully!';
+  const successMessage = pageData?.formSuccessMessage ?? "We'll review your request and get back to you within 1–2 business days.";
+  const errorTitle = pageData?.formErrorTitle ?? 'Failed to submit request';
+  const errorMessage = pageData?.formErrorMessage ?? 'Please try again or email us directly at contact@gammacap.ch';
+  const expectationsHeading = pageData?.expectationsHeading ?? 'What to Expect After Contacting Us';
+  const disclaimer = pageData?.disclaimer ?? 'Gamma Capital does not provide brokerage services, does not execute trades on behalf of clients, and does not offer legal or tax advice. All information and consulting services are provided for educational and strategic purposes only.';
+
+  const areaOfInterestOptions = pageData?.areaOfInterestOptions?.length
+    ? [{ value: '', label: 'Select an area of interest' }, ...pageData.areaOfInterestOptions]
+    : defaultAreaOptions;
+
+  const expectationItems = pageData?.expectationItems?.length
+    ? pageData.expectationItems
+    : defaultExpectations;
+
+  // Parse hero title for brand highlighting
+  const parseHeroTitle = (title: string) => {
+    const parts = title.split(/\{brand\}|\{\/brand\}/);
+    if (parts.length === 3) {
+      return { before: parts[0], brand: parts[1], after: parts[2] };
+    }
+    return { before: title, brand: '', after: '' };
+  };
+  const parsedTitle = parseHeroTitle(heroTitle);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -149,18 +187,18 @@ export default function ContactPageClient() {
 
   return (
     <div className="min-h-screen bg-[#fafafa]">
-      <NavigationHeader />
+      <NavigationHeader siteSettings={siteSettings} />
       <main>
         {/* HERO SECTION */}
         <section ref={heroRef} className="w-full bg-[#fafafa] pt-20 pb-10 md:pt-32 md:pb-16 px-6 md:px-12">
           <div className="max-w-[900px] mx-auto text-center">
             <h1 className="hero-animate text-[36px] md:text-[48px] lg:text-[56px] font-display font-medium tracking-[-0.03em] leading-[1.1] mb-6 text-[#111827]">
-              Get in Touch with <span className="text-[#2563EB]">Gamma Capital</span>
+              {parsedTitle.before}<span className="text-[#2563EB]">{parsedTitle.brand}</span>{parsedTitle.after}
             </h1>
             <p className="hero-animate text-[17px] md:text-[19px] text-[#6B7280] font-normal leading-relaxed max-w-[700px] mx-auto">
-              Whether you are interested in our Discord memberships, consulting services, or a strategic collaboration, you can contact us here.
+              {heroDescription}
               <br /><br />
-              <span className="text-[#374151] font-medium">We review every request carefully and respond selectively.</span>
+              <span className="text-[#374151] font-medium">{heroHighlight}</span>
             </p>
           </div>
         </section>
@@ -169,18 +207,16 @@ export default function ContactPageClient() {
         <section ref={introRef} className="w-full bg-[#F8F9FB] py-8 md:py-12 px-6 md:px-12">
           <div className="max-w-[800px] mx-auto text-center">
             <h2 className="intro-animate text-[28px] md:text-[32px] font-display font-medium tracking-[-0.02em] leading-[1.2] mb-5 text-[#111827]">
-              How to Contact Us
+              {introHeading}
             </h2>
-            <p className="intro-animate text-[16px] md:text-[17px] text-[#6B7280] font-normal leading-relaxed mb-6">
-              Gamma Capital works with investors, professionals and partners who value clarity, structure and disciplined decision-making.
-              <br /><br />
-              Use the form below to reach us regarding memberships, consulting, or other professional inquiries.
+            <p className="intro-animate text-[16px] md:text-[17px] text-[#6B7280] font-normal leading-relaxed mb-6 whitespace-pre-line">
+              {introDescription}
             </p>
             <div className="intro-animate inline-flex items-center gap-3 px-5 py-3 bg-white border border-[#E5E7EB] rounded-lg">
               <Mail className="w-5 h-5 text-[#2563EB]" />
-              <span className="text-[15px] text-[#374151]">For general communication:</span>
-              <a href="mailto:contact@gammacap.ch" className="text-[15px] text-[#2563EB] font-medium hover:underline">
-                contact@gammacap.ch
+              <span className="text-[15px] text-[#374151]">{introEmailLabel}</span>
+              <a href={`mailto:${introEmail}`} className="text-[15px] text-[#2563EB] font-medium hover:underline">
+                {introEmail}
               </a>
             </div>
           </div>
@@ -191,9 +227,9 @@ export default function ContactPageClient() {
           <div className="max-w-[600px] mx-auto">
             <div className="form-card bg-white border border-[#E5E7EB] rounded-xl p-7 md:p-10 shadow-sm">
               <div className="mb-8">
-                <h2 className="text-[22px] md:text-[24px] font-display font-semibold text-[#111827] mb-2">Contact Request</h2>
+                <h2 className="text-[22px] md:text-[24px] font-display font-semibold text-[#111827] mb-2">{formTitle}</h2>
                 <p className="text-[15px] text-[#6B7280]">
-                  Please provide a few details so we can better understand your request and respond appropriately.
+                  {formSubtitle}
                 </p>
               </div>
 
@@ -201,8 +237,8 @@ export default function ContactPageClient() {
                 <div className="mb-6 p-4 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-lg flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-[#2563EB] flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-[14px] font-medium text-[#2563EB]">Request submitted successfully!</p>
-                    <p className="text-[13px] text-[#2563EB]/80">We&apos;ll review your request and get back to you within 1–2 business days.</p>
+                    <p className="text-[14px] font-medium text-[#2563EB]">{successTitle}</p>
+                    <p className="text-[13px] text-[#2563EB]/80">{successMessage}</p>
                   </div>
                 </div>
               )}
@@ -211,8 +247,8 @@ export default function ContactPageClient() {
                 <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-[14px] font-medium text-red-600">Failed to submit request</p>
-                    <p className="text-[13px] text-red-500">Please try again or email us directly at contact@gammacap.ch</p>
+                    <p className="text-[14px] font-medium text-red-600">{errorTitle}</p>
+                    <p className="text-[13px] text-red-500">{errorMessage}</p>
                   </div>
                 </div>
               )}
@@ -348,22 +384,25 @@ export default function ContactPageClient() {
         <section ref={expectationsRef} className="w-full bg-[#fafafa] py-10 md:py-16 px-6 md:px-12">
           <div className="max-w-[700px] mx-auto">
             <h2 className="text-[24px] md:text-[28px] font-medium tracking-[-0.02em] leading-[1.2] mb-8 text-[#0a0a0b] text-center">
-              What to Expect After Contacting Us
+              {expectationsHeading}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {expectationItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="expectation-item flex items-start gap-4 p-4 bg-white border border-[#E5E7EB] rounded-lg"
-                >
-                  <div className="w-9 h-9 bg-[#2563EB]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <item.icon className="w-4 h-4 text-[#2563EB]" />
+              {expectationItems.map((item, index) => {
+                const IconComponent = iconMap[item.icon ?? ''] ?? UserCheck;
+                return (
+                  <div
+                    key={index}
+                    className="expectation-item flex items-start gap-4 p-4 bg-white border border-[#E5E7EB] rounded-lg"
+                  >
+                    <div className="w-9 h-9 bg-[#2563EB]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <IconComponent className="w-4 h-4 text-[#2563EB]" />
+                    </div>
+                    <p className="text-[15px] text-[#52525b] leading-relaxed pt-1.5">
+                      {item.text}
+                    </p>
                   </div>
-                  <p className="text-[15px] text-[#52525b] leading-relaxed pt-1.5">
-                    {item.text}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -372,12 +411,12 @@ export default function ContactPageClient() {
         <section className="w-full bg-[#fafafa] py-8 pb-12 md:py-12 md:pb-20 px-6 md:px-12">
           <div className="max-w-[750px] mx-auto text-center">
             <p className="text-[13px] text-[#a1a1aa] leading-relaxed">
-              Gamma Capital does not provide brokerage services, does not execute trades on behalf of clients, and does not offer legal or tax advice. All information and consulting services are provided for educational and strategic purposes only.
+              {disclaimer}
             </p>
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer siteSettings={siteSettings} />
     </div>
   );
 }

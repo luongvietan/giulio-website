@@ -4,19 +4,41 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Globe, Layers, TrendingUp, Building2, Coins } from 'lucide-react';
+import { Globe, Layers, TrendingUp, Building2, Coins, type LucideIcon } from 'lucide-react';
+import type { MultiAssetSectionData } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const assetClasses = [
-    { icon: TrendingUp, label: 'Equities' },
-    { icon: Layers, label: 'Derivatives' },
-    { icon: Globe, label: 'Structured Products' },
-    { icon: Building2, label: 'Real Estate' },
-    { icon: Coins, label: 'Digital Assets' },
+// Icon mapping for CMS-driven icons
+const iconMap: Record<string, LucideIcon> = {
+    TrendingUp,
+    Layers,
+    Globe,
+    Building2,
+    Coins,
+};
+
+// Default data (fallback when CMS is empty)
+const defaultAssetClasses = [
+    { icon: 'TrendingUp', label: 'Equities' },
+    { icon: 'Layers', label: 'Derivatives' },
+    { icon: 'Globe', label: 'Structured Products' },
+    { icon: 'Building2', label: 'Real Estate' },
+    { icon: 'Coins', label: 'Digital Assets' },
 ];
 
-export default function MultiAssetSection() {
+interface MultiAssetSectionProps {
+    data?: MultiAssetSectionData;
+}
+
+export default function MultiAssetSection({ data }: MultiAssetSectionProps) {
+    // Extract CMS data with fallbacks
+    const badge = data?.badge ?? 'Cross-Asset Expertise';
+    const title = data?.title ?? 'A Multi-Asset, Institutional Perspective';
+    const description = data?.description ?? 'Gamma Capital operates across multiple asset classes, including equities, derivatives, structured products, real estate and digital assets.';
+    const secondaryDescription = data?.secondaryDescription ?? 'This cross-asset perspective allows us to identify hidden correlations, structural inefficiencies and opportunities that remain invisible within single-asset approaches.';
+    const assetClasses = data?.assetClasses?.length ? data.assetClasses : defaultAssetClasses;
+
     const sectionRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const assetsRef = useRef<HTMLDivElement>(null);
@@ -66,16 +88,16 @@ export default function MultiAssetSection() {
             <div className="max-w-[1000px] mx-auto">
                 <div ref={contentRef} className="text-center">
                     <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-wide border rounded-full px-3 py-1 text-[#6B7280] bg-white border-[#E5E7EB] mb-6">
-                        Cross-Asset Expertise
+                        {badge}
                     </span>
                     <h2 className="text-[32px] md:text-[40px] font-display font-medium tracking-[-0.02em] leading-[1.15] text-[#111827] mb-6">
-                        A Multi-Asset, Institutional Perspective
+                        {title}
                     </h2>
                     <p className="text-[16px] md:text-[17px] text-[#6B7280] max-w-3xl mx-auto leading-relaxed mb-4">
-                        Gamma Capital operates across multiple asset classes, including equities, derivatives, structured products, real estate and digital assets.
+                        {description}
                     </p>
                     <p className="text-[16px] md:text-[17px] text-[#6B7280] max-w-3xl mx-auto leading-relaxed mb-4">
-                        This cross-asset perspective allows us to identify hidden correlations, structural inefficiencies and opportunities that remain invisible within single-asset approaches.
+                        {secondaryDescription}
                     </p>
                     <p className="text-[16px] md:text-[17px] text-[#374151] max-w-3xl mx-auto leading-relaxed font-medium">
                         Our work integrates financial markets analysis with real-world asset experience, offering a broader and more resilient strategic view.
@@ -84,15 +106,18 @@ export default function MultiAssetSection() {
 
                 {/* Asset Class Pills */}
                 <div ref={assetsRef} className="flex flex-wrap justify-center gap-3 mt-12">
-                    {assetClasses.map((asset, index) => (
-                        <div
-                            key={index}
-                            className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#E5E7EB] rounded-full hover:border-[#2563EB]/30 hover:shadow-sm transition-all duration-200"
-                        >
-                            <asset.icon className="w-4 h-4 text-[#2563EB]" />
-                            <span className="text-[14px] font-medium text-[#374151]">{asset.label}</span>
-                        </div>
-                    ))}
+                    {assetClasses.map((asset, index) => {
+                        const IconComponent = iconMap[asset.icon ?? ''] ?? Globe;
+                        return (
+                            <div
+                                key={index}
+                                className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#E5E7EB] rounded-full hover:border-[#2563EB]/30 hover:shadow-sm transition-all duration-200"
+                            >
+                                <IconComponent className="w-4 h-4 text-[#2563EB]" />
+                                <span className="text-[14px] font-medium text-[#374151]">{asset.label}</span>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

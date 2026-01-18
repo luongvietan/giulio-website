@@ -6,6 +6,9 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { headers } from "next/headers";
+import { sanityFetch } from "@/sanity/lib/client";
+import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import type { SiteSettings } from "@/types/sanity";
 
 
 const geistSans = Geist({
@@ -18,10 +21,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Gamma Capital - Market Intelligence & Strategic Advisory",
-  description: "Gamma Capital delivers institutional-grade market intelligence, exclusive Discord community access, and personalized consulting to elevate your investment strategy.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await sanityFetch<SiteSettings | null>({
+    query: SITE_SETTINGS_QUERY,
+    tags: ['siteSettings'],
+  });
+
+  return {
+    title: settings?.seoTitle ?? "Gamma Capital - Market Intelligence & Strategic Advisory",
+    description: settings?.seoDescription ?? "Gamma Capital delivers institutional-grade market intelligence, exclusive Discord community access, and personalized consulting to elevate your investment strategy.",
+  };
+}
 
 export default async function RootLayout({
   children,

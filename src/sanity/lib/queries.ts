@@ -25,9 +25,16 @@ const SECTIONS_PROJECTION = `
     // Hero Section
     featureCards[] { _key, icon, title, description, href, linkText },
     stats[] { _key, value, label },
+    bulletPoints[] { icon, text },
+    supportingTagline,
     // What We Do / Three Cards Section
     services[] { _key, icon, title, description, href, linkText },
     cards[] { _key, icon, title, description, href, linkText },
+    // Multi-Asset Section
+    secondaryDescription,
+    assetClasses[] { icon, label },
+    // Why Gamma Section
+    reasons[] { icon, text },
     // Rich Text Section - expand inline images
     content[] {
       ...,
@@ -131,4 +138,154 @@ export const ALL_PAGES_QUERY = defineQuery(`
 // For generating static paths
 export const ALL_PAGE_SLUGS_QUERY = defineQuery(`
   *[_type == "page" && defined(slug.current) && isHomepage != true].slug.current
+`)
+
+// ============================================
+// Page Singleton Queries
+// ============================================
+
+export const CONTACT_PAGE_QUERY = defineQuery(`
+  *[_type == "contactPage"][0] {
+    heroTitle,
+    heroDescription,
+    heroHighlight,
+    introHeading,
+    introDescription,
+    introEmailLabel,
+    introEmail,
+    formTitle,
+    formSubtitle,
+    formSuccessTitle,
+    formSuccessMessage,
+    formErrorTitle,
+    formErrorMessage,
+    areaOfInterestOptions[] {
+      value,
+      label
+    },
+    expectationsHeading,
+    expectationItems[] {
+      icon,
+      text
+    },
+    disclaimer,
+    seoTitle,
+    seoDescription
+  }
+`)
+
+export const MEMBERSHIPS_PAGE_QUERY = defineQuery(`
+  *[_type == "membershipsPage"][0] {
+    heroBadge,
+    heroTitle,
+    heroSubtitle,
+    heroDescription,
+    heroPrimaryCta,
+    heroSecondaryCta,
+    insideSectionTitle,
+    insideSectionDescription,
+    insideFeatures[] {
+      icon,
+      text
+    },
+    benefitsSectionTitle,
+    keyBenefits[] {
+      icon,
+      title,
+      description
+    },
+    includedSectionTitle,
+    includedFeatures,
+    educationalMiniCourseTitle,
+    educationalItems,
+    additionalIncluded,
+    includedTagline,
+    pricingSectionTitle,
+    pricingSectionDescription,
+    plans[] {
+      id,
+      name,
+      price,
+      priceValue,
+      trial,
+      description,
+      cta,
+      popular,
+      stripePriceId
+    },
+    popularBadgeText,
+    accessSectionTitle,
+    accessSteps[] {
+      step,
+      title,
+      description
+    },
+    accessTagline,
+    faqSectionTitle,
+    faqs[] {
+      question,
+      answer
+    },
+    comingSoonTitle,
+    comingSoonDescription,
+    comingSoonFeatures,
+    comingSoonNote,
+    finalCtaTitle,
+    finalCtaDescription,
+    finalCtaButton,
+    seoTitle,
+    seoDescription
+  }
+`)
+
+export const CONSULTING_PAGE_QUERY = defineQuery(`
+  *[_type == "consultingPage"][0] {
+    heroBadge,
+    heroTitle,
+    heroSubtitle,
+    heroDescription,
+    serviceNavItems[] {
+      id,
+      title,
+      icon
+    },
+    serviceSections[] {
+      id,
+      icon,
+      title,
+      description,
+      highlight,
+      iconGradient,
+      shadowColor,
+      features[] {
+        icon,
+        title,
+        desc
+      }
+    },
+    ctaTitle,
+    ctaDescription,
+    ctaButtonText,
+    ctaButtonHref,
+    seoTitle,
+    seoDescription
+  }
+`)
+
+// UI Strings Query
+export const UI_STRINGS_QUERY = defineQuery(`
+  *[_type == "uiStrings"][0] {
+    notFoundBadge,
+    notFoundTitle,
+    notFoundDescription,
+    notFoundHomeButtonText,
+    notFoundContactButtonText,
+    notFoundQuickLinksTitle,
+    notFoundQuickLinks[] {
+      label,
+      href
+    },
+    draftModeLabel,
+    draftModeExitText
+  }
 `)

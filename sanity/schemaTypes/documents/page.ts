@@ -85,6 +85,8 @@ export default defineType({
                 defineArrayMember({ type: 'testimonialCTASection', title: 'CTA Section' }),
                 defineArrayMember({ type: 'threeCardsSection', title: 'Three Cards' }),
                 defineArrayMember({ type: 'richTextSection', title: 'Rich Text' }),
+                defineArrayMember({ type: 'multiAssetSection', title: 'Multi-Asset Section' }),
+                defineArrayMember({ type: 'whyGammaSection', title: 'Why Gamma Section' }),
             ],
         }),
 

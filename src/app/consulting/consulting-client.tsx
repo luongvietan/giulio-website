@@ -25,59 +25,182 @@ import {
   Map,
   Wallet,
   Activity,
-  Zap
+  Zap,
+  type LucideIcon
 } from 'lucide-react';
+import type { ConsultingPage, SiteSettings } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Service navigation items
-const serviceNavItems = [
-  { id: 'portfolio-review', title: 'Portfolio Review', icon: PieChart },
-  { id: 'strategy-design', title: 'Strategy Design', icon: Compass },
-  { id: 'options', title: 'Options', icon: TrendingUp },
-  { id: 'structured-products', title: 'Structured Products', icon: Shield },
-  { id: 'real-estate', title: 'Real Estate & Other Assets', icon: Building2 },
-  { id: 'crypto', title: 'Crypto', icon: Bitcoin },
+// Icon mapping for CMS-driven icons
+const iconMap: Record<string, LucideIcon> = {
+  PieChart,
+  Compass,
+  TrendingUp,
+  Shield,
+  Building2,
+  Bitcoin,
+  BarChart3,
+  Target,
+  Lightbulb,
+  LineChart,
+  Layers,
+  Map,
+  Wallet,
+  Activity,
+  Zap,
+};
+
+// Default service navigation items
+const defaultServiceNavItems = [
+  { id: 'portfolio-review', title: 'Portfolio Review', icon: 'PieChart' },
+  { id: 'strategy-design', title: 'Strategy Design', icon: 'Compass' },
+  { id: 'options', title: 'Options', icon: 'TrendingUp' },
+  { id: 'structured-products', title: 'Structured Products', icon: 'Shield' },
+  { id: 'real-estate', title: 'Real Estate & Other Assets', icon: 'Building2' },
+  { id: 'crypto', title: 'Crypto', icon: 'Bitcoin' },
 ];
 
-// Feature data for each section
-const portfolioFeatures = [
-  { icon: BarChart3, title: 'Multi-Asset Analysis', desc: 'Equities, options, ETFs, fixed income, crypto & more' },
-  { icon: Target, title: 'Stress Testing', desc: 'Scenario analysis and VaR/CVaR modelling' },
-  { icon: Activity, title: 'Correlation Mapping', desc: 'Identify hidden risks and inefficiencies' },
+// Default features data for each section
+const defaultPortfolioFeatures = [
+  { icon: 'BarChart3', title: 'Multi-Asset Analysis', desc: 'Equities, options, ETFs, fixed income, crypto & more' },
+  { icon: 'Target', title: 'Stress Testing', desc: 'Scenario analysis and VaR/CVaR modelling' },
+  { icon: 'Activity', title: 'Correlation Mapping', desc: 'Identify hidden risks and inefficiencies' },
 ];
 
-const strategyFeatures = [
-  { icon: Lightbulb, title: 'Options-Driven', desc: 'Integrating short-term tactics with long-term positioning' },
-  { icon: Layers, title: 'Bespoke Architecture', desc: 'Built around your objectives and risk tolerance' },
-  { icon: Zap, title: 'Algorithm Design', desc: 'Systematise execution and signal logic' },
+const defaultStrategyFeatures = [
+  { icon: 'Lightbulb', title: 'Options-Driven', desc: 'Integrating short-term tactics with long-term positioning' },
+  { icon: 'Layers', title: 'Bespoke Architecture', desc: 'Built around your objectives and risk tolerance' },
+  { icon: 'Zap', title: 'Algorithm Design', desc: 'Systematise execution and signal logic' },
 ];
 
-const optionsFeatures = [
-  { icon: LineChart, title: 'Flow Analysis', desc: 'Monitor institutional-grade options flow' },
-  { icon: Activity, title: 'GEX & Greeks', desc: 'Delta hedging, vanna/charm effects' },
-  { icon: Target, title: 'Volatility Regimes', desc: 'Skew, term structure analysis' },
+const defaultOptionsFeatures = [
+  { icon: 'LineChart', title: 'Flow Analysis', desc: 'Monitor institutional-grade options flow' },
+  { icon: 'Activity', title: 'GEX & Greeks', desc: 'Delta hedging, vanna/charm effects' },
+  { icon: 'Target', title: 'Volatility Regimes', desc: 'Skew, term structure analysis' },
 ];
 
-const structuredFeatures = [
-  { icon: Shield, title: 'Product Evaluation', desc: 'Autocallables, Phoenix notes, express products' },
-  { icon: Layers, title: 'Payoff Design', desc: 'Risk transfer and hedging analysis' },
-  { icon: TrendingUp, title: 'Options Replication', desc: 'Enhanced flexibility and efficiency' },
+const defaultStructuredFeatures = [
+  { icon: 'Shield', title: 'Product Evaluation', desc: 'Autocallables, Phoenix notes, express products' },
+  { icon: 'Layers', title: 'Payoff Design', desc: 'Risk transfer and hedging analysis' },
+  { icon: 'TrendingUp', title: 'Options Replication', desc: 'Enhanced flexibility and efficiency' },
 ];
 
-const realEstateFeatures = [
-  { icon: Map, title: 'Switzerland & Italy', desc: 'Deep expertise in key markets' },
-  { icon: BarChart3, title: 'Yield Modelling', desc: 'Cash-flow projections and risk mapping' },
-  { icon: Wallet, title: 'Strategic Integration', desc: 'Multi-asset portfolio approach' },
+const defaultRealEstateFeatures = [
+  { icon: 'Map', title: 'Switzerland & Italy', desc: 'Deep expertise in key markets' },
+  { icon: 'BarChart3', title: 'Yield Modelling', desc: 'Cash-flow projections and risk mapping' },
+  { icon: 'Wallet', title: 'Strategic Integration', desc: 'Multi-asset portfolio approach' },
 ];
 
-const cryptoFeatures = [
-  { icon: Activity, title: 'Market Structure', desc: 'Liquidity cycles and macro correlations' },
-  { icon: Target, title: 'Risk Sizing', desc: 'Measured positioning and structural awareness' },
-  { icon: Layers, title: 'Network Insights', desc: 'Access to experienced crypto professionals' },
+const defaultCryptoFeatures = [
+  { icon: 'Activity', title: 'Market Structure', desc: 'Liquidity cycles and macro correlations' },
+  { icon: 'Target', title: 'Risk Sizing', desc: 'Measured positioning and structural awareness' },
+  { icon: 'Layers', title: 'Network Insights', desc: 'Access to experienced crypto professionals' },
 ];
 
-export default function ConsultingPageClient() {
+// Default service sections data
+const defaultServiceSections = [
+  {
+    id: 'portfolio-review',
+    icon: 'PieChart',
+    title: 'Portfolio Review',
+    description: [
+      "A disciplined, multi-asset review designed to reveal how your portfolio truly behaves.",
+      "We analyse every component to identify hidden risks, inefficiencies and structural imbalances: equities, options, ETFs, fixed income, structured products, crypto, real estate and alternatives.",
+      "Using institutional tools such as scenario analysis, stress testing, correlation mapping, VaR/CVaR and factor modelling, we highlight where performance is being lost and how risk can be repositioned."
+    ],
+    highlight: "The result is a clear, refined interpretation of your exposures and a practical roadmap to bring order, coherence and discipline to your investment process.",
+    features: defaultPortfolioFeatures,
+    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
+    shadowColor: 'shadow-[#2563EB]/20',
+  },
+  {
+    id: 'strategy-design',
+    icon: 'Compass',
+    title: 'Strategy Design',
+    description: [
+      "We design investment strategies that combine institutional structure with private-investor flexibility.",
+      "Our philosophy is opportunistic and options-driven, integrating short-term tactics with medium- and long-term positioning.",
+      "Each strategy is built around your objectives, risk tolerance and liquidity profile, ranging from tailored frameworks to fully bespoke architectures."
+    ],
+    highlight: "Every strategy defines how to express an idea, how to size it, how to hedge it, and how to evolve it as conditions change — creating a disciplined, repeatable system rather than isolated trades.",
+    features: defaultStrategyFeatures,
+    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
+    shadowColor: 'shadow-[#2563EB]/20',
+  },
+  {
+    id: 'options',
+    icon: 'TrendingUp',
+    title: 'Options',
+    description: [
+      "Options flow is the core of Gamma Capital. Our primary edge comes from monitoring and interpreting institutional-grade options flow and unusual activity.",
+      "We connect flow to derivatives mechanics — GEX, delta hedging dynamics, vanna/charm effects, volatility regimes, skew, and term structure — to frame how options markets influence price action."
+    ],
+    highlight: "Whether the objective is tactical exposure, yield enhancement, convexity management, or hedging, our approach translates complex market signals into clear, risk-aware frameworks — with the structure and precision of a professional derivatives desk.",
+    features: defaultOptionsFeatures,
+    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
+    shadowColor: 'shadow-[#2563EB]/20',
+  },
+  {
+    id: 'structured-products',
+    icon: 'Shield',
+    title: 'Structured Products',
+    description: [
+      "Our structured-product advisory blends academic depth with institutional insight gained through exposure to portfolio managers at UBS and studies at USI Lugano.",
+      "We help investors evaluate and design a wide range of structures, from autocallables and Phoenix notes to reverse convertibles, express products and capital-protected solutions."
+    ],
+    highlight: "When appropriate, we replicate or enhance these payoffs using options to achieve greater flexibility and efficiency.",
+    features: defaultStructuredFeatures,
+    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
+    shadowColor: 'shadow-[#2563EB]/20',
+  },
+  {
+    id: 'real-estate',
+    icon: 'Building2',
+    title: 'Real Estate & Other Assets',
+    description: [
+      "Our real estate perspective is shaped by direct experience in Switzerland and Italy, with deep familiarity in markets such as Lugano, Chiasso, Venice, Como, Udine and Rome.",
+      "We analyse property opportunities with the same rigor applied to financial assets — cash-flow projections, yield modelling, risk mapping, seasonality, and strategic integration within a broader portfolio."
+    ],
+    highlight: "From short-stay optimisation to long-term capital allocation, we help clients treat real estate not as isolated purchases but as deliberate components of a multi-asset strategy.",
+    features: defaultRealEstateFeatures,
+    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
+    shadowColor: 'shadow-[#2563EB]/20',
+  },
+  {
+    id: 'crypto',
+    icon: 'Bitcoin',
+    title: 'Crypto',
+    description: [
+      "Active in the crypto markets since 2017, we bring historical context and institutional discipline to an asset class often dominated by noise.",
+      "We focus on market structure, liquidity cycles, risk sizing, macro correlations and scenario-based positioning."
+    ],
+    highlight: "Crypto is approached not as speculation, but as an asymmetric asset requiring measured sizing, structural awareness and strategic integration within a diversified portfolio.",
+    features: defaultCryptoFeatures,
+    iconGradient: 'from-[#f59e0b] to-[#d97706]',
+    shadowColor: 'shadow-[#f59e0b]/20',
+  },
+];
+
+interface ConsultingPageClientProps {
+  pageData?: ConsultingPage | null;
+  siteSettings?: SiteSettings | null;
+}
+
+export default function ConsultingPageClient({ pageData, siteSettings }: ConsultingPageClientProps) {
+  // Extract CMS data with fallbacks
+  const heroBadge = pageData?.heroBadge ?? 'Advisory Services';
+  const heroTitle = pageData?.heroTitle ?? 'Consulting';
+  const heroSubtitle = pageData?.heroSubtitle ?? 'Institution-level advisory designed for private investors who demand precision, clarity, and actionable insight across every major asset class.';
+
+  const serviceNavItems = pageData?.serviceNavItems?.length ? pageData.serviceNavItems : defaultServiceNavItems;
+  const serviceSections = pageData?.serviceSections?.length ? pageData.serviceSections : defaultServiceSections;
+
+  const ctaTitle = pageData?.ctaTitle ?? 'Ready to Elevate Your Investment Process?';
+  const ctaDescription = pageData?.ctaDescription ?? 'Schedule a consultation to discuss how Gamma Capital can bring institutional-level precision and clarity to your portfolio.';
+  const ctaButtonText = pageData?.ctaButtonText ?? 'Get in Touch';
+  const ctaButtonHref = pageData?.ctaButtonHref ?? '/contact';
+
   const heroRef = useRef<HTMLElement>(null);
   const navCardsRef = useRef<HTMLDivElement>(null);
   const [activeSection, setActiveSection] = useState<string>('');
