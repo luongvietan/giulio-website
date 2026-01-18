@@ -107,6 +107,16 @@ export default defineType({
                             type: 'array',
                             of: [{ type: 'string' }],
                         }),
+                        defineField({
+                            name: 'linkUrl',
+                            title: 'Link URL',
+                            type: 'string',
+                        }),
+                        defineField({
+                            name: 'linkText',
+                            title: 'Link Text',
+                            type: 'string',
+                        }),
                     ],
                 },
             ],

@@ -572,21 +572,76 @@ const strategyPage = {
     _type: 'serviceLandingPage',
     // title field removed
     heroBadge: 'Market Intelligence',
-    heroTitle: 'Strategic Insights',
-    heroSubtitle: 'Data Driven',
-    heroDescription: 'Actionable market intelligence and strategic insights.',
-    heroCtaText: 'Read Reports',
-    heroCtaLink: '/solutions/strategy-insights',
+    heroTitle: 'Data-driven insights, algorithms and institutional frameworks',
+    heroSubtitle: '', // Leaving empty as title is long enough
+    heroDescription: 'to understand markets and manage risk.',
+    heroCtaText: 'Contact Us',
+    heroCtaLink: '/contact',
     services: [
-        { _key: 'sts-1', title: 'Daily Reports', description: 'Market movements and analysis.', icon: 'TrendingUp', features: ['Forex', 'Equities'] },
-        { _key: 'sts-2', title: 'Macro Analysis', description: 'Global economic trends.', icon: 'Map', features: ['Inflation', 'Rates'] }
+        {
+            _key: 'sts-1',
+            title: 'Market Intelligence (Core)',
+            description: "We develop advanced analytical frameworks and proprietary algorithms to interpret markets, manage portfolio risk and identify asymmetric opportunities.\n\nOur models adapt to volatility, liquidity and macro regimes, and can be custom-built on request for specific strategies or portfolios.",
+            icon: 'BarChart3',
+            features: [],
+            linkUrl: '/contact',
+            linkText: 'Contact us'
+        },
+        {
+            _key: 'sts-2',
+            title: 'Options Intelligence',
+            description: "Options are a key source of market information. We analyse institutional options flow, GEX, dealer positioning and volatility dynamics to understand where risk is building or being hedged.\n\nOur focus is on:",
+            icon: 'TrendingUp',
+            features: [
+                'flow-driven market behaviour',
+                'gamma exposure and dealer hedging',
+                'volatility regimes and term structure',
+                'This intelligence supports timing, risk management and strategy design.'
+            ]
+        },
+        {
+            _key: 'sts-3',
+            title: 'Structured Products Intelligence',
+            description: "We analyse and design structured payoffs from an institutional perspective. Our work focuses on:",
+            icon: 'Layers', // Using Layers if available, or just fallback
+            features: [
+                'payoff asymmetry and embedded optionality',
+                'issuer hedging logic',
+                'regime-dependent performance',
+                'efficiency vs complexity',
+                'We also replicate or improve structured payoffs using options, removing unnecessary opacity.'
+            ]
+        },
+        {
+            _key: 'sts-4',
+            title: 'Real Estate Advisory (Market Intelligence)',
+            description: "Our real estate intelligence combines financial analysis with direct operational experience in Switzerland and Italy.\n\nWe analyse opportunities in markets such as Lugano, Chiasso, Venice, Como, Udine and Rome, focusing on yield, risk, cash flow and strategic allocation.\n\nReal estate is treated as part of a broader multi-asset framework, not as an isolated investment.",
+            icon: 'Building2',
+            features: [],
+            linkUrl: '/contact',
+            linkText: 'Contact us'
+        },
+        {
+            _key: 'sts-5',
+            title: 'Strategic Network & Access',
+            description: "Gamma Capital operates within a selective network of professionals across finance, real estate and alternative investments.\n\nThis network provides access to:",
+            icon: 'Network',
+            features: [
+                'high-level market insight',
+                'experienced operators',
+                'strategic alignment and introductions, where appropriate',
+                'Not a service, but a strategic advantage for selected clients.'
+            ],
+            linkUrl: '/contact',
+            linkText: 'Contact us'
+        }
     ],
-    ctaTitle: 'Stay Informed',
-    ctaDescription: 'Subscribe to our intelligence reports.',
-    primaryCtaText: 'Subscribe',
-    primaryCtaLink: '/memberships',
-    secondaryCtaText: 'Sample Report',
-    secondaryCtaLink: '#',
+    ctaTitle: 'Institutional insight, applied with clarity.',
+    ctaDescription: 'Contact us to learn more about our services.',
+    primaryCtaText: 'Contact Us',
+    primaryCtaLink: '/contact',
+    secondaryCtaText: 'View Memberships',
+    secondaryCtaLink: '/memberships',
     seoTitle: 'Strategy Insights - Gamma Capital',
     seoDescription: 'Market intelligence and strategic investment insights.',
 }

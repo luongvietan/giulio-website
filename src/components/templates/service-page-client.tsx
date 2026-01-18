@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import NavigationHeader from "@/components/sections/navigation-header";
 import Footer from "@/components/sections/footer";
-import { Briefcase, Users, Calendar, Check, Network, Building2, BarChart3, TrendingUp, Shield, type LucideIcon } from 'lucide-react';
+import { Briefcase, Users, Calendar, Check, Network, Building2, BarChart3, TrendingUp, Shield, ArrowUpRight, type LucideIcon } from 'lucide-react';
 import type { ServiceLandingPage, SiteSettings } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -159,14 +159,23 @@ export default function ServicePageClient({ pageData, siteSettings, defaultBadge
                                         </div>
                                         <h3 className="text-[18px] font-semibold text-[#111827] mb-3">{service.title}</h3>
                                         <p className="text-[14px] text-[#6B7280] leading-relaxed mb-5">{service.description}</p>
-                                        <ul className="flex flex-col gap-2.5">
+                                        <ul className="flex flex-col gap-2.5 mb-6">
                                             {(service.features || []).map((feature, i) => (
-                                                <li key={i} className="flex items-center gap-3">
-                                                    <Check className="w-3.5 h-3.5 text-[#2563EB] flex-shrink-0" />
+                                                <li key={i} className="flex items-start gap-3">
+                                                    <Check className="w-3.5 h-3.5 text-[#2563EB] flex-shrink-0 mt-1" />
                                                     <span className="text-[13px] text-[#374151]">{feature}</span>
                                                 </li>
                                             ))}
                                         </ul>
+                                        {service.linkUrl && (
+                                            <Link
+                                                href={service.linkUrl}
+                                                className="inline-flex items-center text-[13px] font-medium text-[#2563EB] hover:text-[#1E3A8A] transition-colors mt-auto"
+                                            >
+                                                {service.linkText || 'Learn more'}
+                                                <ArrowUpRight className="w-3.5 h-3.5 ml-1" />
+                                            </Link>
+                                        )}
                                     </div>
                                 );
                             })}

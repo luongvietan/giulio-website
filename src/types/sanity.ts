@@ -365,6 +365,8 @@ export interface ServiceLandingPage {
         description: string
         icon?: string
         features?: string[]
+        linkUrl?: string
+        linkText?: string
     }>
     ctaTitle?: string
     ctaDescription?: string
