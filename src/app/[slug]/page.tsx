@@ -23,6 +23,7 @@ export async function generateStaticParams() {
         query: ALL_PAGE_SLUGS_QUERY,
         revalidate: 3600, 
         tags: ['page'],
+        skipDraftMode: true, // draftMode() not available in generateStaticParams
     })
 
     // Handle null case (fetch failed)
@@ -44,11 +45,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             params: { slug },
             revalidate: 60,
             tags: ['page', slug],
+            skipDraftMode: true, // draftMode() not available in generateMetadata
         }),
         sanityFetch<SiteSettings | null>({
             query: SITE_SETTINGS_QUERY,
             revalidate: 60,
             tags: ['siteSettings'],
+            skipDraftMode: true, // draftMode() not available in generateMetadata
         }),
     ])
 

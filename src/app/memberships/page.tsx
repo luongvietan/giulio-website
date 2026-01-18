@@ -11,6 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const pageData = await sanityFetch<MembershipsPage | null>({
     query: MEMBERSHIPS_PAGE_QUERY,
     tags: ['membershipsPage'],
+    skipDraftMode: true, // draftMode() not available in generateMetadata
   });
 
   return {

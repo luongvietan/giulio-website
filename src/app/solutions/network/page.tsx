@@ -8,13 +8,13 @@ import type { ServiceLandingPage, SiteSettings } from "@/types/sanity";
 
 // Metadata is now handled within the page component or via generateMetadata referencing CMS if needed
 export async function generateMetadata(): Promise<Metadata> {
-  const { isEnabled: isDraftMode } = await draftMode();
   // Fetch with ID 'networkPage'
   const pageData = await sanityFetch<ServiceLandingPage | null>({
     query: SERVICE_LANDING_PAGE_QUERY,
     params: { id: 'networkPage' },
-    revalidate: isDraftMode ? 0 : 60,
+    revalidate: 60,
     tags: ['networkPage'],
+    skipDraftMode: true, // draftMode() not available in generateMetadata
   });
 
   return {

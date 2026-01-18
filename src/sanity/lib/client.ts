@@ -31,15 +31,30 @@ export async function sanityFetch<T>({
     params = {},
     revalidate = 60,
     tags = [],
+    // Set to true when calling from generateStaticParams or generateMetadata
+    // where draftMode() is not available
+    skipDraftMode = false,
 }: {
     query: string
     params?: QueryParams
     revalidate?: number | false
     tags?: string[]
+    skipDraftMode?: boolean
 }): Promise<T | null> {
     try {
-        const { draftMode } = await import('next/headers')
-        const { isEnabled } = await draftMode()
+        let isEnabled = false
+
+        // Only check draftMode when we're in a request context
+        if (!skipDraftMode) {
+            try {
+                const { draftMode } = await import('next/headers')
+                const result = await draftMode()
+                isEnabled = result.isEnabled
+            } catch {
+                // draftMode() called outside request scope - ignore and use published content
+                isEnabled = false
+            }
+        }
 
         if (isEnabled) {
             const previewClient = createClient({

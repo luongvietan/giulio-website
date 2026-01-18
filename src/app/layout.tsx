@@ -26,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SiteSettings | null>({
     query: SITE_SETTINGS_QUERY,
     tags: ['siteSettings'],
+    skipDraftMode: true, // draftMode() not available in generateMetadata
   });
 
   return {

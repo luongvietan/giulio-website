@@ -11,6 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const pageData = await sanityFetch<ContactPage | null>({
     query: CONTACT_PAGE_QUERY,
     tags: ['contactPage'],
+    skipDraftMode: true, // draftMode() not available in generateMetadata
   });
 
   return {

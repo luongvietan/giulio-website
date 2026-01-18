@@ -6,12 +6,12 @@ import { SERVICE_LANDING_PAGE_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/qu
 import type { ServiceLandingPage, SiteSettings } from "@/types/sanity";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { isEnabled: isDraftMode } = await draftMode();
   const pageData = await sanityFetch<ServiceLandingPage | null>({
     query: SERVICE_LANDING_PAGE_QUERY,
     params: { id: 'realEstatePage' },
-    revalidate: isDraftMode ? 0 : 60,
+    revalidate: 60,
     tags: ['realEstatePage'],
+    skipDraftMode: true, // draftMode() not available in generateMetadata
   });
 
   return {

@@ -7,11 +7,11 @@ import { SOLUTIONS_PAGE_QUERY, SITE_SETTINGS_QUERY, UI_STRINGS_QUERY } from "@/s
 import type { SolutionsPage, SiteSettings, UIStrings } from "@/types/sanity";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { isEnabled: isDraftMode } = await draftMode();
   const pageData = await sanityFetch<SolutionsPage | null>({
     query: SOLUTIONS_PAGE_QUERY,
-    revalidate: isDraftMode ? 0 : 60,
+    revalidate: 60,
     tags: ['solutionsPage'],
+    skipDraftMode: true, // draftMode() not available in generateMetadata
   });
 
   return {
