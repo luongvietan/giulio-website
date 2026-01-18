@@ -14,7 +14,9 @@ export function DisableDraftMode() {
 
     const handleDisable = () => {
         startTransition(() => {
-            router.push(uiStrings?.disableDraftRoute ?? '/api/disable-draft')
+            if (uiStrings?.disableDraftRoute) {
+                router.push(uiStrings.disableDraftRoute)
+            }
         })
     }
 

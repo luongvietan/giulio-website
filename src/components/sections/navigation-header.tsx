@@ -38,7 +38,7 @@ export default function NavigationHeader({ siteSettings, uiStrings }: Navigation
   const mobileMenuOpenLabel = uiStrings?.mobileMenuOpenLabel;
   const mobileMenuCloseLabel = uiStrings?.mobileMenuCloseLabel;
   const navigationBackLabel = uiStrings?.navigationBackLabel;
-  const logoAriaLabel = uiStrings?.logoAriaLabel ?? 'Go to Homepage';
+  const logoAriaLabel = uiStrings?.logoAriaLabel;
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 

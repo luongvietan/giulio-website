@@ -37,9 +37,9 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
   const introEmail = pageData?.introEmail ?? '';
   const formTitle = pageData?.formTitle ?? '';
   const formSubtitle = pageData?.formSubtitle ?? '';
-  const successTitle = pageData?.formSuccessTitle ?? uiStrings?.formSuccessTitle ?? '';
-  const successMessage = pageData?.formSuccessMessage ?? '';
-  const errorTitle = pageData?.formErrorTitle ?? uiStrings?.formErrorTitle ?? '';
+  const successTitle = pageData?.formSuccessTitle ?? uiStrings?.formSuccessTitle;
+  const successMessage = pageData?.formSuccessMessage;
+  const errorTitle = pageData?.formErrorTitle ?? uiStrings?.formErrorTitle;
   const errorMessage = pageData?.formErrorMessage ?? '';
   const expectationsHeading = pageData?.expectationsHeading ?? '';
   const disclaimer = pageData?.disclaimer ?? '';
@@ -55,8 +55,10 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
   const formInterestPlaceholder = pageData?.formInterestPlaceholder ?? uiStrings?.formInterestPlaceholder ?? '';
   const formMessageLabel = pageData?.formMessageLabel ?? uiStrings?.formMessageLabel ?? '';
   const formMessagePlaceholder = pageData?.formMessagePlaceholder ?? uiStrings?.formMessagePlaceholder ?? '';
-  const formButtonText = pageData?.formButtonText ?? uiStrings?.formSubmitButton ?? '';
-  const formButtonSubmittingText = pageData?.formButtonSubmittingText ?? uiStrings?.formSubmittingText ?? '';
+  const formButtonText = pageData?.formButtonText ?? uiStrings?.formSubmitButton;
+  const formButtonSubmittingText = pageData?.formButtonSubmittingText ?? uiStrings?.formSubmittingText;
+  const requiredError = uiStrings?.formRequiredError ?? '';
+  const emailError = uiStrings?.formEmailError ?? '';
 
   const areaOfInterestOptions = [
     { value: '', label: formInterestPlaceholder },
@@ -82,6 +84,7 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
     areaOfInterest: '',
     message: '',
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -102,8 +105,26 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.name.trim()) newErrors.name = requiredError;
+    if (!formData.email.trim()) {
+      newErrors.email = requiredError;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = emailError;
+    }
+    if (!formData.country.trim()) newErrors.country = requiredError;
+    if (!formData.areaOfInterest) newErrors.areaOfInterest = requiredError;
+    if (!formData.message.trim()) newErrors.message = requiredError;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) return;
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -117,6 +138,7 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', country: '', areaOfInterest: '', message: '' });
+        setErrors({});
       } else {
         setSubmitStatus('error');
       }
@@ -251,7 +273,7 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
                 {/* Full Name */}
                 <div className="form-field">
                   <label htmlFor="name" className="block text-[13px] font-medium text-[#52525b] mb-2">
@@ -261,11 +283,14 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
                     type="text"
                     id="name"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
+                    onChange={(e) => {
+                      setFormData({ ...formData, name: e.target.value });
+                      if (errors.name) setErrors({ ...errors, name: '' });
+                    }}
+                    className={`w-full px-4 py-3 border rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all ${errors.name ? 'border-red-500 bg-red-50' : 'border-[#E5E7EB]'}`}
                     placeholder={formNamePlaceholder}
-                    required
                   />
+                  {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
                 </div>
 
                 {/* Email Address */}
@@ -277,11 +302,14 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
                     type="email"
                     id="email"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
+                    onChange={(e) => {
+                      setFormData({ ...formData, email: e.target.value });
+                      if (errors.email) setErrors({ ...errors, email: '' });
+                    }}
+                    className={`w-full px-4 py-3 border rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all ${errors.email ? 'border-red-500 bg-red-50' : 'border-[#E5E7EB]'}`}
                     placeholder={formEmailPlaceholder}
-                    required
                   />
+                  {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
                 </div>
 
                 {/* Country of Residence */}
@@ -293,11 +321,14 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
                     type="text"
                     id="country"
                     value={formData.country}
-                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
+                    onChange={(e) => {
+                      setFormData({ ...formData, country: e.target.value });
+                      if (errors.country) setErrors({ ...errors, country: '' });
+                    }}
+                    className={`w-full px-4 py-3 border rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all ${errors.country ? 'border-red-500 bg-red-50' : 'border-[#E5E7EB]'}`}
                     placeholder={formCountryPlaceholder}
-                    required
                   />
+                  {errors.country && <p className="mt-1 text-xs text-red-500">{errors.country}</p>}
                 </div>
 
                 {/* Area of Interest Dropdown */}
@@ -310,7 +341,7 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className={`w-full px-4 py-3 border rounded-lg bg-[#F8F9FB] text-[14px] text-left flex items-center justify-between transition-all ${isDropdownOpen
                       ? 'border-[#2563EB] ring-2 ring-[#2563EB]/30'
-                      : 'border-[#E5E7EB] hover:border-[#9CA3AF]'
+                      : errors.areaOfInterest ? 'border-red-500 bg-red-50' : 'border-[#E5E7EB] hover:border-[#9CA3AF]'
                       } ${formData.areaOfInterest ? 'text-[#111827]' : 'text-[#9CA3AF]'}`}
                   >
                     <span>{selectedLabel}</span>
@@ -324,6 +355,7 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
                           type="button"
                           onClick={() => {
                             setFormData({ ...formData, areaOfInterest: option.value });
+                            if (errors.areaOfInterest) setErrors({ ...errors, areaOfInterest: '' });
                             setIsDropdownOpen(false);
                           }}
                           className={`w-full px-4 py-2.5 text-[14px] text-left transition-colors ${formData.areaOfInterest === option.value
@@ -336,7 +368,8 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
                       ))}
                     </div>
                   )}
-                  <input type="hidden" name="areaOfInterest" value={formData.areaOfInterest} required />
+                  <input type="hidden" name="areaOfInterest" value={formData.areaOfInterest} />
+                  {errors.areaOfInterest && <p className="mt-1 text-xs text-red-500">{errors.areaOfInterest}</p>}
                 </div>
 
                 {/* Message */}
@@ -347,12 +380,15 @@ export default function ContactPageClient({ pageData, siteSettings, uiStrings }:
                   <textarea
                     id="message"
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, message: e.target.value });
+                      if (errors.message) setErrors({ ...errors, message: '' });
+                    }}
                     rows={5}
-                    className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all resize-none"
+                    className={`w-full px-4 py-3 border rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all resize-none ${errors.message ? 'border-red-500 bg-red-50' : 'border-[#E5E7EB]'}`}
                     placeholder={formMessagePlaceholder}
-                    required
                   />
+                  {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
                 </div>
 
                 {/* Submit Button */}

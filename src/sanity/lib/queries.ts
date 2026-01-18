@@ -373,6 +373,8 @@ export const UI_STRINGS_QUERY = defineQuery(`
     formInterestPlaceholder,
     formMessageLabel,
     formMessagePlaceholder,
+    formRequiredError,
+    formEmailError,
     membershipSuccessTitle,
     membershipSuccessMessage,
     membershipProcessingText,

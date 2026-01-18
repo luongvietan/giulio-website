@@ -444,6 +444,8 @@ export interface UIStrings {
     formInterestPlaceholder?: string
     formMessageLabel?: string
     formMessagePlaceholder?: string
+    formRequiredError?: string
+    formEmailError?: string
     // Accessibility
     spinnerLoadingLabel?: string
     paginationEllipsis?: string

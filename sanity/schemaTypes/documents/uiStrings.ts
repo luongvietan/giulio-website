@@ -214,6 +214,7 @@ export default defineType({
             type: 'string',
             group: 'forms',
             initialValue: 'Submit Request',
+            validation: Rule => Rule.required(),
         }),
         defineField({
             name: 'formSubmittingText',
@@ -221,6 +222,7 @@ export default defineType({
             type: 'string',
             group: 'forms',
             initialValue: 'Submitting...',
+            validation: Rule => Rule.required(),
         }),
         defineField({
             name: 'formSuccessTitle',
@@ -228,6 +230,7 @@ export default defineType({
             type: 'string',
             group: 'forms',
             initialValue: 'Request submitted successfully!',
+            validation: Rule => Rule.required(),
         }),
         defineField({
             name: 'formErrorTitle',
@@ -235,6 +238,7 @@ export default defineType({
             type: 'string',
             group: 'forms',
             initialValue: 'Failed to submit request',
+            validation: Rule => Rule.required(),
         }),
         defineField({
             name: 'formRequiredFieldLabel',
@@ -242,6 +246,22 @@ export default defineType({
             type: 'string',
             group: 'forms',
             initialValue: '(required)',
+        }),
+        defineField({
+            name: 'formRequiredError',
+            title: 'Required Field Error Message',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'This field is required.',
+            validation: Rule => Rule.required(),
+        }),
+        defineField({
+            name: 'formEmailError',
+            title: 'Invalid Email Error Message',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Please enter a valid email address.',
+            validation: Rule => Rule.required(),
         }),
 
         // General UI Strings
