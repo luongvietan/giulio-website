@@ -268,77 +268,114 @@ const membershipsPage = {
     _id: 'membershipsPage',
     _type: 'membershipsPage',
     // title field removed
-    heroBadge: 'Premium Discord Access',
-    heroTitle: 'Join the Elite Investment Community',
-    heroSubtitle: 'Elevate Your Strategy',
-    heroDescription: 'Get real-time market alerts, exclusive research, and direct access to institutional analysts.',
+    heroBadge: 'Premium Access',
+    heroTitle: 'Premium Discord Access for Serious Market Participants',
+    heroSubtitle: '',
+    heroDescription: 'Join a private environment dedicated to actionable insights, options flow interpretation, unusual activity monitoring and structured, real-time market guidance — without noise, hype or confusion.',
     heroPrimaryCta: 'Join the Membership',
     heroSecondaryCta: 'Discover What\'s Inside',
-    insideSectionTitle: 'Inside the Community',
-    insideSectionDescription: 'Access a wealth of resources designed to improve your trading and investment performance.',
+    insideSectionTitle: 'What You Will Find Inside the Discord',
+    insideSectionDescription: 'The Gamma Capital Discord is designed for investors who want real clarity in fast-moving markets.',
     insideFeatures: [
-        { _key: 'if-1', icon: 'TrendingUp', text: 'Real-time Trade Alerts' },
-        { _key: 'if-2', icon: 'Eye', text: 'Market Watchlists' },
-        { _key: 'if-3', icon: 'MessageSquare', text: 'Analyst Q&A' },
-        { _key: 'if-4', icon: 'GraduationCap', text: 'Educational Resources' }
+        { _key: 'if-1', icon: 'TrendingUp', text: 'Real-time monitoring of institutional flows and unusual options activity' },
+        { _key: 'if-2', icon: 'BarChart3', text: 'Daily market analysis on key U.S. equities and macro drivers' },
+        { _key: 'if-3', icon: 'Zap', text: 'Fast alerts on anomalous moves and high-potential setups' },
+        { _key: 'if-4', icon: 'Users', text: 'Private discussions within a high-quality community of motivated members' },
+        { _key: 'if-5', icon: 'GraduationCap', text: 'Educational material, including introductory modules on options and flow interpretation' }
     ],
     benefitsSectionTitle: 'Key Benefits of Joining',
     keyBenefits: [
-        { _key: 'kb-1', icon: 'Zap', title: 'Speed', description: 'React faster to market movements with instant alerts.' },
-        { _key: 'kb-2', icon: 'Target', title: 'Precision', description: 'High-conviction setups and analysis.' },
-        { _key: 'kb-3', icon: 'Users', title: 'Network', description: 'Connect with like-minded serious investors.' }
+        { _key: 'kb-1', icon: 'Layers', title: 'Structured Insights', description: 'Receive disciplined, well-organized market insights — not noise or speculation.' },
+        { _key: 'kb-2', icon: 'Eye', title: 'Early Information Advantage', description: 'Monitor institutional behavior and unusual activity before the majority of retail traders even notice what is happening.' },
+        { _key: 'kb-3', icon: 'Shield', title: 'A Clean, Serious Community', description: 'A curated space for investors who want focus, clarity and real analysis.' },
+        { _key: 'kb-4', icon: 'BookOpen', title: 'Educational Foundation', description: 'Access introductory material that helps you understand options, flows and smart money logic.' },
+        { _key: 'kb-5', icon: 'Briefcase', title: 'Proven Methodology', description: 'The same analytical approach used in our consulting work — adapted for daily operational use.' }
     ],
     includedSectionTitle: 'What\'s Included in the Membership',
-    includedFeatures: ['Daily Market Analysis', 'Live Trading Sessions', 'Portfolio Tracking Templates', 'Risk Management Tools'],
+    includedFeatures: [
+        'Access to all private Discord channels',
+        'Real-time monitoring of institutional options flow',
+        'Daily commentary on high-impact market events',
+        'Fast alerts on unusual activity and high-potential setups',
+        'Priority access to community discussions',
+        'Automatic Premium role assignment after purchase'
+    ],
     educationalMiniCourseTitle: 'Educational mini-course:',
-    educationalItems: ['Technical Analysis Mastery', 'Fundamental Analysis Basics', 'Risk Management Framework'],
-    additionalIncluded: ['Priority Support', 'Quarterly Strategy Calls'],
-    includedTagline: 'Everything you need to succeed.',
+    educationalItems: [
+        'How options work',
+        'How to read institutional flows',
+        'How to operate with smart-money logic'
+    ],
+    additionalIncluded: [],
+    includedTagline: 'Everything is designed to support your decision-making with clarity and focus.',
     pricingSectionTitle: 'Membership Tiers',
-    pricingSectionDescription: 'Choose the plan that fits your investment style and needs.',
+    pricingSectionDescription: "All plans include the full premium experience.\nThe only difference is the duration.",
     plans: [
         {
             _key: 'plan-1',
             id: 'monthly',
-            name: 'Monthly Access',
-            price: '$99',
-            priceValue: 99,
-            trial: '7 days free trial',
-            description: 'Flexible monthly billing.',
-            cta: 'Start Free Trial',
+            name: 'Monthly Plan',
+            price: '€19.99',
+            priceValue: 19.99,
+            trial: '3 days free trial',
+            description: 'Best for testing the community and its value.',
+            cta: 'Join Monthly',
             popular: false,
             stripePriceId: 'price_monthly_id'
         },
         {
             _key: 'plan-2',
-            id: 'yearly',
-            name: 'Annual Pro',
-            price: '$899',
-            priceValue: 899,
-            trial: '14 days free trial',
-            description: 'Save 25% with annual billing.',
-            cta: 'Start Free Trial',
+            id: 'quarterly',
+            name: 'Quarterly Plan',
+            price: '€54.99',
+            priceValue: 54.99,
+            trial: '7 days free trial',
+            description: 'Saves money compared to the monthly plan.',
+            cta: 'Join Quarterly',
             popular: true,
+            stripePriceId: 'price_quarterly_id'
+        },
+        {
+            _key: 'plan-3',
+            id: 'yearly',
+            name: 'Annual Plan',
+            price: '€219.99',
+            priceValue: 219.99,
+            trial: '30 days free trial',
+            description: 'The best value for dedicated members.',
+            cta: 'Join Annual',
+            popular: false,
             stripePriceId: 'price_yearly_id'
         }
     ],
     popularBadgeText: 'Most Popular',
     accessSectionTitle: 'How Access Works',
     accessSteps: [
-        { _key: 'as-1', step: 1, title: 'Choose Plan', description: 'Select your membership tier.' },
-        { _key: 'as-2', step: 2, title: 'Connect Discord', description: 'Link your Discord account securely.' },
-        { _key: 'as-3', step: 3, title: 'Instant Access', description: 'Get immediate access to all channels.' }
+        { _key: 'as-1', step: 1, title: 'Select Plan', description: 'Select the plan you prefer and complete the checkout via Stripe.' },
+        { _key: 'as-2', step: 2, title: 'Automatic Activation', description: 'Your Premium role on Discord is activated automatically.' },
+        { _key: 'as-3', step: 3, title: 'Instant Access', description: 'You gain instant access to all private channels and educational materials.' },
+        { _key: 'as-4', step: 4, title: 'Manage Subscription', description: 'At expiration, you can renew or cancel freely — your role adjusts accordingly.' }
     ],
     accessTagline: 'No friction, no manual steps, no waiting.',
-    faqSectionTitle: 'Frequently Asked Questions',
+    faqSectionTitle: 'FAQ',
     faqs: [
-        { _key: 'faq-1', question: 'Can I cancel anytime?', answer: 'Yes, you can cancel your subscription at any time from your dashboard.' },
-        { _key: 'faq-2', question: 'Do you offer refunds?', answer: 'We offer a 14-day money-back guarantee for annual plans.' }
+        { _key: 'faq-1', question: 'Do I need trading experience to join?', answer: 'Basic market knowledge helps, but the community is designed to be accessible even for investors who are still learning.' },
+        { _key: 'faq-2', question: 'Are signals provided?', answer: 'No. We offer structure, context and strategic insights — not blind trade calls.' },
+        { _key: 'faq-3', question: 'Can I cancel anytime?', answer: 'Yes. You can cancel at any moment; access remains valid until the end of your billing cycle.' },
+        { _key: 'faq-4', question: 'How do free trials work?', answer: 'You get full access during the trial period. If you cancel before it ends, you will not be charged.' },
+        { _key: 'faq-5', question: 'What markets do you focus on?', answer: 'Primarily U.S. equities, options and flow-based market signals.' }
     ],
     comingSoonTitle: 'Coming Soon',
-    comingSoonDescription: 'We are constantly adding new features.',
-    finalCtaTitle: 'Ready to Upgrade Your Trading?',
-    finalCtaDescription: 'Join hundreds of satisfied members today.',
+    comingSoonDescription: "Gamma Capital constantly evolves.\nNew tools and channels will be added progressively, including:",
+    comingSoonFeatures: [
+        'Enhanced flow dashboards',
+        'Educational modules',
+        'Deeper analytical channels',
+        'Periodic market breakdowns'
+    ],
+    comingSoonNote: 'Premium members will receive access automatically as these features roll out.',
+    finalCtaTitle: 'Join the Gamma Capital Discord',
+    finalCtaDescription: 'Gain clarity, structure and early insight in markets that reward prepared investors.',
     finalCtaButton: 'Choose Your Membership Plan',
     seoTitle: 'Premium Investment Community - Gamma Capital',
     seoDescription: 'Join our premium Discord community for real-time alerts and expert analysis.',
@@ -361,7 +398,11 @@ const consultingPage = {
     serviceNavSubtitle: 'Click to explore each service in detail',
     serviceNavItems: [
         { _key: 'sni-1', id: 'portfolio', title: 'Portfolio Review', icon: 'Briefcase' },
-        { _key: 'sni-2', id: 'risk', title: 'Risk Management', icon: 'Shield' }
+        { _key: 'sni-2', id: 'strategy', title: 'Strategy Design', icon: 'Compass' },
+        { _key: 'sni-3', id: 'options', title: 'Options', icon: 'TrendingUp' },
+        { _key: 'sni-4', id: 'structured', title: 'Structured Products', icon: 'Layers' },
+        { _key: 'sni-5', id: 'realestate', title: 'Real Estate & Assets', icon: 'Building2' },
+        { _key: 'sni-6', id: 'crypto', title: 'Crypto', icon: 'Bitcoin' }
     ],
     serviceSections: [
         {
@@ -369,24 +410,114 @@ const consultingPage = {
             id: 'portfolio',
             icon: 'Briefcase',
             title: 'Portfolio Review',
-            description: ['Comprehensive analysis of your current holdings.', 'Identification of overlapping assets and concentration risks.'],
-            highlight: 'Optimize your allocation',
+            description: [
+                'A disciplined, multi-asset review designed to reveal how your portfolio truly behaves.',
+                'We analyse every component to identify hidden risks, inefficiencies and structural imbalances: equities, options, ETFs, fixed income, structured products, crypto, real estate and alternatives.',
+                'Using institutional tools such as scenario analysis, stress testing, correlation mapping, VaR/CVaR and factor modelling, we highlight where performance is being lost and how risk can be repositioned.',
+                'The result is a clear, refined interpretation of your exposures and a practical roadmap to bring order, coherence and discipline to your investment process.'
+            ],
+            highlight: 'Refined interpretation of your exposures',
             features: [
-                { _key: 'pf-1', icon: 'BarChart3', title: 'Asset Allocation', desc: 'Optimal distribution across asset classes.' },
-                { _key: 'pf-2', icon: 'Target', title: 'Goal Alignment', desc: 'Ensuring investments match your objectives.' }
-            ]
+                { _key: 'pf-1', icon: 'BarChart3', title: 'Multi-Asset Analysis', desc: 'Equities, Options, Crypto, Real Estate.' },
+                { _key: 'pf-2', icon: 'Target', title: 'Risk Mapping', desc: 'Identify hidden correlations and imbalances.' }
+            ],
+            iconGradient: "from-[#2563EB] to-[#1E3A8A]",
+            shadowColor: "shadow-[#2563EB]/20"
         },
         {
             _key: 'ss-2',
-            id: 'risk',
-            icon: 'Shield',
-            title: 'Risk Management',
-            description: ['Develop a personalized risk framework.', 'Stress test your portfolio against market scenarios.'],
-            highlight: 'Protect your capital',
+            id: 'strategy',
+            icon: 'Compass',
+            title: 'Strategy Design',
+            description: [
+                'We design investment strategies that combine institutional structure with private-investor flexibility.',
+                'Our philosophy is opportunistic and options-driven, integrating short-term tactics with medium- and long-term positioning.',
+                'Each strategy is built around your objectives, risk tolerance and liquidity profile, ranging from tailored frameworks to fully bespoke architectures. Where requested, we also design tailor-made algorithms to systematise execution, risk rules and signal logic.',
+                'What makes our work unique is the fusion of options flow analysis, structured-product logic, multi-asset integration and scenario-driven adaptability.',
+                'Every strategy defines how to express an idea, how to size it, how to hedge it, and how to evolve it as conditions change — creating a disciplined, repeatable system rather than isolated trades.'
+            ],
+            highlight: 'Built around your objectives and risk tolerance',
             features: [
-                { _key: 'rf-1', icon: 'Shield', title: 'Downside Protection', desc: 'Strategies to limit losses.' },
-                { _key: 'rf-2', icon: 'Calculator', title: 'Position Sizing', desc: 'Mathematical approach to trade size.' }
-            ]
+                { _key: 'sf-1', icon: 'Lightbulb', title: 'Bespoke Frameworks', desc: 'Tailored to your capital and goals.' },
+                { _key: 'sf-2', icon: 'LineChart', title: 'Systematic Rules', desc: 'Defined execution and risk logic.' }
+            ],
+            iconGradient: "from-[#7C3AED] to-[#5B21B6]",
+            shadowColor: "shadow-[#7C3AED]/20"
+        },
+        {
+            _key: 'ss-3',
+            id: 'options',
+            icon: 'TrendingUp',
+            title: 'Options',
+            description: [
+                'Options flow is the core of Gamma Capital.',
+                'Our primary edge comes from monitoring and interpreting institutional-grade options flow and unusual activity to understand positioning, risk transfer, and potential market intent.',
+                'We connect flow to derivatives mechanics, GEX (gamma exposure), delta hedging dynamics, vanna/charm effects, volatility regimes, skew, and term structure, to frame how options markets can influence price action and liquidity.',
+                'Whether the objective is tactical exposure, yield enhancement, convexity management, or hedging, our approach translates complex market signals into clear, risk-aware frameworks — with the structure and precision of a professional derivatives desk.'
+            ],
+            highlight: 'Structure and precision of a professional desk',
+            features: [
+                { _key: 'of-1', icon: 'Activity', title: 'Flow Analysis', desc: 'Interpret institutional positioning.' },
+                { _key: 'of-2', icon: 'Zap', title: 'Greeks & Volatility', desc: 'Advanced derivatives mechanics.' }
+            ],
+            iconGradient: "from-[#059669] to-[#047857]",
+            shadowColor: "shadow-[#059669]/20"
+        },
+        {
+            _key: 'ss-4',
+            id: 'structured',
+            icon: 'Layers',
+            title: 'Structured Products',
+            description: [
+                'Our structured-product advisory blends academic depth with institutional insight gained through exposure to portfolio managers at UBS and studies at USI Lugano.',
+                'We help investors evaluate and design a wide range of structures, from autocallables and Phoenix notes to reverse convertibles, express products and capital-protected solutions.',
+                'Our focus is on understanding payoff design, issuer hedging, risk transfer and market-regime suitability.',
+                'When appropriate, we replicate or enhance these payoffs using options to achieve greater flexibility and efficiency.'
+            ],
+            highlight: 'Academic depth with institutional insight',
+            features: [
+                { _key: 'spf-1', icon: 'Layers', title: 'Payoff Design', desc: 'Custom structures and replication.' },
+                { _key: 'spf-2', icon: 'Shield', title: 'Risk Transfer', desc: 'Issuer hedging analysis.' }
+            ],
+            iconGradient: "from-[#D97706] to-[#B45309]",
+            shadowColor: "shadow-[#D97706]/20"
+        },
+        {
+            _key: 'ss-5',
+            id: 'realestate',
+            icon: 'Building2',
+            title: 'Real Estate & Other Assets',
+            description: [
+                'Our real estate perspective is shaped by direct experience in Switzerland and Italy, with deep familiarity in markets such as Lugano, Chiasso, Venice, Como, Udine and Rome.',
+                'We analyse property opportunities with the same rigor applied to financial assets — cash-flow projections, yield modelling, risk mapping, seasonality, and strategic integration within a broader portfolio.',
+                'From short-stay optimisation to long-term capital allocation, we help clients treat real estate not as isolated purchases but as deliberate components of a multi-asset strategy.'
+            ],
+            highlight: 'Same rigor applied to financial assets',
+            features: [
+                { _key: 'ref-1', icon: 'Map', title: 'Market Knowledge', desc: 'Switzerland & Italy focus.' },
+                { _key: 'ref-2', icon: 'PieChart', title: 'Financial Modelling', desc: 'Yield and cash-flow analysis.' }
+            ],
+            iconGradient: "from-[#DC2626] to-[#991B1B]",
+            shadowColor: "shadow-[#DC2626]/20"
+        },
+        {
+            _key: 'ss-6',
+            id: 'crypto',
+            icon: 'Bitcoin',
+            title: 'Crypto',
+            description: [
+                'Active in the crypto markets since 2017, we bring historical context and institutional discipline to an asset class often dominated by noise.',
+                'We focus on market structure, liquidity cycles, risk sizing, macro correlations and scenario-based positioning.',
+                'Our network includes experienced crypto professionals whose insights add depth beyond superficial commentary.',
+                'Crypto is approached not as speculation, but as an asymmetric asset requiring measured sizing, structural awareness and strategic integration within a diversified portfolio.'
+            ],
+            highlight: 'Historical context and institutional discipline',
+            features: [
+                { _key: 'cf-1', icon: 'Wallet', title: 'Market Structure', desc: 'Liquidity and cycle analysis.' },
+                { _key: 'cf-2', icon: 'Shield', title: 'Risk Sizing', desc: 'Measured asymmetric exposure.' }
+            ],
+            iconGradient: "from-[#F59E0B] to-[#D97706]",
+            shadowColor: "shadow-[#F59E0B]/20"
         }
     ],
     ctaTitle: 'Let\'s Discuss Your Portfolio',

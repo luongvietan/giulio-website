@@ -395,35 +395,31 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
           </div>
         </section>
 
-        {/* SECTION 3 - Coming Soon */}
-        <section ref={comingSoonRef} className="w-full bg-[#F8F9FB] py-10 md:py-20 px-6 md:px-12 border-t border-[#E5E7EB]">
-          <div className="max-w-[800px] mx-auto">
-            <div className="bg-gradient-to-br from-[#F8F9FB] to-white rounded-2xl p-6 md:p-10 border border-[#2563EB]/20">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-[#2563EB]/10 rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-[#2563EB]" />
-                </div>
-                <h2 className="text-[22px] md:text-[28px] font-semibold text-[#111827]">
-                  {comingSoonTitle}
-                </h2>
-              </div>
-
-              <p className="text-[14px] md:text-[15px] text-[#6B7280] mb-5">
-                {comingSoonDescription}
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-                {comingSoonFeatures.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-[#2563EB] rounded-full" />
-                    <span className="text-[13px] md:text-[14px] text-[#374151]">{feature}</span>
+        {/* SECTION 3 - Key Benefits */}
+        <section ref={benefitsRef} className="w-full bg-[#fafafa] py-10 md:py-20 px-6 md:px-12 border-t border-[#E5E7EB]">
+          <div className="max-w-[1100px] mx-auto">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-[24px] md:text-[36px] font-semibold text-[#111827] mb-4">
+                {benefitsSectionTitle}
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {keyBenefits.map((benefit, index) => {
+                const BenefitIcon = iconMap[benefit.icon ?? ''] ?? Target;
+                return (
+                  <div key={index} className="benefit-card bg-white rounded-2xl p-5 md:p-6 border border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-lg transition-all duration-300">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 md:mb-5">
+                      <BenefitIcon className="w-5 h-5 md:w-6 md:h-6 text-[#2563EB]" />
+                    </div>
+                    <h3 className="text-[16px] md:text-[18px] font-semibold text-[#111827] mb-2">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-[13px] md:text-[14px] text-[#71717a] leading-relaxed">
+                      {benefit.description}
+                    </p>
                   </div>
-                ))}
-              </div>
-
-              <p className="text-[13px] md:text-[14px] text-[#2563EB] font-medium">
-                {comingSoonNote}
-              </p>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -620,31 +616,35 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
           </div>
         </section>
 
-        {/* SECTION 8 - Key Benefits */}
-        <section ref={benefitsRef} className="w-full bg-[#fafafa] py-10 md:py-20 px-6 md:px-12 border-t border-[#E5E7EB]">
-          <div className="max-w-[1100px] mx-auto">
-            <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-[24px] md:text-[36px] font-semibold text-[#111827] mb-4">
-                {benefitsSectionTitle}
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {keyBenefits.map((benefit, index) => {
-                const BenefitIcon = iconMap[benefit.icon ?? ''] ?? Target;
-                return (
-                  <div key={index} className="benefit-card bg-white rounded-2xl p-5 md:p-6 border border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-lg transition-all duration-300">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 md:mb-5">
-                      <BenefitIcon className="w-5 h-5 md:w-6 md:h-6 text-[#2563EB]" />
-                    </div>
-                    <h3 className="text-[16px] md:text-[18px] font-semibold text-[#111827] mb-2">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-[13px] md:text-[14px] text-[#71717a] leading-relaxed">
-                      {benefit.description}
-                    </p>
+        {/* SECTION 8 - Coming Soon */}
+        <section ref={comingSoonRef} className="w-full bg-[#F8F9FB] py-10 md:py-20 px-6 md:px-12 border-t border-[#E5E7EB]">
+          <div className="max-w-[800px] mx-auto">
+            <div className="bg-gradient-to-br from-[#F8F9FB] to-white rounded-2xl p-6 md:p-10 border border-[#2563EB]/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-[#2563EB]/10 rounded-lg flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-[#2563EB]" />
+                </div>
+                <h2 className="text-[22px] md:text-[28px] font-semibold text-[#111827]">
+                  {comingSoonTitle}
+                </h2>
+              </div>
+
+              <p className="text-[14px] md:text-[15px] text-[#6B7280] mb-5 whitespace-pre-line">
+                {comingSoonDescription}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+                {comingSoonFeatures.map((feature, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-[#2563EB] rounded-full" />
+                    <span className="text-[13px] md:text-[14px] text-[#374151]">{feature}</span>
                   </div>
-                );
-              })}
+                ))}
+              </div>
+
+              <p className="text-[13px] md:text-[14px] text-[#2563EB] font-medium">
+                {comingSoonNote}
+              </p>
             </div>
           </div>
         </section>

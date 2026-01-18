@@ -26,6 +26,7 @@ import {
   Wallet,
   Activity,
   Zap,
+  Briefcase,
   type LucideIcon
 } from 'lucide-react';
 import type { ConsultingPage, SiteSettings, UIStrings } from '@/types/sanity';
@@ -49,11 +50,8 @@ const iconMap: Record<string, LucideIcon> = {
   Wallet,
   Activity,
   Zap,
+  Briefcase,
 };
-
-// Default service navigation items - REMOVED
-// Default features data - REMOVED
-// Default service sections data - REMOVED
 
 interface ConsultingPageClientProps {
   pageData?: ConsultingPage | null;
@@ -205,13 +203,26 @@ export default function ConsultingPageClient({ pageData, siteSettings, uiStrings
     }
   };
 
-  // Feature Card Component
-  const FeatureCard = ({ icon, title, desc }: { icon?: string | React.ElementType; title: string; desc: string }) => {
+  // Feature Card Component (Moved inline logic here)
+  const FeatureCard = ({ icon, title, desc, accentColor }: { icon?: string | React.ElementType; title: string; desc: string; accentColor?: string }) => {
     const IconComponent = (icon && typeof icon === 'string' ? iconMap[icon] : icon) ?? PieChart;
+
+    // Determine styles based on accent color or default blue
+    const iconStyle = accentColor ? { color: accentColor } : {};
+    const bgStyle = accentColor
+      ? { background: `linear-gradient(135deg, ${accentColor}1A, ${accentColor}0D)` }
+      : {};
+
+    // Default classes for fallback
+    const iconClass = accentColor ? "w-6 h-6" : "w-6 h-6 text-[#2563EB]";
+    const bgClass = accentColor
+      ? "w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+      : "w-12 h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300";
+
     return (
       <div className="feature-card group bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-lg hover:shadow-[#2563EB]/5 transition-all duration-300">
-        <div className="w-12 h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-          <IconComponent className="w-6 h-6 text-[#2563EB]" />
+        <div className={bgClass} style={bgStyle}>
+          <IconComponent className={iconClass} style={iconStyle} />
         </div>
         <h4 className="text-[16px] font-semibold text-[#111827] mb-2">{title}</h4>
         <p className="text-[14px] text-[#6B7280] leading-relaxed">{desc}</p>
@@ -243,6 +254,10 @@ export default function ConsultingPageClient({ pageData, siteSettings, uiStrings
   }) => {
     const Icon = (IconOrString && typeof IconOrString === 'string' ? iconMap[IconOrString] : IconOrString) ?? PieChart;
 
+    // Extract primary color from gradient string (e.g., "from-[#F59E0B]")
+    const colorMatch = iconGradient?.match(/from-\[#([0-9A-Fa-f]{6})\]/);
+    const accentColor = colorMatch ? `#${colorMatch[1]}` : undefined;
+
     return (
       <section id={id} className={`service-section w-full py-12 md:py-24 px-6 md:px-12 ${bgAlt ? 'bg-[#F8F9FB]' : 'bg-white'}`}>
         <div className="max-w-[1200px] mx-auto">
@@ -266,9 +281,27 @@ export default function ConsultingPageClient({ pageData, siteSettings, uiStrings
 
               {/* Highlight Box */}
               {highlight && (
-                <div className="bg-gradient-to-r from-[#2563EB]/5 to-transparent border-l-4 border-[#2563EB] pl-5 py-4 pr-4 rounded-r-lg">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#2563EB] mt-0.5 flex-shrink-0" />
+                <div
+                  className="pl-5 py-4 pr-4 rounded-r-lg border-l-4"
+                  style={{
+                    background: accentColor ? `linear-gradient(to right, ${accentColor}0D, transparent)` : undefined,
+                    borderColor: accentColor,
+                  }}
+                >
+                  {!accentColor && (
+                    <style jsx>{`
+                       .highlight-box-default {
+                         background: linear-gradient(to right, rgba(37, 99, 235, 0.05), transparent);
+                         border-left-color: #2563EB;
+                       }
+                     `}</style>
+                  )}
+
+                  <div className={`flex items-start gap-3 ${!accentColor ? "highlight-box-default" : ""}`} style={{ borderColor: accentColor }}>
+                    <CheckCircle2
+                      className="w-5 h-5 mt-0.5 flex-shrink-0"
+                      style={{ color: accentColor || '#2563EB' }}
+                    />
                     <p className="text-[15px] text-[#111827] font-medium leading-relaxed">
                       {highlight}
                     </p>
@@ -280,7 +313,7 @@ export default function ConsultingPageClient({ pageData, siteSettings, uiStrings
             {/* Right: Feature Cards */}
             <div className="grid sm:grid-cols-1 gap-4">
               {features?.map((feature, index) => (
-                <FeatureCard key={index} {...feature} />
+                <FeatureCard key={index} {...feature} accentColor={accentColor} />
               ))}
             </div>
           </div>
