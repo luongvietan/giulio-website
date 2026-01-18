@@ -33,6 +33,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+import { UI_STRINGS_QUERY } from "@/sanity/lib/queries";
+import type { UIStrings } from "@/types/sanity";
+import { UIStringsProvider } from "@/components/providers/ui-strings-provider";
+
+// ... imports remain the same
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -44,12 +50,21 @@ export default async function RootLayout({
   const pathname = headersList.get("x-invoke-path") || "";
   const isAdminPage = pathname.startsWith("/admin");
 
+  // Fetch UI Strings globally
+  const uiStrings = await sanityFetch<UIStrings | null>({
+    query: UI_STRINGS_QUERY,
+    revalidate: isDraftMode ? 0 : 60,
+    tags: ['uiStrings'],
+  });
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <UIStringsProvider uiStrings={uiStrings}>
+          {children}
+        </UIStringsProvider>
         {!isAdminPage && <VisualEditsMessenger />}
         {isDraftMode && !isAdminPage && (
           <>

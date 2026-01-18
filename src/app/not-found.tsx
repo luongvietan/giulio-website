@@ -19,18 +19,19 @@ export default async function NotFound() {
     ]);
 
     const content = {
-        badge: uiStrings?.notFoundBadge ?? 'Error 404',
-        title: uiStrings?.notFoundTitle ?? 'Lost in Data.',
-        description: uiStrings?.notFoundDescription ?? 'The page you are looking for has been moved, removed, or never existed.',
-        homeButton: uiStrings?.notFoundHomeButtonText ?? 'Return Home',
-        contactButton: uiStrings?.notFoundContactButtonText ?? 'Contact Support',
-        quickLinksTitle: uiStrings?.notFoundQuickLinksTitle ?? 'Popular Insights',
-        quickLinks: uiStrings?.notFoundQuickLinks ?? [],
+        badge: uiStrings?.notFoundBadge,
+        title: uiStrings?.notFoundTitle,
+        description: uiStrings?.notFoundDescription,
+        homeButton: uiStrings?.notFoundHomeButtonText,
+        contactButton: uiStrings?.notFoundContactButtonText,
+        quickLinksTitle: uiStrings?.notFoundQuickLinksTitle,
+        quickLinks: uiStrings?.notFoundQuickLinks || [],
     };
 
     // Parse title for highlighting (simple implementation based on description)
     // Matches {highlight}Text{/highlight}
-    const titleParts = content.title.split(/\{highlight\}|\{\/highlight\}/);
+    const safeTitle = content.title || '';
+    const titleParts = safeTitle.split(/\{highlight\}|\{\/highlight\}/);
     const titleBefore = titleParts[0] || '';
     const titleHighlight = titleParts.length > 1 ? titleParts[1] : '';
     const titleAfter = titleParts.length > 2 ? titleParts[2] : '';

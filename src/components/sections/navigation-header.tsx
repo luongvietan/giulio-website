@@ -73,15 +73,16 @@ export default function NavigationHeader({ siteSettings, uiStrings }: Navigation
         <div className="relative flex h-[72px] items-center justify-between px-6 md:px-12 max-w-[1400px] mx-auto">
           <div ref={logoRef} className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-3">
-              {logoImage ? (
+              {logoImage && (
                 <Image
                   src={urlFor(logoImage).width(36).height(36).url()}
-                  alt={siteName || 'Logo'}
+                  alt={siteName || ''}
                   width={36}
                   height={36}
                   className="rounded"
                 />
-              ) : (
+              )}
+              {!logoImage && logoText && (
                 <div className="w-9 h-9 border border-[#2563EB]/30 rounded flex items-center justify-center bg-[#2563EB]/5">
                   <span className="text-[#2563EB] font-display font-semibold text-lg tracking-tight">{logoText}</span>
                 </div>

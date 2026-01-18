@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Mail, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Linkedin, Twitter, Facebook, Instagram, Youtube, Github } from 'lucide-react';
 import type { SiteSettings } from '@/types/sanity';
 import { urlFor } from '@/sanity/lib/image';
 
@@ -25,6 +25,10 @@ const socialIconMap: Record<string, React.FC<{ className?: string }>> = {
   linkedin: ({ className }) => <Linkedin className={className} />,
   discord: DiscordIcon,
   email: ({ className }) => <Mail className={className} />,
+  facebook: ({ className }) => <Facebook className={className} />,
+  instagram: ({ className }) => <Instagram className={className} />,
+  youtube: ({ className }) => <Youtube className={className} />,
+  github: ({ className }) => <Github className={className} />,
 };
 
 interface FooterProps {
@@ -91,20 +95,23 @@ export default function Footer({ siteSettings }: FooterProps) {
         <div ref={columnsRef} className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="flex flex-col gap-4 md:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-2">
-              {logoImage ? (
+              {logoImage && (
                 <Image
                   src={urlFor(logoImage).width(32).height(32).url()}
-                  alt={siteName || 'Logo'}
+                  alt={siteName || ''}
                   width={32}
                   height={32}
                   className="rounded"
                 />
-              ) : (
+              )}
+              {!logoImage && logoText && (
                 <div className="w-8 h-8 border border-[#2563EB]/30 rounded flex items-center justify-center bg-[#2563EB]/5">
                   <span className="text-[#2563EB] font-display font-semibold text-base tracking-tight">{logoText}</span>
                 </div>
               )}
-              <span className="text-[15px] font-display font-semibold text-[#111827] tracking-tight">{siteName}</span>
+              {siteName && (
+                <span className="text-[15px] font-display font-semibold text-[#111827] tracking-tight">{siteName}</span>
+              )}
             </Link>
             {footerDescription && (
               <p className="text-[13px] text-[#6B7280] leading-relaxed">
@@ -113,7 +120,8 @@ export default function Footer({ siteSettings }: FooterProps) {
             )}
             <div className="flex items-center gap-3 mt-2">
               {socialLinks.map((social, index) => {
-                const IconComponent = socialIconMap[social.platform] || Twitter;
+                const iconKey = (social.iconName?.toLowerCase() || social.platform?.toLowerCase()) ?? '';
+                const IconComponent = socialIconMap[iconKey] || Twitter;
                 const href = social.platform === 'email' ? `mailto:${social.url}` : social.url;
                 return (
                   <a

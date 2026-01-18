@@ -105,7 +105,12 @@ export default defineType({
                     fields: [
                         defineField({
                             name: 'platform',
-                            title: 'Platform',
+                            title: 'Platform Name',
+                            type: 'string',
+                        }),
+                        defineField({
+                            name: 'iconName',
+                            title: 'Social Icon',
                             type: 'string',
                             options: {
                                 list: [
@@ -113,6 +118,10 @@ export default defineType({
                                     { title: 'LinkedIn', value: 'linkedin' },
                                     { title: 'Discord', value: 'discord' },
                                     { title: 'Email', value: 'email' },
+                                    { title: 'Facebook', value: 'facebook' },
+                                    { title: 'Instagram', value: 'instagram' },
+                                    { title: 'YouTube', value: 'youtube' },
+                                    { title: 'GitHub', value: 'github' },
                                 ],
                             },
                         }),

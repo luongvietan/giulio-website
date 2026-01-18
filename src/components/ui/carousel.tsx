@@ -171,6 +171,10 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+import { useUIStrings } from "@/components/providers/ui-strings-provider"
+
+// ... imports
+
 function CarouselPrevious({
   className,
   variant = "outline",
@@ -178,6 +182,7 @@ function CarouselPrevious({
   ...props
 }: React.ComponentProps<typeof Button>) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const uiStrings = useUIStrings()
 
   return (
     <Button
@@ -196,7 +201,7 @@ function CarouselPrevious({
       {...props}
     >
       <ArrowLeft />
-      <span className="sr-only">Previous slide</span>
+      <span className="sr-only">{uiStrings?.carouselPrev}</span>
     </Button>
   )
 }
@@ -208,6 +213,7 @@ function CarouselNext({
   ...props
 }: React.ComponentProps<typeof Button>) {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const uiStrings = useUIStrings()
 
   return (
     <Button
@@ -226,7 +232,7 @@ function CarouselNext({
       {...props}
     >
       <ArrowRight />
-      <span className="sr-only">Next slide</span>
+      <span className="sr-only">{uiStrings?.carouselNext}</span>
     </Button>
   )
 }

@@ -153,7 +153,8 @@ export interface SiteSettings {
     mobileFooterText?: string
     footerDescription?: string
     socialLinks?: Array<{
-        platform: 'twitter' | 'linkedin' | 'discord' | 'email'
+        platform?: string
+        iconName?: string
         url: string
     }>
     footerColumns?: Array<{
@@ -392,4 +393,9 @@ export interface UIStrings {
     mobileMenuOpenLabel?: string
     mobileMenuCloseLabel?: string
     navigationBackLabel?: string
+    // Accessibility
+    paginationPrev?: string
+    paginationNext?: string
+    carouselPrev?: string
+    carouselNext?: string
 }

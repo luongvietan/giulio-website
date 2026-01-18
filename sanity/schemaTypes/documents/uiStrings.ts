@@ -150,6 +150,35 @@ export default defineType({
             group: 'general',
             initialValue: 'Exit',
         }),
+        // Accessibility & Controls
+        defineField({
+            name: 'paginationPrev',
+            title: 'Pagination Previous Label',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Previous',
+        }),
+        defineField({
+            name: 'paginationNext',
+            title: 'Pagination Next Label',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Next',
+        }),
+        defineField({
+            name: 'carouselPrev',
+            title: 'Carousel Previous Label',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Previous slide',
+        }),
+        defineField({
+            name: 'carouselNext',
+            title: 'Carousel Next Label',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Next slide',
+        }),
     ],
     preview: {
         prepare() {

@@ -344,6 +344,11 @@ export const UI_STRINGS_QUERY = defineQuery(`
     mobileMenuCloseLabel,
     navigationBackLabel,
     draftModeLabel,
-    draftModeExitText
+    draftModeExitText,
+    paginationPrev,
+    paginationNext,
+    carouselPrev,
+    carouselNext
   }
-`)
+`)(
+
