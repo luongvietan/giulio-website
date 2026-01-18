@@ -45,48 +45,52 @@ interface MembershipsPageClientProps {
 }
 
 export default function MembershipsPageClient({ pageData, siteSettings, uiStrings }: MembershipsPageClientProps) {
-  // Extract CMS data with fallbacks
-  const heroBadge = pageData?.heroBadge ?? 'Premium Discord Access';
-  const heroTitle = pageData?.heroTitle ?? 'Premium Discord Access for';
-  const heroSubtitle = pageData?.heroSubtitle ?? 'Serious Market Participants';
-  const heroDescription = pageData?.heroDescription ?? 'Join a private environment dedicated to actionable insights, options flow interpretation, unusual activity monitoring and structured, real-time market guidance — without noise, hype or confusion.';
-  const heroPrimaryCta = pageData?.heroPrimaryCta ?? 'Join the Membership';
-  const heroSecondaryCta = pageData?.heroSecondaryCta ?? "Discover What's Inside";
+  // Extract CMS data (empty string fallbacks - CMS is source of truth)
+  const heroBadge = pageData?.heroBadge ?? '';
+  const heroTitle = pageData?.heroTitle ?? '';
+  const heroSubtitle = pageData?.heroSubtitle ?? '';
+  const heroDescription = pageData?.heroDescription ?? '';
+  const heroPrimaryCta = pageData?.heroPrimaryCta ?? '';
+  const heroSecondaryCta = pageData?.heroSecondaryCta ?? '';
 
-  const insideSectionTitle = pageData?.insideSectionTitle ?? 'What You Will Find Inside the Discord';
-  const insideSectionDescription = pageData?.insideSectionDescription ?? 'The Gamma Capital Discord is designed for investors who want real clarity in fast-moving markets.';
+  const insideSectionTitle = pageData?.insideSectionTitle ?? '';
+  const insideSectionDescription = pageData?.insideSectionDescription ?? '';
   const insideFeatures = pageData?.insideFeatures || [];
 
-  const benefitsSectionTitle = pageData?.benefitsSectionTitle ?? 'Key Benefits of Joining';
+  const benefitsSectionTitle = pageData?.benefitsSectionTitle ?? '';
   const keyBenefits = pageData?.keyBenefits || [];
 
-  const includedSectionTitle = pageData?.includedSectionTitle ?? "What's Included in the Membership";
+  const includedSectionTitle = pageData?.includedSectionTitle ?? '';
   const includedFeatures = pageData?.includedFeatures || [];
-  const educationalMiniCourseTitle = pageData?.educationalMiniCourseTitle ?? 'Educational mini-course:';
+  const educationalMiniCourseTitle = pageData?.educationalMiniCourseTitle ?? '';
   const educationalItems = pageData?.educationalItems || [];
   const additionalIncluded = pageData?.additionalIncluded || [];
-  const includedTagline = pageData?.includedTagline ?? 'Everything is designed to support your decision-making with clarity and focus.';
+  const includedTagline = pageData?.includedTagline ?? '';
 
-  const pricingSectionTitle = pageData?.pricingSectionTitle ?? 'Membership Tiers';
-  const pricingSectionDescription = pageData?.pricingSectionDescription ?? 'All plans include the full premium experience.\nThe only difference is the duration.';
+  const pricingSectionTitle = pageData?.pricingSectionTitle ?? '';
+  const pricingSectionDescription = pageData?.pricingSectionDescription ?? '';
   const plans = pageData?.plans || [];
-  const popularBadgeText = pageData?.popularBadgeText ?? 'Most Popular';
+  const popularBadgeText = pageData?.popularBadgeText ?? '';
 
-  const accessSectionTitle = pageData?.accessSectionTitle ?? 'How Access Works';
+  const accessSectionTitle = pageData?.accessSectionTitle ?? '';
   const accessSteps = pageData?.accessSteps || [];
-  const accessTagline = pageData?.accessTagline ?? 'No friction, no manual steps, no waiting.';
+  const accessTagline = pageData?.accessTagline ?? '';
 
-  const faqSectionTitle = pageData?.faqSectionTitle ?? 'Frequently Asked Questions';
+  const faqSectionTitle = pageData?.faqSectionTitle ?? '';
   const faqs = pageData?.faqs || [];
 
-  const comingSoonTitle = pageData?.comingSoonTitle ?? 'Coming Soon';
-  const comingSoonDescription = pageData?.comingSoonDescription ?? 'Gamma Capital constantly evolves. New tools and channels will be added progressively, including:';
+  const comingSoonTitle = pageData?.comingSoonTitle ?? uiStrings?.comingSoonTitle ?? '';
+  const comingSoonDescription = pageData?.comingSoonDescription ?? '';
   const comingSoonFeatures = pageData?.comingSoonFeatures || [];
-  const comingSoonNote = pageData?.comingSoonNote ?? 'Premium members will receive access automatically as these features roll out.';
+  const comingSoonNote = pageData?.comingSoonNote ?? '';
 
-  const finalCtaTitle = pageData?.finalCtaTitle ?? 'Join the Gamma Capital Discord';
-  const finalCtaDescription = pageData?.finalCtaDescription ?? 'Gain clarity, structure and early insight in markets that reward prepared investors.';
-  const finalCtaButton = pageData?.finalCtaButton ?? 'Choose Your Membership Plan';
+  const finalCtaTitle = pageData?.finalCtaTitle ?? '';
+  const finalCtaDescription = pageData?.finalCtaDescription ?? '';
+  const finalCtaButton = pageData?.finalCtaButton ?? '';
+
+  // Checkout state text (CMS cascade: page-specific -> global UI strings)
+  const checkoutProcessingText = uiStrings?.checkoutProcessingText ?? uiStrings?.systemLoading ?? '';
+  const checkoutErrorText = uiStrings?.checkoutErrorText ?? uiStrings?.systemError ?? '';
 
   const [openFaq, setOpenFaq] = React.useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<string | null>(null);
@@ -122,12 +126,12 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
         window.location.href = data.url;
       } else {
         console.error('Checkout error:', data.error);
-        setCheckoutError(uiStrings?.systemError || 'Something went wrong. Please try again.');
+        setCheckoutError(checkoutErrorText);
         setIsLoading(null);
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      setCheckoutError(uiStrings?.systemError || 'Something went wrong. Please try again.');
+      setCheckoutError(checkoutErrorText);
       setIsLoading(null);
     }
   };
@@ -330,28 +334,28 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
               <svg className="w-4 h-4 text-[#2563EB]" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
               </svg>
-              <span className="text-[12px] font-medium text-[#2563EB] tracking-wide uppercase">Premium Discord Access</span>
+              <span className="text-[12px] font-medium text-[#2563EB] tracking-wide uppercase">{heroBadge}</span>
             </div>
             <h1 ref={titleRef} className="text-[32px] md:text-[48px] font-display font-medium tracking-[-0.03em] leading-[1.15] mb-6 text-[#111827]">
-              Premium Discord Access for<br />
-              <span className="text-[#6B7280]">Serious Market Participants</span>
+              {heroTitle}<br />
+              <span className="text-[#6B7280]">{heroSubtitle}</span>
             </h1>
             <p ref={paragraphRef} className="text-[15px] md:text-[18px] text-[#71717a] font-normal leading-relaxed max-w-2xl mx-auto mb-6 md:mb-10">
-              Join a private environment dedicated to actionable insights, options flow interpretation, unusual activity monitoring and structured, real-time market guidance — without noise, hype or confusion.
+              {heroDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <button
                 onClick={scrollToPricing}
                 className="inline-flex items-center justify-center gap-2 bg-[#0A1A2F] text-white px-7 py-3.5 rounded-xl text-[14px] font-semibold hover:bg-[#1E3A8A] transition-colors"
               >
-                Join the Membership
+                {heroPrimaryCta}
                 <ArrowRight className="w-4 h-4" />
               </button>
               <Link
                 href="#inside"
                 className="inline-flex items-center justify-center gap-2 bg-transparent text-[#111827] px-7 py-3.5 rounded-xl text-[14px] font-medium border border-[#E5E7EB] hover:border-[#6B7280] hover:bg-[#F8F9FB] transition-colors"
               >
-                Discover What&apos;s Inside
+                {heroSecondaryCta}
               </Link>
             </div>
           </div>
@@ -370,7 +374,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
             </div>
             <div className="bg-[#F8F9FB] rounded-2xl p-8 border border-[#E5E7EB]">
               <p className="text-[14px] uppercase tracking-wide text-[#374151] font-medium mb-6 animate-item">
-                Inside the private channels you will find:
+                {uiStrings?.insideChannelsLabel ?? ''}
               </p>
               <div className="space-y-4">
                 {insideFeatures.map((feature, index) => {
@@ -400,12 +404,12 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                   <Sparkles className="w-5 h-5 text-[#2563EB]" />
                 </div>
                 <h2 className="text-[22px] md:text-[28px] font-semibold text-[#111827]">
-                  Coming Soon
+                  {comingSoonTitle}
                 </h2>
               </div>
 
               <p className="text-[14px] md:text-[15px] text-[#6B7280] mb-5">
-                Gamma Capital constantly evolves. New tools and channels will be added progressively, including:
+                {comingSoonDescription}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
@@ -418,7 +422,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
               </div>
 
               <p className="text-[13px] md:text-[14px] text-[#2563EB] font-medium">
-                Premium members will receive access automatically as these features roll out.
+                {comingSoonNote}
               </p>
             </div>
           </div>
@@ -429,7 +433,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
           <div className="max-w-[900px] mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-[28px] md:text-[36px] font-semibold text-[#111827] mb-4">
-                What&apos;s Included in the Membership
+                {includedSectionTitle}
               </h2>
             </div>
             <div className="bg-gradient-to-br from-[#0A1A2F] to-[#111827] rounded-2xl p-8 md:p-10 text-white">
@@ -468,7 +472,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
 
               <div className="mt-8 pt-6 border-t border-white/10 text-center animate-item">
                 <p className="text-[14px] text-white/60 italic">
-                  Everything is designed to support your decision-making with clarity and focus.
+                  {includedTagline}
                 </p>
               </div>
             </div>
@@ -513,7 +517,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                     <div className="flex items-center justify-center gap-2 mt-3">
                       <Clock className="w-4 h-4 text-[#2563EB]" />
                       <span className="text-[13px] text-[#2563EB] font-medium">
-                        {plan.trial} free trial
+                        {plan.trial} {uiStrings?.freeTrialSuffix ?? ''}
                       </span>
                     </div>
                   </div>
@@ -533,7 +537,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                     {isLoading === plan.id ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        {uiStrings?.systemLoading || 'Processing...'}
+                        {checkoutProcessingText}
                       </>
                     ) : (
                       <>
@@ -558,7 +562,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
           <div className="max-w-[800px] mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-[28px] md:text-[36px] font-semibold text-[#111827] mb-4">
-                How Access Works
+                {accessSectionTitle}
               </h2>
             </div>
 
@@ -583,7 +587,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
             <div className="mt-10 text-center">
               <p className="inline-flex items-center gap-2 text-[14px] text-[#2563EB] font-medium bg-[#2563EB]/10 px-4 py-2 rounded-full">
                 <Shield className="w-4 h-4" />
-                No friction, no manual steps, no waiting.
+                {accessTagline}
               </p>
             </div>
           </div>
@@ -593,7 +597,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
         <section ref={faqRef} className="w-full bg-[#f4f4f5] py-12 md:py-20 px-6 md:px-12 border-t border-[#E5E7EB]">
           <div className="max-w-[700px] mx-auto">
             <h2 className="text-[28px] md:text-[36px] font-semibold text-center mb-10 text-[#111827]">
-              Frequently Asked Questions
+              {faqSectionTitle}
             </h2>
             <div className="flex flex-col gap-3">
               {faqs.map((faq, index) => (

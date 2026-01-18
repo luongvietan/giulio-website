@@ -46,8 +46,8 @@ export default async function Home() {
         ) : (
           <div className="flex items-center justify-center min-h-[50vh]">
             <div className="text-center">
-              <h1 className="text-2xl font-semibold text-gray-900">{uiStrings?.comingSoonTitle || 'Coming Soon'}</h1>
-              <p className="mt-2 text-gray-600">{uiStrings?.comingSoonMessage || 'This page is currently being updated.'}</p>
+              <h1 className="text-2xl font-semibold text-gray-900">{uiStrings?.comingSoonTitle ?? ''}</h1>
+              <p className="mt-2 text-gray-600">{uiStrings?.comingSoonMessage ?? ''}</p>
             </div>
           </div>
         )}

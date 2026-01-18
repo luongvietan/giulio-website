@@ -8,7 +8,7 @@ import { useGSAP } from '@gsap/react';
 import NavigationHeader from "@/components/sections/navigation-header";
 import Footer from "@/components/sections/footer";
 import { BarChart3, Users, Building2, Network, ArrowRight, TrendingUp, Shield, type LucideIcon } from 'lucide-react';
-import type { SolutionsPage, SiteSettings } from '@/types/sanity';
+import type { SolutionsPage, SiteSettings, UIStrings } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,20 +24,22 @@ const iconMap: Record<string, LucideIcon> = {
 interface SolutionsPageClientProps {
   pageData?: SolutionsPage | null;
   siteSettings?: SiteSettings | null;
+  uiStrings?: UIStrings | null;
 }
 
-export default function SolutionsPageClient({ pageData, siteSettings }: SolutionsPageClientProps) {
-  const heroBadge = pageData?.heroBadge ?? 'Our Solutions';
-  const heroTitle = pageData?.heroTitle ?? 'Comprehensive Investment Solutions';
-  const heroSubtitle = pageData?.heroSubtitle ?? 'Investment Solutions';
-  const heroDescription = pageData?.heroDescription ?? 'From market intelligence to personalized consulting, we provide the tools and insights you need to succeed in today\'s markets.';
+export default function SolutionsPageClient({ pageData, siteSettings, uiStrings }: SolutionsPageClientProps) {
+  const heroBadge = pageData?.heroBadge ?? '';
+  const heroTitle = pageData?.heroTitle ?? '';
+  const heroSubtitle = pageData?.heroSubtitle ?? '';
+  const heroDescription = pageData?.heroDescription ?? '';
   const solutions = pageData?.solutions || [];
-  const ctaTitle = pageData?.ctaTitle ?? 'Not Sure Where to Start?';
-  const ctaDescription = pageData?.ctaDescription ?? 'Book a free consultation call to discuss your goals and find the right solution for your investment needs.';
-  const primaryCtaText = pageData?.primaryCtaText ?? 'Schedule a Call';
+  const ctaTitle = pageData?.ctaTitle ?? '';
+  const ctaDescription = pageData?.ctaDescription ?? '';
+  const primaryCtaText = pageData?.primaryCtaText ?? '';
   const primaryCtaLink = pageData?.primaryCtaLink ?? '/contact';
-  const secondaryCtaText = pageData?.secondaryCtaText ?? 'View Memberships';
+  const secondaryCtaText = pageData?.secondaryCtaText ?? '';
   const secondaryCtaLink = pageData?.secondaryCtaLink ?? '/memberships';
+  const exploreLabel = uiStrings?.exploreLabel ?? '';
   const heroRef = useRef<HTMLElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -105,7 +107,7 @@ export default function SolutionsPageClient({ pageData, siteSettings }: Solution
 
   return (
     <div className="min-h-screen bg-[#fafafa]">
-      <NavigationHeader siteSettings={siteSettings} />
+      <NavigationHeader siteSettings={siteSettings} uiStrings={uiStrings} />
       <main>
         <section ref={heroRef} className="w-full bg-[#fafafa] py-16 md:py-24 px-6 md:px-12">
           <div className="max-w-[1200px] mx-auto text-center">
@@ -162,7 +164,7 @@ export default function SolutionsPageClient({ pageData, siteSettings }: Solution
                     {hasLink && (
                       <div className="flex-shrink-0 lg:self-center">
                         <div className="inline-flex items-center gap-2 text-[#2563EB] font-medium text-[14px] group-hover:gap-3 transition-all">
-                          <span>Explore</span>
+                          <span>{exploreLabel}</span>
                           <ArrowRight className="w-4 h-4" />
                         </div>
                       </div>

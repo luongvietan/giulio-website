@@ -24,12 +24,13 @@ export function SuccessContent({ uiStrings }: SuccessContentProps) {
     const buttonRef = useRef<HTMLDivElement>(null);
 
     // CMS Strings with fallbacks
-    const title = uiStrings?.membershipSuccessTitle ?? 'Welcome to the Community!';
-    const message = uiStrings?.membershipSuccessMessage ?? "Your membership has been activated successfully. You'll receive an email with your exclusive Discord invite link within 24 hours.";
-    const processingText = uiStrings?.membershipProcessingText ?? 'Processing your payment...';
-    const orderRefPrefix = uiStrings?.membershipOrderReferencePrefix ?? 'Order reference:';
-    const returnHomeText = uiStrings?.membershipReturnHomeButton ?? 'Return Home';
-    const contactSupportText = uiStrings?.membershipContactSupportButton ?? 'Contact Support';
+    // CMS is single source of truth - no hardcoded fallbacks
+    const title = uiStrings?.membershipSuccessTitle ?? '';
+    const message = uiStrings?.membershipSuccessMessage ?? '';
+    const processingText = uiStrings?.membershipProcessingText ?? '';
+    const orderRefPrefix = uiStrings?.membershipOrderReferencePrefix ?? '';
+    const returnHomeText = uiStrings?.membershipReturnHomeButton ?? '';
+    const contactSupportText = uiStrings?.membershipContactSupportButton ?? '';
 
     // Loading Text Fallback (can also be in CMS if needed, currently using systemLoading or hardcoded as per new schema logic)
     // I added membershipProcessingText for this specific state.

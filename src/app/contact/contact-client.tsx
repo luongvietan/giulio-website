@@ -27,36 +27,36 @@ interface ContactPageClientProps {
 }
 
 export default function ContactPageClient({ pageData, siteSettings, uiStrings }: ContactPageClientProps) {
-  // Use CMS data with fallbacks
-  const heroTitle = pageData?.heroTitle ?? 'Get in Touch with {brand}Gamma Capital{/brand}';
-  const heroDescription = pageData?.heroDescription ?? 'Whether you are interested in our Discord memberships, consulting services, or a strategic collaboration, you can contact us here.';
-  const heroHighlight = pageData?.heroHighlight ?? 'We review every request carefully and respond selectively.';
-  const introHeading = pageData?.introHeading ?? 'How to Contact Us';
-  const introDescription = pageData?.introDescription ?? 'Gamma Capital works with investors, professionals and partners who value clarity, structure and disciplined decision-making.\n\nUse the form below to reach us regarding memberships, consulting, or other professional inquiries.';
-  const introEmailLabel = pageData?.introEmailLabel ?? 'For general communication:';
-  const introEmail = pageData?.introEmail ?? 'contact@gammacap.ch';
-  const formTitle = pageData?.formTitle ?? 'Contact Request';
-  const formSubtitle = pageData?.formSubtitle ?? 'Please provide a few details so we can better understand your request and respond appropriately.';
-  const successTitle = pageData?.formSuccessTitle ?? 'Request submitted successfully!';
-  const successMessage = pageData?.formSuccessMessage ?? "We'll review your request and get back to you within 1–2 business days.";
-  const errorTitle = pageData?.formErrorTitle ?? 'Failed to submit request';
-  const errorMessage = pageData?.formErrorMessage ?? 'Please try again or email us directly at contact@gammacap.ch';
-  const expectationsHeading = pageData?.expectationsHeading ?? 'What to Expect After Contacting Us';
-  const disclaimer = pageData?.disclaimer ?? 'Gamma Capital does not provide brokerage services, does not execute trades on behalf of clients, and does not offer legal or tax advice. All information and consulting services are provided for educational and strategic purposes only.';
+  // Use CMS data (empty string fallbacks - CMS is source of truth)
+  const heroTitle = pageData?.heroTitle ?? '';
+  const heroDescription = pageData?.heroDescription ?? '';
+  const heroHighlight = pageData?.heroHighlight ?? '';
+  const introHeading = pageData?.introHeading ?? '';
+  const introDescription = pageData?.introDescription ?? '';
+  const introEmailLabel = pageData?.introEmailLabel ?? '';
+  const introEmail = pageData?.introEmail ?? '';
+  const formTitle = pageData?.formTitle ?? '';
+  const formSubtitle = pageData?.formSubtitle ?? '';
+  const successTitle = pageData?.formSuccessTitle ?? uiStrings?.formSuccessTitle ?? '';
+  const successMessage = pageData?.formSuccessMessage ?? '';
+  const errorTitle = pageData?.formErrorTitle ?? uiStrings?.formErrorTitle ?? '';
+  const errorMessage = pageData?.formErrorMessage ?? '';
+  const expectationsHeading = pageData?.expectationsHeading ?? '';
+  const disclaimer = pageData?.disclaimer ?? '';
 
-  // Form Labels & Placeholders
-  const formNameLabel = pageData?.formNameLabel ?? 'Full Name';
-  const formNamePlaceholder = pageData?.formNamePlaceholder ?? 'Your full name';
-  const formEmailLabel = pageData?.formEmailLabel ?? 'Email Address';
-  const formEmailPlaceholder = pageData?.formEmailPlaceholder ?? 'your@email.com';
-  const formCountryLabel = pageData?.formCountryLabel ?? 'Country of Residence';
-  const formCountryPlaceholder = pageData?.formCountryPlaceholder ?? 'e.g., Switzerland, United States, etc.';
-  const formInterestLabel = pageData?.formInterestLabel ?? 'Area of Interest';
-  const formInterestPlaceholder = pageData?.formInterestPlaceholder ?? 'Select an area of interest';
-  const formMessageLabel = pageData?.formMessageLabel ?? 'Message';
-  const formMessagePlaceholder = pageData?.formMessagePlaceholder ?? 'Briefly describe your situation, objectives, or question.';
-  const formButtonText = pageData?.formButtonText ?? 'Submit Request';
-  const formButtonSubmittingText = pageData?.formButtonSubmittingText ?? 'Submitting...';
+  // Form Labels & Placeholders (CMS cascade: page-specific -> global uiStrings)
+  const formNameLabel = pageData?.formNameLabel ?? uiStrings?.formNameLabel ?? '';
+  const formNamePlaceholder = pageData?.formNamePlaceholder ?? uiStrings?.formNamePlaceholder ?? '';
+  const formEmailLabel = pageData?.formEmailLabel ?? uiStrings?.formEmailLabel ?? '';
+  const formEmailPlaceholder = pageData?.formEmailPlaceholder ?? uiStrings?.formEmailPlaceholder ?? '';
+  const formCountryLabel = pageData?.formCountryLabel ?? uiStrings?.formCountryLabel ?? '';
+  const formCountryPlaceholder = pageData?.formCountryPlaceholder ?? uiStrings?.formCountryPlaceholder ?? '';
+  const formInterestLabel = pageData?.formInterestLabel ?? uiStrings?.formInterestLabel ?? '';
+  const formInterestPlaceholder = pageData?.formInterestPlaceholder ?? uiStrings?.formInterestPlaceholder ?? '';
+  const formMessageLabel = pageData?.formMessageLabel ?? uiStrings?.formMessageLabel ?? '';
+  const formMessagePlaceholder = pageData?.formMessagePlaceholder ?? uiStrings?.formMessagePlaceholder ?? '';
+  const formButtonText = pageData?.formButtonText ?? uiStrings?.formSubmitButton ?? '';
+  const formButtonSubmittingText = pageData?.formButtonSubmittingText ?? uiStrings?.formSubmittingText ?? '';
 
   const areaOfInterestOptions = [
     { value: '', label: formInterestPlaceholder },

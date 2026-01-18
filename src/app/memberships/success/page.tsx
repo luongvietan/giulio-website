@@ -28,7 +28,7 @@ export default async function SuccessPage() {
         <Suspense fallback={
           <div className="flex flex-col items-center gap-4">
             <Loader2 className="w-12 h-12 text-[#2563EB] animate-spin" />
-            <p className="text-[#6B7280]">{uiStrings?.systemLoading || 'Loading...'}</p>
+            <p className="text-[#6B7280]">{uiStrings?.systemLoading ?? ''}</p>
           </div>
         }>
           <SuccessContent uiStrings={uiStrings} />

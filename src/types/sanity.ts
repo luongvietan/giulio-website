@@ -421,4 +421,31 @@ export interface UIStrings {
     paginationNext?: string
     carouselPrev?: string
     carouselNext?: string
+    // Links & Actions
+    exploreLabel?: string
+    freeTrialSuffix?: string
+    insideChannelsLabel?: string
+    // Checkout States
+    checkoutProcessingText?: string
+    checkoutErrorText?: string
+    // Form Labels (reusable)
+    formNameLabel?: string
+    formNamePlaceholder?: string
+    formEmailLabel?: string
+    formEmailPlaceholder?: string
+    formCountryLabel?: string
+    formCountryPlaceholder?: string
+    formInterestLabel?: string
+    formInterestPlaceholder?: string
+    formMessageLabel?: string
+    formMessagePlaceholder?: string
+    // Accessibility
+    spinnerLoadingLabel?: string
+    paginationEllipsis?: string
+    sidebarToggleLabel?: string
+    sheetCloseLabel?: string
+    dialogCloseLabel?: string
+    breadcrumbAriaLabel?: string
+    breadcrumbMoreLabel?: string
+    adminLoadingText?: string
 }

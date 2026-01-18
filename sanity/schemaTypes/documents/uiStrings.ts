@@ -10,6 +10,7 @@ export default defineType({
         { name: 'notFound', title: '404 Page' },
         { name: 'system', title: 'System' },
         { name: 'navigation', title: 'Navigation' },
+        { name: 'accessibility', title: 'Accessibility' },
         { name: 'forms', title: 'Forms & Validation' },
         { name: 'memberships', title: 'Memberships' },
         { name: 'general', title: 'General' },
@@ -294,6 +295,186 @@ export default defineType({
             group: 'navigation',
             initialValue: 'Next slide',
         }),
+
+        // Links & Actions
+        defineField({
+            name: 'exploreLabel',
+            title: 'Explore Link Label',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Explore',
+        }),
+        defineField({
+            name: 'freeTrialSuffix',
+            title: 'Free Trial Suffix',
+            type: 'string',
+            group: 'general',
+            initialValue: 'free trial',
+            description: 'Text displayed after trial period, e.g. "7 days free trial"',
+        }),
+
+        // Memberships Page Labels
+        defineField({
+            name: 'insideChannelsLabel',
+            title: 'Inside Channels Label',
+            type: 'string',
+            group: 'memberships',
+            initialValue: 'Inside the private channels you will find:',
+        }),
+
+        // Checkout States
+        defineField({
+            name: 'checkoutProcessingText',
+            title: 'Checkout Processing Text',
+            type: 'string',
+            group: 'memberships',
+            initialValue: 'Processing...',
+        }),
+        defineField({
+            name: 'checkoutErrorText',
+            title: 'Checkout Error Text',
+            type: 'string',
+            group: 'memberships',
+            initialValue: 'Something went wrong. Please try again.',
+        }),
+
+        // Generic Form Labels (reusable across pages)
+        defineField({
+            name: 'formNameLabel',
+            title: 'Name Field Label',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Full Name',
+        }),
+        defineField({
+            name: 'formNamePlaceholder',
+            title: 'Name Field Placeholder',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Your full name',
+        }),
+        defineField({
+            name: 'formEmailLabel',
+            title: 'Email Field Label',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Email Address',
+        }),
+        defineField({
+            name: 'formEmailPlaceholder',
+            title: 'Email Field Placeholder',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'your@email.com',
+        }),
+        defineField({
+            name: 'formCountryLabel',
+            title: 'Country Field Label',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Country of Residence',
+        }),
+        defineField({
+            name: 'formCountryPlaceholder',
+            title: 'Country Field Placeholder',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'e.g., Switzerland, United States, etc.',
+        }),
+        defineField({
+            name: 'formInterestLabel',
+            title: 'Interest Field Label',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Area of Interest',
+        }),
+        defineField({
+            name: 'formInterestPlaceholder',
+            title: 'Interest Field Placeholder',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Select an area of interest',
+        }),
+        defineField({
+            name: 'formMessageLabel',
+            title: 'Message Field Label',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Message',
+        }),
+        defineField({
+            name: 'formMessagePlaceholder',
+            title: 'Message Field Placeholder',
+            type: 'string',
+            group: 'forms',
+            initialValue: 'Briefly describe your situation, objectives, or question.',
+        }),
+
+        // Accessibility Labels (SR-Only, ARIA)
+        defineField({
+            name: 'spinnerLoadingLabel',
+            title: 'Spinner Loading Label',
+            type: 'string',
+            group: 'accessibility',
+            initialValue: 'Loading',
+            description: 'Aria-label for loading spinners',
+        }),
+        defineField({
+            name: 'paginationEllipsis',
+            title: 'Pagination Ellipsis Label',
+            type: 'string',
+            group: 'accessibility',
+            initialValue: 'More pages',
+            description: 'Screen reader text for pagination ellipsis',
+        }),
+        defineField({
+            name: 'sidebarToggleLabel',
+            title: 'Sidebar Toggle Label',
+            type: 'string',
+            group: 'accessibility',
+            initialValue: 'Toggle Sidebar',
+            description: 'Aria-label and sr-only text for sidebar toggle button',
+        }),
+        defineField({
+            name: 'sheetCloseLabel',
+            title: 'Sheet Close Label',
+            type: 'string',
+            group: 'accessibility',
+            initialValue: 'Close',
+            description: 'Screen reader text for sheet close button',
+        }),
+        defineField({
+            name: 'dialogCloseLabel',
+            title: 'Dialog Close Label',
+            type: 'string',
+            group: 'accessibility',
+            initialValue: 'Close',
+            description: 'Screen reader text for dialog close button',
+        }),
+        defineField({
+            name: 'breadcrumbAriaLabel',
+            title: 'Breadcrumb Aria Label',
+            type: 'string',
+            group: 'accessibility',
+            initialValue: 'breadcrumb',
+            description: 'Aria-label for breadcrumb navigation',
+        }),
+        defineField({
+            name: 'breadcrumbMoreLabel',
+            title: 'Breadcrumb More Label',
+            type: 'string',
+            group: 'accessibility',
+            initialValue: 'More',
+            description: 'Screen reader text for breadcrumb ellipsis',
+        }),
+        defineField({
+            name: 'adminLoadingText',
+            title: 'Admin Loading Text',
+            type: 'string',
+            group: 'system',
+            initialValue: 'Loading Sanity Studio...',
+            description: 'Text shown while Sanity Studio is loading',
+        }),
     ],
     preview: {
         prepare() {
@@ -304,3 +485,4 @@ export default defineType({
         },
     },
 })
+

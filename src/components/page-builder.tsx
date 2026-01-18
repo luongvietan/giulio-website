@@ -23,8 +23,8 @@ interface PageBuilderProps {
 
 // Error fallback component
 function SectionErrorFallback({ error, resetErrorBoundary, uiStrings }: FallbackProps & { uiStrings?: UIStrings | null }) {
-    const errorTitle = uiStrings?.sectionErrorTitle ?? uiStrings?.systemError ?? 'Section Error'
-    const retryLabel = uiStrings?.systemRetry ?? 'Retry'
+    const errorTitle = uiStrings?.sectionErrorTitle ?? uiStrings?.systemError ?? ''
+    const retryLabel = uiStrings?.systemRetry ?? ''
     const show = process.env.NODE_ENV === 'development' || uiStrings?.sectionErrorTitle || uiStrings?.systemError
 
     if (show) {
@@ -35,7 +35,7 @@ function SectionErrorFallback({ error, resetErrorBoundary, uiStrings }: Fallback
                 </h3>
                 {process.env.NODE_ENV === 'development' && (
                     <p className="text-red-600 text-sm font-mono mb-3">
-                        {error instanceof Error ? error.message : 'Unknown error'}
+                        {error instanceof Error ? error.message : (uiStrings?.sectionErrorMessage ?? '')}
                     </p>
                 )}
                 <button
