@@ -8,6 +8,8 @@ export default defineType({
     icon: Text,
     groups: [
         { name: 'notFound', title: '404 Page' },
+        { name: 'system', title: 'System' },
+        { name: 'navigation', title: 'Navigation' },
         { name: 'general', title: 'General' },
     ],
     fields: [
@@ -71,6 +73,66 @@ export default defineType({
                     select: { title: 'label', subtitle: 'href' },
                 },
             }],
+        }),
+
+        // System Strings
+        defineField({
+            name: 'systemLoading',
+            title: 'Loading text',
+            type: 'string',
+            group: 'system',
+            initialValue: 'Loading...',
+        }),
+        defineField({
+            name: 'systemError',
+            title: 'Error Badge / Title',
+            type: 'string',
+            group: 'system',
+            initialValue: 'Error',
+        }),
+        defineField({
+            name: 'systemRetry',
+            title: 'Retry Button',
+            type: 'string',
+            group: 'system',
+            initialValue: 'Retry',
+        }),
+        defineField({
+            name: 'comingSoonTitle',
+            title: 'Coming Soon Title',
+            type: 'string',
+            group: 'system',
+            initialValue: 'Coming Soon',
+        }),
+        defineField({
+            name: 'comingSoonMessage',
+            title: 'Coming Soon Message',
+            type: 'text',
+            group: 'system',
+            initialValue: 'This page is currently being updated.',
+        }),
+
+        // Navigation Strings
+        defineField({
+            name: 'mobileMenuOpenLabel',
+            title: 'Mobile Menu Open Label (Accessibility)',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Open menu',
+        }),
+        defineField({
+            name: 'mobileMenuCloseLabel',
+            title: 'Mobile Menu Close Label (Accessibility)',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Close menu',
+        }),
+        defineField({
+            name: 'navigationBackLabel',
+            title: 'Back Label',
+            type: 'string',
+            group: 'navigation',
+            initialValue: 'Back',
         }),
 
         // General UI Strings

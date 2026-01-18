@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import ConsultingPageClient from './consulting-client';
 import { sanityFetch } from '@/sanity/lib/client';
-import { CONSULTING_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/lib/queries';
-import type { ConsultingPage, SiteSettings } from '@/types/sanity';
+import { CONSULTING_PAGE_QUERY, SITE_SETTINGS_QUERY, UI_STRINGS_QUERY } from '@/sanity/lib/queries';
+import type { ConsultingPage, SiteSettings, UIStrings } from '@/types/sanity';
 
 export const revalidate = 60;
 
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ConsultingPage() {
   const { isEnabled: isDraftMode } = await draftMode();
 
-  const [pageData, siteSettings] = await Promise.all([
+  const [pageData, siteSettings, uiStrings] = await Promise.all([
     sanityFetch<ConsultingPage | null>({
       query: CONSULTING_PAGE_QUERY,
       revalidate: isDraftMode ? 0 : 60,
@@ -33,7 +33,12 @@ export default async function ConsultingPage() {
       revalidate: isDraftMode ? 0 : 60,
       tags: ['siteSettings'],
     }),
+    sanityFetch<UIStrings | null>({
+      query: UI_STRINGS_QUERY,
+      revalidate: isDraftMode ? 0 : 60,
+      tags: ['uiStrings'],
+    }),
   ]);
 
-  return <ConsultingPageClient pageData={pageData} siteSettings={siteSettings} />;
+  return <ConsultingPageClient pageData={pageData} siteSettings={siteSettings} uiStrings={uiStrings} />;
 }

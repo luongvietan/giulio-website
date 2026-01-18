@@ -5,7 +5,7 @@ import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from './schemaTypes'
 
 // Custom structure for singleton documents
-const singletonTypes = ['siteSettings']
+const singletonTypes = ['siteSettings', 'contactPage', 'membershipsPage', 'consultingPage', 'solutionsPage', 'networkPage', 'realEstatePage', 'strategyPage', 'uiStrings']
 
 const structure = (S: any) =>
   S.list()
@@ -20,6 +20,45 @@ const structure = (S: any) =>
             .schemaType('siteSettings')
             .documentId('siteSettings')
             .title('Site Settings')
+        ),
+      // Solutions Page
+      S.listItem()
+        .title('Solutions Page')
+        .id('solutionsPage')
+        .child(
+          S.document()
+            .schemaType('solutionsPage')
+            .documentId('solutionsPage')
+            .title('Solutions Page')
+        ),
+      S.divider(),
+      // Service Pages (Singletons)
+      S.listItem()
+        .title('Network Page')
+        .id('networkPage')
+        .child(
+          S.document()
+            .schemaType('serviceLandingPage')
+            .documentId('networkPage')
+            .title('Network Page')
+        ),
+      S.listItem()
+        .title('Real Estate Page')
+        .id('realEstatePage')
+        .child(
+          S.document()
+            .schemaType('serviceLandingPage')
+            .documentId('realEstatePage')
+            .title('Real Estate Page')
+        ),
+      S.listItem()
+        .title('Strategy Page')
+        .id('strategyPage')
+        .child(
+          S.document()
+            .schemaType('serviceLandingPage')
+            .documentId('strategyPage')
+            .title('Strategy Page')
         ),
       S.divider(),
       // Pages

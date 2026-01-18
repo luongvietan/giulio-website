@@ -18,14 +18,8 @@ const iconMap: Record<string, LucideIcon> = {
     Coins,
 };
 
-// Default data (fallback when CMS is empty)
-const defaultAssetClasses = [
-    { icon: 'TrendingUp', label: 'Equities' },
-    { icon: 'Layers', label: 'Derivatives' },
-    { icon: 'Globe', label: 'Structured Products' },
-    { icon: 'Building2', label: 'Real Estate' },
-    { icon: 'Coins', label: 'Digital Assets' },
-];
+// Default data removed
+const defaultAssetClasses: { icon: string; label: string }[] = [];
 
 interface MultiAssetSectionProps {
     data?: MultiAssetSectionData;
@@ -37,7 +31,7 @@ export default function MultiAssetSection({ data }: MultiAssetSectionProps) {
     const title = data?.title ?? 'A Multi-Asset, Institutional Perspective';
     const description = data?.description ?? 'Gamma Capital operates across multiple asset classes, including equities, derivatives, structured products, real estate and digital assets.';
     const secondaryDescription = data?.secondaryDescription ?? 'This cross-asset perspective allows us to identify hidden correlations, structural inefficiencies and opportunities that remain invisible within single-asset approaches.';
-    const assetClasses = data?.assetClasses?.length ? data.assetClasses : defaultAssetClasses;
+    const assetClasses = data?.assetClasses || [];
 
     const sectionRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);

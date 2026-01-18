@@ -201,6 +201,18 @@ export interface ContactPage {
     formSuccessMessage?: string
     formErrorTitle?: string
     formErrorMessage?: string
+    formNameLabel?: string
+    formNamePlaceholder?: string
+    formEmailLabel?: string
+    formEmailPlaceholder?: string
+    formCountryLabel?: string
+    formCountryPlaceholder?: string
+    formInterestLabel?: string
+    formInterestPlaceholder?: string
+    formMessageLabel?: string
+    formMessagePlaceholder?: string
+    formButtonText?: string
+    formButtonSubmittingText?: string
     areaOfInterestOptions?: Array<{
         value: string
         label: string
@@ -309,6 +321,52 @@ export interface ConsultingPage {
     seoDescription?: string
 }
 
+export interface SolutionsPage {
+    seoTitle?: string
+    seoDescription?: string
+    heroBadge?: string
+    heroTitle?: string
+    heroSubtitle?: string
+    heroDescription?: string
+    solutions?: Array<{
+        title: string
+        description: string
+        icon?: string
+        color?: string
+        href: string
+        features?: string[]
+    }>
+    ctaTitle?: string
+    ctaDescription?: string
+    primaryCtaText?: string
+    primaryCtaLink?: string
+    secondaryCtaText?: string
+    secondaryCtaLink?: string
+}
+
+export interface ServiceLandingPage {
+    seoTitle?: string
+    seoDescription?: string
+    heroBadge?: string
+    heroTitle?: string
+    heroSubtitle?: string
+    heroDescription?: string
+    heroCtaText?: string
+    heroCtaLink?: string
+    services?: Array<{
+        title: string
+        description: string
+        icon?: string
+        features?: string[]
+    }>
+    ctaTitle?: string
+    ctaDescription?: string
+    primaryCtaText?: string
+    primaryCtaLink?: string
+    secondaryCtaText?: string
+    secondaryCtaLink?: string
+}
+
 // UI Strings singleton (system messages and labels)
 export interface UIStrings {
     _type: 'uiStrings'
@@ -324,4 +382,14 @@ export interface UIStrings {
     // General
     draftModeLabel?: string
     draftModeExitText?: string
+    // System
+    systemLoading?: string
+    systemError?: string
+    systemRetry?: string
+    comingSoonTitle?: string
+    comingSoonMessage?: string
+    // Navigation
+    mobileMenuOpenLabel?: string
+    mobileMenuCloseLabel?: string
+    navigationBackLabel?: string
 }

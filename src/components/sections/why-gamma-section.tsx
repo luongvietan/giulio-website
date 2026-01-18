@@ -18,14 +18,8 @@ const iconMap: Record<string, LucideIcon> = {
     Layers,
 };
 
-// Default data (fallback when CMS is empty)
-const defaultReasons = [
-    { icon: 'Building', text: 'Institutional logic applied to private portfolios' },
-    { icon: 'Target', text: 'Strong focus on options flow and structured payoffs' },
-    { icon: 'Shield', text: 'Risk-aware, scenario-driven methodology' },
-    { icon: 'MessageSquare', text: 'Clean communication, no hype or retail noise' },
-    { icon: 'Layers', text: 'A growing ecosystem: research, Discord, and advisory' },
-];
+// Default data removed
+const defaultReasons: { icon: string; text: string }[] = [];
 
 interface WhyGammaSectionProps {
     data?: WhyGammaSectionData;
@@ -35,7 +29,7 @@ export default function WhyGammaSection({ data }: WhyGammaSectionProps) {
     // Extract CMS data with fallbacks
     const badge = data?.badge ?? 'Our Difference';
     const title = data?.title ?? 'Why Gamma Capital';
-    const reasons = data?.reasons?.length ? data.reasons : defaultReasons;
+    const reasons = data?.reasons || [];
 
     const sectionRef = useRef<HTMLElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);

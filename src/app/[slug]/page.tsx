@@ -5,8 +5,8 @@ import NavigationHeader from "@/components/sections/navigation-header";
 import Footer from "@/components/sections/footer";
 import { PageBuilder } from "@/components/page-builder";
 import { sanityFetch } from "@/sanity/lib/client";
-import { PAGE_BY_SLUG_QUERY, ALL_PAGE_SLUGS_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
-import type { Page, SiteSettings } from "@/types/sanity";
+import { PAGE_BY_SLUG_QUERY, ALL_PAGE_SLUGS_QUERY, SITE_SETTINGS_QUERY, UI_STRINGS_QUERY } from "@/sanity/lib/queries";
+import type { Page, SiteSettings, UIStrings } from "@/types/sanity";
 import { getImageUrl } from '@/sanity/lib/image'
 
 interface PageProps {
@@ -104,7 +104,7 @@ export default async function CMSPage({ params }: PageProps) {
     const { isEnabled: isDraftMode } = await draftMode()
 
     // Fetch page data and site settings from Sanity
-    const [page, siteSettings] = await Promise.all([
+    const [page, siteSettings, uiStrings] = await Promise.all([
         sanityFetch<Page | null>({
             query: PAGE_BY_SLUG_QUERY,
             params: { slug },
@@ -116,6 +116,11 @@ export default async function CMSPage({ params }: PageProps) {
             revalidate: isDraftMode ? 0 : 60,
             tags: ['siteSettings'],
         }),
+        sanityFetch<UIStrings | null>({
+            query: UI_STRINGS_QUERY,
+            revalidate: isDraftMode ? 0 : 60,
+            tags: ['uiStrings'],
+        }),
     ])
 
     // If no page found or it's the homepage (should be handled by /), return 404
@@ -125,10 +130,10 @@ export default async function CMSPage({ params }: PageProps) {
 
     return (
         <div className="min-h-screen bg-[#F8F9FB]">
-            <NavigationHeader siteSettings={siteSettings} />
+            <NavigationHeader siteSettings={siteSettings} uiStrings={uiStrings} />
             <main>
                 {page.sections && page.sections.length > 0 ? (
-                    <PageBuilder sections={page.sections} />
+                    <PageBuilder sections={page.sections} uiStrings={uiStrings} />
                 ) : (
                     <div className="py-12 md:py-24 text-center text-[#a1a1aa]">
                         <p>No content yet. Add sections in Sanity Studio.</p>

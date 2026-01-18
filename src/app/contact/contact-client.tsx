@@ -6,7 +6,7 @@ import { useGSAP } from '@gsap/react';
 import NavigationHeader from "@/components/sections/navigation-header";
 import Footer from "@/components/sections/footer";
 import { Mail, ChevronDown, Send, Loader2, CheckCircle, AlertCircle, Clock, UserCheck, MessageSquare, ShieldCheck, type LucideIcon } from 'lucide-react';
-import type { ContactPage, SiteSettings } from '@/types/sanity';
+import type { ContactPage, SiteSettings, UIStrings } from '@/types/sanity';
 
 // Icon mapping for CMS-driven icons
 const iconMap: Record<string, LucideIcon> = {
@@ -16,32 +16,17 @@ const iconMap: Record<string, LucideIcon> = {
   ShieldCheck,
 };
 
-// Fallback data (used when CMS is empty)
-const defaultAreaOptions = [
-  { value: '', label: 'Select an area of interest' },
-  { value: 'discord-memberships', label: 'Discord Memberships' },
-  { value: 'consulting-portfolio-review', label: 'Consulting & Portfolio Review' },
-  { value: 'strategy-design', label: 'Strategy Design' },
-  { value: 'options-derivatives', label: 'Options & Derivatives' },
-  { value: 'structured-products', label: 'Structured Products' },
-  { value: 'real-estate-other-assets', label: 'Real Estate & Other Assets' },
-  { value: 'crypto', label: 'Crypto' },
-  { value: 'partnerships-other', label: 'Partnerships / Other' },
-];
-
-const defaultExpectations = [
-  { icon: 'UserCheck', text: 'Every request is reviewed personally' },
-  { icon: 'Clock', text: 'We typically respond within 1–2 business days' },
-  { icon: 'MessageSquare', text: 'Not all requests may receive a response' },
-  { icon: 'ShieldCheck', text: 'Consulting engagements are subject to availability and fit' },
-];
+// Default data removed
+const defaultAreaOptions: { value: string; label: string }[] = [];
+const defaultExpectations: { icon: string; text: string }[] = [];
 
 interface ContactPageClientProps {
   pageData?: ContactPage | null;
   siteSettings?: SiteSettings | null;
+  uiStrings?: UIStrings | null;
 }
 
-export default function ContactPageClient({ pageData, siteSettings }: ContactPageClientProps) {
+export default function ContactPageClient({ pageData, siteSettings, uiStrings }: ContactPageClientProps) {
   // Use CMS data with fallbacks
   const heroTitle = pageData?.heroTitle ?? 'Get in Touch with {brand}Gamma Capital{/brand}';
   const heroDescription = pageData?.heroDescription ?? 'Whether you are interested in our Discord memberships, consulting services, or a strategic collaboration, you can contact us here.';
@@ -59,13 +44,26 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
   const expectationsHeading = pageData?.expectationsHeading ?? 'What to Expect After Contacting Us';
   const disclaimer = pageData?.disclaimer ?? 'Gamma Capital does not provide brokerage services, does not execute trades on behalf of clients, and does not offer legal or tax advice. All information and consulting services are provided for educational and strategic purposes only.';
 
-  const areaOfInterestOptions = pageData?.areaOfInterestOptions?.length
-    ? [{ value: '', label: 'Select an area of interest' }, ...pageData.areaOfInterestOptions]
-    : defaultAreaOptions;
+  // Form Labels & Placeholders
+  const formNameLabel = pageData?.formNameLabel ?? 'Full Name';
+  const formNamePlaceholder = pageData?.formNamePlaceholder ?? 'Your full name';
+  const formEmailLabel = pageData?.formEmailLabel ?? 'Email Address';
+  const formEmailPlaceholder = pageData?.formEmailPlaceholder ?? 'your@email.com';
+  const formCountryLabel = pageData?.formCountryLabel ?? 'Country of Residence';
+  const formCountryPlaceholder = pageData?.formCountryPlaceholder ?? 'e.g., Switzerland, United States, etc.';
+  const formInterestLabel = pageData?.formInterestLabel ?? 'Area of Interest';
+  const formInterestPlaceholder = pageData?.formInterestPlaceholder ?? 'Select an area of interest';
+  const formMessageLabel = pageData?.formMessageLabel ?? 'Message';
+  const formMessagePlaceholder = pageData?.formMessagePlaceholder ?? 'Briefly describe your situation, objectives, or question.';
+  const formButtonText = pageData?.formButtonText ?? 'Submit Request';
+  const formButtonSubmittingText = pageData?.formButtonSubmittingText ?? 'Submitting...';
 
-  const expectationItems = pageData?.expectationItems?.length
-    ? pageData.expectationItems
-    : defaultExpectations;
+  const areaOfInterestOptions = [
+    { value: '', label: formInterestPlaceholder },
+    ...(pageData?.areaOfInterestOptions || [])
+  ];
+
+  const expectationItems = pageData?.expectationItems || [];
 
   // Parse hero title for brand highlighting
   const parseHeroTitle = (title: string) => {
@@ -129,7 +127,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
     }
   };
 
-  const selectedLabel = areaOfInterestOptions.find(opt => opt.value === formData.areaOfInterest)?.label || 'Select an area of interest';
+  const selectedLabel = areaOfInterestOptions.find(opt => opt.value === formData.areaOfInterest)?.label || formInterestPlaceholder;
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -187,7 +185,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
 
   return (
     <div className="min-h-screen bg-[#fafafa]">
-      <NavigationHeader siteSettings={siteSettings} />
+      <NavigationHeader siteSettings={siteSettings} uiStrings={uiStrings} />
       <main>
         {/* HERO SECTION */}
         <section ref={heroRef} className="w-full bg-[#fafafa] pt-20 pb-10 md:pt-32 md:pb-16 px-6 md:px-12">
@@ -257,7 +255,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                 {/* Full Name */}
                 <div className="form-field">
                   <label htmlFor="name" className="block text-[13px] font-medium text-[#52525b] mb-2">
-                    Full Name <span className="text-red-500">*</span>
+                    {formNameLabel} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -265,7 +263,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
-                    placeholder="Your full name"
+                    placeholder={formNamePlaceholder}
                     required
                   />
                 </div>
@@ -273,7 +271,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                 {/* Email Address */}
                 <div className="form-field">
                   <label htmlFor="email" className="block text-[13px] font-medium text-[#52525b] mb-2">
-                    Email Address <span className="text-red-500">*</span>
+                    {formEmailLabel} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -281,7 +279,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
-                    placeholder="your@email.com"
+                    placeholder={formEmailPlaceholder}
                     required
                   />
                 </div>
@@ -289,7 +287,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                 {/* Country of Residence */}
                 <div className="form-field">
                   <label htmlFor="country" className="block text-[13px] font-medium text-[#52525b] mb-2">
-                    Country of Residence <span className="text-red-500">*</span>
+                    {formCountryLabel} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -297,7 +295,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                     value={formData.country}
                     onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                     className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all"
-                    placeholder="e.g., Switzerland, United States, etc."
+                    placeholder={formCountryPlaceholder}
                     required
                   />
                 </div>
@@ -305,7 +303,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                 {/* Area of Interest Dropdown */}
                 <div ref={dropdownRef} className="form-field relative">
                   <label className="block text-[13px] font-medium text-[#52525b] mb-2">
-                    Area of Interest <span className="text-red-500">*</span>
+                    {formInterestLabel} <span className="text-red-500">*</span>
                   </label>
                   <button
                     type="button"
@@ -344,7 +342,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                 {/* Message */}
                 <div className="form-field">
                   <label htmlFor="message" className="block text-[13px] font-medium text-[#52525b] mb-2">
-                    Message <span className="text-red-500">*</span>
+                    {formMessageLabel} <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -352,7 +350,7 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={5}
                     className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg bg-[#F8F9FB] text-[14px] text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/30 focus:border-[#2563EB] transition-all resize-none"
-                    placeholder="Briefly describe your situation, objectives, or question."
+                    placeholder={formMessagePlaceholder}
                     required
                   />
                 </div>
@@ -366,12 +364,12 @@ export default function ContactPageClient({ pageData, siteSettings }: ContactPag
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      Submitting...
+                      {formButtonSubmittingText}
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      Submit Request
+                      {formButtonText}
                     </>
                   )}
                 </button>

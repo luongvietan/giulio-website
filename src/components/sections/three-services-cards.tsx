@@ -18,33 +18,8 @@ const iconMap: Record<string, LucideIcon | React.FC<{ className?: string }>> = {
   ),
 };
 
-// Default content (fallback when no CMS data)
-const defaultCards: ServiceCardType[] = [
-  {
-    _key: 'card-1',
-    icon: 'BarChart3',
-    title: 'Strategy Insights',
-    description: 'Data-driven market analysis and actionable intelligence for informed decisions.',
-    href: '/solutions/strategy-insights',
-    linkText: 'Learn more',
-  },
-  {
-    _key: 'card-2',
-    icon: 'Discord',
-    title: 'Discord Community',
-    description: 'Real-time alerts, market discussions, and direct access to our research team.',
-    href: '/memberships',
-    linkText: 'View plans',
-  },
-  {
-    _key: 'card-3',
-    icon: 'Users',
-    title: 'Advisory Services',
-    description: 'Portfolio review, strategy design, and risk framework development.',
-    href: '/consulting',
-    linkText: 'Get started',
-  },
-];
+// Default content removed
+const defaultCards: ServiceCardType[] = [];
 
 interface ThreeServicesCardsProps {
   data?: ThreeCardsSectionData;
@@ -52,7 +27,7 @@ interface ThreeServicesCardsProps {
 
 export default function ThreeServicesCards({ data }: ThreeServicesCardsProps) {
   // Use CMS data or fallback to defaults
-  const cards = data?.cards ?? defaultCards;
+  const cards = data?.cards || [];
 
   // Helper to get icon component
   const getIcon = (iconName?: string) => {

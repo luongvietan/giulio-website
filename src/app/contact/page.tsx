@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import ContactPageClient from './contact-client';
 import { sanityFetch } from '@/sanity/lib/client';
-import { CONTACT_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/lib/queries';
-import type { ContactPage, SiteSettings } from '@/types/sanity';
+import { CONTACT_PAGE_QUERY, SITE_SETTINGS_QUERY, UI_STRINGS_QUERY } from '@/sanity/lib/queries';
+import type { ContactPage, SiteSettings, UIStrings } from '@/types/sanity';
 
 export const revalidate = 60;
 
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ContactPage() {
   const { isEnabled: isDraftMode } = await draftMode();
 
-  const [pageData, siteSettings] = await Promise.all([
+  const [pageData, siteSettings, uiStrings] = await Promise.all([
     sanityFetch<ContactPage | null>({
       query: CONTACT_PAGE_QUERY,
       revalidate: isDraftMode ? 0 : 60,
@@ -33,7 +33,12 @@ export default async function ContactPage() {
       revalidate: isDraftMode ? 0 : 60,
       tags: ['siteSettings'],
     }),
+    sanityFetch<UIStrings | null>({
+      query: UI_STRINGS_QUERY,
+      revalidate: isDraftMode ? 0 : 60,
+      tags: ['uiStrings'],
+    }),
   ]);
 
-  return <ContactPageClient pageData={pageData} siteSettings={siteSettings} />;
+  return <ContactPageClient pageData={pageData} siteSettings={siteSettings} uiStrings={uiStrings} />;
 }

@@ -272,6 +272,56 @@ export const CONSULTING_PAGE_QUERY = defineQuery(`
   }
 `)
 
+export const SOLUTIONS_PAGE_QUERY = defineQuery(`
+  *[_type == "solutionsPage"][0] {
+    seoTitle,
+    seoDescription,
+    heroBadge,
+    heroTitle,
+    heroSubtitle,
+    heroDescription,
+    solutions[] {
+      title,
+      description,
+      icon,
+      color,
+      href,
+      features
+    },
+    ctaTitle,
+    ctaDescription,
+    primaryCtaText,
+    primaryCtaLink,
+    secondaryCtaText,
+    secondaryCtaLink
+  }
+`)
+
+export const SERVICE_LANDING_PAGE_QUERY = defineQuery(`
+  *[_type == "serviceLandingPage" && _id == $id][0] {
+    seoTitle,
+    seoDescription,
+    heroBadge,
+    heroTitle,
+    heroSubtitle,
+    heroDescription,
+    heroCtaText,
+    heroCtaLink,
+    services[] {
+      title,
+      description,
+      icon,
+      features
+    },
+    ctaTitle,
+    ctaDescription,
+    primaryCtaText,
+    primaryCtaLink,
+    secondaryCtaText,
+    secondaryCtaLink
+  }
+`)
+
 // UI Strings Query
 export const UI_STRINGS_QUERY = defineQuery(`
   *[_type == "uiStrings"][0] {
@@ -285,6 +335,14 @@ export const UI_STRINGS_QUERY = defineQuery(`
       label,
       href
     },
+    systemLoading,
+    systemError,
+    systemRetry,
+    comingSoonTitle,
+    comingSoonMessage,
+    mobileMenuOpenLabel,
+    mobileMenuCloseLabel,
+    navigationBackLabel,
     draftModeLabel,
     draftModeExitText
   }

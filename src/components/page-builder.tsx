@@ -8,6 +8,7 @@ import type {
     TestimonialCTASectionData,
     ThreeCardsSectionData,
     RichTextSectionData,
+    UIStrings,
 } from '@/types/sanity'
 import HeroSection from './sections/hero-section'
 import WhatWeDo from './sections/what-we-do'
@@ -17,27 +18,31 @@ import RichTextSection from './sections/rich-text-section'
 
 interface PageBuilderProps {
     sections?: PageSection[]
+    uiStrings?: UIStrings | null
 }
 
-// Error fallback component - shows details in dev, silent in production
-function SectionErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
-    if (process.env.NODE_ENV === 'development') {
+// Error fallback component
+function SectionErrorFallback({ error, resetErrorBoundary, uiStrings }: FallbackProps & { uiStrings?: UIStrings | null }) {
+    if (process.env.NODE_ENV === 'development' || uiStrings?.systemError) {
         return (
             <div className="p-6 my-4 bg-red-50 border border-red-200 rounded-lg">
-                <h3 className="text-red-800 font-semibold mb-2">Section Error</h3>
-                <p className="text-red-600 text-sm font-mono mb-3">
-                    {error instanceof Error ? error.message : 'Unknown error'}
-                </p>
+                <h3 className="text-red-800 font-semibold mb-2">
+                    {uiStrings?.systemError || 'Section Error'}
+                </h3>
+                {process.env.NODE_ENV === 'development' && (
+                    <p className="text-red-600 text-sm font-mono mb-3">
+                        {error instanceof Error ? error.message : 'Unknown error'}
+                    </p>
+                )}
                 <button
                     onClick={resetErrorBoundary}
                     className="text-sm px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
                 >
-                    Retry
+                    {uiStrings?.systemRetry || 'Retry'}
                 </button>
             </div>
         )
     }
-    // Silent fail in production - render nothing
     return null
 }
 
@@ -54,13 +59,12 @@ function renderSection(section: PageSection) {
         case 'richTextSection':
             return <RichTextSection key={section._key} data={section as RichTextSectionData} />
         default:
-            // Handle unknown section types gracefully
             console.warn(`Unknown section type: ${(section as PageSection)._type}`)
             return null
     }
 }
 
-export function PageBuilder({ sections }: PageBuilderProps) {
+export function PageBuilder({ sections, uiStrings }: PageBuilderProps) {
     if (!sections || sections.length === 0) {
         return null
     }
@@ -70,7 +74,7 @@ export function PageBuilder({ sections }: PageBuilderProps) {
             {sections.map((section) => (
                 <ErrorBoundary
                     key={section._key}
-                    FallbackComponent={SectionErrorFallback}
+                    fallbackRender={(props) => <SectionErrorFallback {...props} uiStrings={uiStrings} />}
                     onError={(error) => {
                         console.error(`[PageBuilder] Section ${section._type} error:`, error)
                     }}

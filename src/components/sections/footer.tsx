@@ -37,8 +37,8 @@ export default function Footer({ siteSettings }: FooterProps) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   // Use CMS data or return safe defaults/null
-  const siteName = siteSettings?.siteName || 'Gamma Capital';
-  const logoText = siteSettings?.logoText || 'Γ';
+  const siteName = siteSettings?.siteName;
+  const logoText = siteSettings?.logoText;
   const logoImage = siteSettings?.logo;
   const footerDescription = siteSettings?.footerDescription;
   const socialLinks = siteSettings?.socialLinks || [];
@@ -46,7 +46,7 @@ export default function Footer({ siteSettings }: FooterProps) {
   const contactEmail = siteSettings?.contactEmail;
   const copyrightText = siteSettings?.copyrightText;
   const disclaimer = siteSettings?.disclaimer;
-  const connectColumnTitle = siteSettings?.connectColumnTitle || 'Connect';
+  const connectColumnTitle = siteSettings?.connectColumnTitle;
 
   useGSAP(() => {
     if (columnsRef.current) {
@@ -94,7 +94,7 @@ export default function Footer({ siteSettings }: FooterProps) {
               {logoImage ? (
                 <Image
                   src={urlFor(logoImage).width(32).height(32).url()}
-                  alt={siteName}
+                  alt={siteName || 'Logo'}
                   width={32}
                   height={32}
                   className="rounded"
@@ -148,7 +148,9 @@ export default function Footer({ siteSettings }: FooterProps) {
           ))}
 
           <div className="flex flex-col gap-4">
-            <h3 className="text-[11px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-1 font-display">{connectColumnTitle}</h3>
+            {connectColumnTitle && (
+              <h3 className="text-[11px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-1 font-display">{connectColumnTitle}</h3>
+            )}
             {contactEmail && (
               <div className="flex flex-col gap-2.5">
                 <a href={`mailto:${contactEmail}`} className="text-[13px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors flex items-center gap-2">

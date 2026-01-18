@@ -1,44 +1,43 @@
-'use client';
-
 import Link from 'next/link';
 import { ArrowLeft, Home } from 'lucide-react';
 import NavigationHeader from '@/components/sections/navigation-header';
 import Footer from '@/components/sections/footer';
-import { useEffect, useState } from 'react';
-import type { UIStrings } from '@/types/sanity';
+import { sanityFetch } from '@/sanity/lib/client';
+import { SITE_SETTINGS_QUERY, UI_STRINGS_QUERY } from '@/sanity/lib/queries';
+import type { SiteSettings, UIStrings } from '@/types/sanity';
 
-// Default content (used while loading or if CMS is empty)
-const defaultContent = {
-    badge: 'Error 404',
-    title: 'Lost in Data.',
-    description: 'The page you are looking for has been moved, removed, or never existed in our strategy framework.',
-    homeButton: 'Return Home',
-    contactButton: 'Contact Support',
-    quickLinksTitle: 'Popular Insights',
-    quickLinks: [
-        { label: 'Strategy', href: '/solutions' },
-        { label: 'Memberships', href: '/memberships' },
-        { label: 'Consulting', href: '/consulting' },
-        { label: 'Options', href: '/solutions' },
-    ],
-};
+export default async function NotFound() {
+    const [siteSettings, uiStrings] = await Promise.all([
+        sanityFetch<SiteSettings | null>({
+            query: SITE_SETTINGS_QUERY,
+            tags: ['siteSettings'],
+        }),
+        sanityFetch<UIStrings | null>({
+            query: UI_STRINGS_QUERY,
+            tags: ['uiStrings'],
+        }),
+    ]);
 
-export default function NotFound() {
-    // Use default content - can be extended to fetch from CMS
-    // For 404 pages, we use client-side defaults since this is an error page
     const content = {
-        badge: defaultContent.badge,
-        title: defaultContent.title,
-        description: defaultContent.description,
-        homeButton: defaultContent.homeButton,
-        contactButton: defaultContent.contactButton,
-        quickLinksTitle: defaultContent.quickLinksTitle,
-        quickLinks: defaultContent.quickLinks,
+        badge: uiStrings?.notFoundBadge ?? 'Error 404',
+        title: uiStrings?.notFoundTitle ?? 'Lost in Data.',
+        description: uiStrings?.notFoundDescription ?? 'The page you are looking for has been moved, removed, or never existed.',
+        homeButton: uiStrings?.notFoundHomeButtonText ?? 'Return Home',
+        contactButton: uiStrings?.notFoundContactButtonText ?? 'Contact Support',
+        quickLinksTitle: uiStrings?.notFoundQuickLinksTitle ?? 'Popular Insights',
+        quickLinks: uiStrings?.notFoundQuickLinks ?? [],
     };
+
+    // Parse title for highlighting (simple implementation based on description)
+    // Matches {highlight}Text{/highlight}
+    const titleParts = content.title.split(/\{highlight\}|\{\/highlight\}/);
+    const titleBefore = titleParts[0] || '';
+    const titleHighlight = titleParts.length > 1 ? titleParts[1] : '';
+    const titleAfter = titleParts.length > 2 ? titleParts[2] : '';
 
     return (
         <div className="min-h-screen bg-[#F8F9FB] flex flex-col">
-            <NavigationHeader />
+            <NavigationHeader siteSettings={siteSettings} uiStrings={uiStrings} />
 
             <main className="flex-1 flex items-center justify-center p-6 md:p-12 relative overflow-hidden">
                 {/* Background Decorative Elements */}
@@ -53,7 +52,15 @@ export default function NotFound() {
 
                     <div className="space-y-4">
                         <h1 className="text-6xl md:text-8xl font-display font-semibold tracking-tighter text-[#111827] italic">
-                            Lost in <span className="text-[#2563EB]">Data.</span>
+                            {titleHighlight ? (
+                                <>
+                                    {titleBefore}
+                                    <span className="text-[#2563EB]">{titleHighlight}</span>
+                                    {titleAfter}
+                                </>
+                            ) : (
+                                content.title
+                            )}
                         </h1>
                         <p className="text-lg md:text-xl text-[#6B7280] max-w-lg mx-auto leading-relaxed font-medium">
                             {content.description}
@@ -79,26 +86,28 @@ export default function NotFound() {
                     </div>
 
                     {/* Quick Search Suggestion */}
-                    <div className="pt-12 border-t border-gray-100 mt-12">
-                        <p className="text-[12px] text-[#9CA3AF] font-medium uppercase tracking-widest mb-6 font-display">
-                            {content.quickLinksTitle}
-                        </p>
-                        <div className="flex flex-wrap justify-center gap-3">
-                            {content.quickLinks.map((link) => (
-                                <Link
-                                    key={link.label}
-                                    href={link.href}
-                                    className="px-4 py-2 rounded-lg bg-white border border-[#E5E7EB] text-[13px] text-[#6B7280] font-medium hover:text-[#2563EB] hover:border-[#2563EB]/30 transition-colors"
-                                >
-                                    {link.label}
-                                </Link>
-                            ))}
+                    {content.quickLinks.length > 0 && (
+                        <div className="pt-12 border-t border-gray-100 mt-12">
+                            <p className="text-[12px] text-[#9CA3AF] font-medium uppercase tracking-widest mb-6 font-display">
+                                {content.quickLinksTitle}
+                            </p>
+                            <div className="flex flex-wrap justify-center gap-3">
+                                {content.quickLinks.map((link) => (
+                                    <Link
+                                        key={link.label}
+                                        href={link.href}
+                                        className="px-4 py-2 rounded-lg bg-white border border-[#E5E7EB] text-[13px] text-[#6B7280] font-medium hover:text-[#2563EB] hover:border-[#2563EB]/30 transition-colors"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </main>
 
-            <Footer />
+            <Footer siteSettings={siteSettings} />
         </div>
     );
 }

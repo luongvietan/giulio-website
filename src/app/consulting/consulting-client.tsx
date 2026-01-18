@@ -28,7 +28,7 @@ import {
   Zap,
   type LucideIcon
 } from 'lucide-react';
-import type { ConsultingPage, SiteSettings } from '@/types/sanity';
+import type { ConsultingPage, SiteSettings, UIStrings } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,150 +51,24 @@ const iconMap: Record<string, LucideIcon> = {
   Zap,
 };
 
-// Default service navigation items
-const defaultServiceNavItems = [
-  { id: 'portfolio-review', title: 'Portfolio Review', icon: 'PieChart' },
-  { id: 'strategy-design', title: 'Strategy Design', icon: 'Compass' },
-  { id: 'options', title: 'Options', icon: 'TrendingUp' },
-  { id: 'structured-products', title: 'Structured Products', icon: 'Shield' },
-  { id: 'real-estate', title: 'Real Estate & Other Assets', icon: 'Building2' },
-  { id: 'crypto', title: 'Crypto', icon: 'Bitcoin' },
-];
-
-// Default features data for each section
-const defaultPortfolioFeatures = [
-  { icon: 'BarChart3', title: 'Multi-Asset Analysis', desc: 'Equities, options, ETFs, fixed income, crypto & more' },
-  { icon: 'Target', title: 'Stress Testing', desc: 'Scenario analysis and VaR/CVaR modelling' },
-  { icon: 'Activity', title: 'Correlation Mapping', desc: 'Identify hidden risks and inefficiencies' },
-];
-
-const defaultStrategyFeatures = [
-  { icon: 'Lightbulb', title: 'Options-Driven', desc: 'Integrating short-term tactics with long-term positioning' },
-  { icon: 'Layers', title: 'Bespoke Architecture', desc: 'Built around your objectives and risk tolerance' },
-  { icon: 'Zap', title: 'Algorithm Design', desc: 'Systematise execution and signal logic' },
-];
-
-const defaultOptionsFeatures = [
-  { icon: 'LineChart', title: 'Flow Analysis', desc: 'Monitor institutional-grade options flow' },
-  { icon: 'Activity', title: 'GEX & Greeks', desc: 'Delta hedging, vanna/charm effects' },
-  { icon: 'Target', title: 'Volatility Regimes', desc: 'Skew, term structure analysis' },
-];
-
-const defaultStructuredFeatures = [
-  { icon: 'Shield', title: 'Product Evaluation', desc: 'Autocallables, Phoenix notes, express products' },
-  { icon: 'Layers', title: 'Payoff Design', desc: 'Risk transfer and hedging analysis' },
-  { icon: 'TrendingUp', title: 'Options Replication', desc: 'Enhanced flexibility and efficiency' },
-];
-
-const defaultRealEstateFeatures = [
-  { icon: 'Map', title: 'Switzerland & Italy', desc: 'Deep expertise in key markets' },
-  { icon: 'BarChart3', title: 'Yield Modelling', desc: 'Cash-flow projections and risk mapping' },
-  { icon: 'Wallet', title: 'Strategic Integration', desc: 'Multi-asset portfolio approach' },
-];
-
-const defaultCryptoFeatures = [
-  { icon: 'Activity', title: 'Market Structure', desc: 'Liquidity cycles and macro correlations' },
-  { icon: 'Target', title: 'Risk Sizing', desc: 'Measured positioning and structural awareness' },
-  { icon: 'Layers', title: 'Network Insights', desc: 'Access to experienced crypto professionals' },
-];
-
-// Default service sections data
-const defaultServiceSections = [
-  {
-    id: 'portfolio-review',
-    icon: 'PieChart',
-    title: 'Portfolio Review',
-    description: [
-      "A disciplined, multi-asset review designed to reveal how your portfolio truly behaves.",
-      "We analyse every component to identify hidden risks, inefficiencies and structural imbalances: equities, options, ETFs, fixed income, structured products, crypto, real estate and alternatives.",
-      "Using institutional tools such as scenario analysis, stress testing, correlation mapping, VaR/CVaR and factor modelling, we highlight where performance is being lost and how risk can be repositioned."
-    ],
-    highlight: "The result is a clear, refined interpretation of your exposures and a practical roadmap to bring order, coherence and discipline to your investment process.",
-    features: defaultPortfolioFeatures,
-    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
-    shadowColor: 'shadow-[#2563EB]/20',
-  },
-  {
-    id: 'strategy-design',
-    icon: 'Compass',
-    title: 'Strategy Design',
-    description: [
-      "We design investment strategies that combine institutional structure with private-investor flexibility.",
-      "Our philosophy is opportunistic and options-driven, integrating short-term tactics with medium- and long-term positioning.",
-      "Each strategy is built around your objectives, risk tolerance and liquidity profile, ranging from tailored frameworks to fully bespoke architectures."
-    ],
-    highlight: "Every strategy defines how to express an idea, how to size it, how to hedge it, and how to evolve it as conditions change — creating a disciplined, repeatable system rather than isolated trades.",
-    features: defaultStrategyFeatures,
-    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
-    shadowColor: 'shadow-[#2563EB]/20',
-  },
-  {
-    id: 'options',
-    icon: 'TrendingUp',
-    title: 'Options',
-    description: [
-      "Options flow is the core of Gamma Capital. Our primary edge comes from monitoring and interpreting institutional-grade options flow and unusual activity.",
-      "We connect flow to derivatives mechanics — GEX, delta hedging dynamics, vanna/charm effects, volatility regimes, skew, and term structure — to frame how options markets influence price action."
-    ],
-    highlight: "Whether the objective is tactical exposure, yield enhancement, convexity management, or hedging, our approach translates complex market signals into clear, risk-aware frameworks — with the structure and precision of a professional derivatives desk.",
-    features: defaultOptionsFeatures,
-    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
-    shadowColor: 'shadow-[#2563EB]/20',
-  },
-  {
-    id: 'structured-products',
-    icon: 'Shield',
-    title: 'Structured Products',
-    description: [
-      "Our structured-product advisory blends academic depth with institutional insight gained through exposure to portfolio managers at UBS and studies at USI Lugano.",
-      "We help investors evaluate and design a wide range of structures, from autocallables and Phoenix notes to reverse convertibles, express products and capital-protected solutions."
-    ],
-    highlight: "When appropriate, we replicate or enhance these payoffs using options to achieve greater flexibility and efficiency.",
-    features: defaultStructuredFeatures,
-    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
-    shadowColor: 'shadow-[#2563EB]/20',
-  },
-  {
-    id: 'real-estate',
-    icon: 'Building2',
-    title: 'Real Estate & Other Assets',
-    description: [
-      "Our real estate perspective is shaped by direct experience in Switzerland and Italy, with deep familiarity in markets such as Lugano, Chiasso, Venice, Como, Udine and Rome.",
-      "We analyse property opportunities with the same rigor applied to financial assets — cash-flow projections, yield modelling, risk mapping, seasonality, and strategic integration within a broader portfolio."
-    ],
-    highlight: "From short-stay optimisation to long-term capital allocation, we help clients treat real estate not as isolated purchases but as deliberate components of a multi-asset strategy.",
-    features: defaultRealEstateFeatures,
-    iconGradient: 'from-[#2563EB] to-[#1E3A8A]',
-    shadowColor: 'shadow-[#2563EB]/20',
-  },
-  {
-    id: 'crypto',
-    icon: 'Bitcoin',
-    title: 'Crypto',
-    description: [
-      "Active in the crypto markets since 2017, we bring historical context and institutional discipline to an asset class often dominated by noise.",
-      "We focus on market structure, liquidity cycles, risk sizing, macro correlations and scenario-based positioning."
-    ],
-    highlight: "Crypto is approached not as speculation, but as an asymmetric asset requiring measured sizing, structural awareness and strategic integration within a diversified portfolio.",
-    features: defaultCryptoFeatures,
-    iconGradient: 'from-[#f59e0b] to-[#d97706]',
-    shadowColor: 'shadow-[#f59e0b]/20',
-  },
-];
+// Default service navigation items - REMOVED
+// Default features data - REMOVED
+// Default service sections data - REMOVED
 
 interface ConsultingPageClientProps {
   pageData?: ConsultingPage | null;
   siteSettings?: SiteSettings | null;
+  uiStrings?: UIStrings | null;
 }
 
-export default function ConsultingPageClient({ pageData, siteSettings }: ConsultingPageClientProps) {
+export default function ConsultingPageClient({ pageData, siteSettings, uiStrings }: ConsultingPageClientProps) {
   // Extract CMS data with fallbacks
   const heroBadge = pageData?.heroBadge ?? 'Advisory Services';
   const heroTitle = pageData?.heroTitle ?? 'Consulting';
   const heroSubtitle = pageData?.heroSubtitle ?? 'Institution-level advisory designed for private investors who demand precision, clarity, and actionable insight across every major asset class.';
 
-  const serviceNavItems = pageData?.serviceNavItems?.length ? pageData.serviceNavItems : defaultServiceNavItems;
-  const serviceSections = pageData?.serviceSections?.length ? pageData.serviceSections : defaultServiceSections;
+  const serviceNavItems = pageData?.serviceNavItems || [];
+  const serviceSections = pageData?.serviceSections || [];
 
   const ctaTitle = pageData?.ctaTitle ?? 'Ready to Elevate Your Investment Process?';
   const ctaDescription = pageData?.ctaDescription ?? 'Schedule a consultation to discuss how Gamma Capital can bring institutional-level precision and clarity to your portfolio.';
@@ -310,7 +184,7 @@ export default function ConsultingPageClient({ pageData, siteSettings }: Consult
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [serviceNavItems]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -325,20 +199,23 @@ export default function ConsultingPageClient({ pageData, siteSettings }: Consult
   };
 
   // Feature Card Component
-  const FeatureCard = ({ icon: Icon, title, desc }: { icon: React.ElementType; title: string; desc: string }) => (
-    <div className="feature-card group bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-lg hover:shadow-[#2563EB]/5 transition-all duration-300">
-      <div className="w-12 h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-        <Icon className="w-6 h-6 text-[#2563EB]" />
+  const FeatureCard = ({ icon, title, desc }: { icon?: string | React.ElementType; title: string; desc: string }) => {
+    const IconComponent = (icon && typeof icon === 'string' ? iconMap[icon] : icon) ?? PieChart;
+    return (
+      <div className="feature-card group bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#2563EB]/30 hover:shadow-lg hover:shadow-[#2563EB]/5 transition-all duration-300">
+        <div className="w-12 h-12 bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <IconComponent className="w-6 h-6 text-[#2563EB]" />
+        </div>
+        <h4 className="text-[16px] font-semibold text-[#111827] mb-2">{title}</h4>
+        <p className="text-[14px] text-[#6B7280] leading-relaxed">{desc}</p>
       </div>
-      <h4 className="text-[16px] font-semibold text-[#111827] mb-2">{title}</h4>
-      <p className="text-[14px] text-[#6B7280] leading-relaxed">{desc}</p>
-    </div>
-  );
+    );
+  };
 
   // Service Section Component
   const ServiceSection = ({
     id,
-    icon: Icon,
+    icon: IconOrString,
     title,
     description,
     highlight,
@@ -348,60 +225,66 @@ export default function ConsultingPageClient({ pageData, siteSettings }: Consult
     shadowColor = "shadow-[#2563EB]/20"
   }: {
     id: string;
-    icon: React.ElementType;
+    icon?: string | React.ElementType;
     title: string;
     description: string[];
     highlight: string;
-    features: { icon: React.ElementType; title: string; desc: string }[];
+    features: { icon?: string | React.ElementType; title: string; desc: string }[];
     bgAlt?: boolean;
     iconGradient?: string;
     shadowColor?: string;
-  }) => (
-    <section id={id} className={`service-section w-full py-12 md:py-24 px-6 md:px-12 ${bgAlt ? 'bg-[#F8F9FB]' : 'bg-white'}`}>
-      <div className="max-w-[1200px] mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left: Content */}
-          <div className="section-content">
-            <div className="flex items-center gap-4 mb-6">
-              <div className={`w-14 h-14 bg-gradient-to-br ${iconGradient} rounded-2xl flex items-center justify-center shadow-lg ${shadowColor}`}>
-                <Icon className="w-7 h-7 text-white" />
+  }) => {
+    const Icon = (IconOrString && typeof IconOrString === 'string' ? iconMap[IconOrString] : IconOrString) ?? PieChart;
+
+    return (
+      <section id={id} className={`service-section w-full py-12 md:py-24 px-6 md:px-12 ${bgAlt ? 'bg-[#F8F9FB]' : 'bg-white'}`}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Left: Content */}
+            <div className="section-content">
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`w-14 h-14 bg-gradient-to-br ${iconGradient} rounded-2xl flex items-center justify-center shadow-lg ${shadowColor}`}>
+                  <Icon className="w-7 h-7 text-white" />
+                </div>
+                <h2 className="text-[28px] md:text-[36px] font-semibold text-[#111827] tracking-[-0.02em]">{title}</h2>
               </div>
-              <h2 className="text-[28px] md:text-[36px] font-semibold text-[#111827] tracking-[-0.02em]">{title}</h2>
+
+              <div className="space-y-4 mb-8">
+                {description.map((text, index) => (
+                  <p key={index} className="text-[16px] text-[#374151] leading-[1.8]">
+                    {text}
+                  </p>
+                ))}
+              </div>
+
+              {/* Highlight Box */}
+              {highlight && (
+                <div className="bg-gradient-to-r from-[#2563EB]/5 to-transparent border-l-4 border-[#2563EB] pl-5 py-4 pr-4 rounded-r-lg">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-[#2563EB] mt-0.5 flex-shrink-0" />
+                    <p className="text-[15px] text-[#111827] font-medium leading-relaxed">
+                      {highlight}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div className="space-y-4 mb-8">
-              {description.map((text, index) => (
-                <p key={index} className="text-[16px] text-[#374151] leading-[1.8]">
-                  {text}
-                </p>
+            {/* Right: Feature Cards */}
+            <div className="grid sm:grid-cols-1 gap-4">
+              {features?.map((feature, index) => (
+                <FeatureCard key={index} {...feature} />
               ))}
             </div>
-
-            {/* Highlight Box */}
-            <div className="bg-gradient-to-r from-[#2563EB]/5 to-transparent border-l-4 border-[#2563EB] pl-5 py-4 pr-4 rounded-r-lg">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#2563EB] mt-0.5 flex-shrink-0" />
-                <p className="text-[15px] text-[#111827] font-medium leading-relaxed">
-                  {highlight}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Feature Cards */}
-          <div className="grid sm:grid-cols-1 gap-4">
-            {features.map((feature, index) => (
-              <FeatureCard key={index} {...feature} />
-            ))}
           </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-white">
-      <NavigationHeader />
+      <NavigationHeader siteSettings={siteSettings} uiStrings={uiStrings} />
       <main>
         {/* Hero Section */}
         <section ref={heroRef} className="w-full bg-gradient-to-b from-[#0A1A2F] to-[#111827] py-16 md:py-28 px-6 md:px-12 relative overflow-hidden">
@@ -420,16 +303,15 @@ export default function ConsultingPageClient({ pageData, siteSettings }: Consult
           <div className="max-w-[1200px] mx-auto text-center relative z-10">
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-[#2563EB]/20 border border-[#2563EB]/30 rounded-full mb-8">
               <span className="w-2 h-2 bg-[#2563EB] rounded-full animate-pulse"></span>
-              <span className="text-[13px] font-medium text-[#2563EB] tracking-wide uppercase">Advisory Services</span>
+              <span className="text-[13px] font-medium text-[#2563EB] tracking-wide uppercase">{heroBadge}</span>
             </div>
 
             <h1 className="hero-title text-[42px] md:text-[56px] lg:text-[64px] font-display font-medium tracking-[-0.03em] leading-[1.05] mb-8 text-white">
-              Consulting
+              {heroTitle}
             </h1>
 
             <p className="hero-subtitle text-[18px] md:text-[20px] text-[#9CA3AF] font-normal leading-relaxed max-w-3xl mx-auto mb-12">
-              Institution-level advisory designed for private investors who demand precision,
-              clarity, and actionable insight across every major asset class.
+              {heroSubtitle}
             </p>
 
             {/* Stats Row */}
@@ -467,7 +349,7 @@ export default function ConsultingPageClient({ pageData, siteSettings }: Consult
             </div>
             <div ref={navCardsRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {serviceNavItems.map((item) => {
-                const IconComponent = item.icon;
+                const IconComponent = (typeof item.icon === 'string' ? iconMap[item.icon] : item.icon) ?? PieChart;
                 return (
                   <button
                     key={item.id}
@@ -499,90 +381,21 @@ export default function ConsultingPageClient({ pageData, siteSettings }: Consult
           </div>
         </section>
 
-        {/* Portfolio Review Section */}
-        <ServiceSection
-          id="portfolio-review"
-          icon={PieChart}
-          title="Portfolio Review"
-          description={[
-            "A disciplined, multi-asset review designed to reveal how your portfolio truly behaves.",
-            "We analyse every component to identify hidden risks, inefficiencies and structural imbalances: equities, options, ETFs, fixed income, structured products, crypto, real estate and alternatives.",
-            "Using institutional tools such as scenario analysis, stress testing, correlation mapping, VaR/CVaR and factor modelling, we highlight where performance is being lost and how risk can be repositioned."
-          ]}
-          highlight="The result is a clear, refined interpretation of your exposures and a practical roadmap to bring order, coherence and discipline to your investment process."
-          features={portfolioFeatures}
-        />
-
-        {/* Strategy Design Section */}
-        <ServiceSection
-          id="strategy-design"
-          icon={Compass}
-          title="Strategy Design"
-          description={[
-            "We design investment strategies that combine institutional structure with private-investor flexibility.",
-            "Our philosophy is opportunistic and options-driven, integrating short-term tactics with medium- and long-term positioning.",
-            "Each strategy is built around your objectives, risk tolerance and liquidity profile, ranging from tailored frameworks to fully bespoke architectures."
-          ]}
-          highlight="Every strategy defines how to express an idea, how to size it, how to hedge it, and how to evolve it as conditions change — creating a disciplined, repeatable system rather than isolated trades."
-          features={strategyFeatures}
-          bgAlt={true}
-        />
-
-        {/* Options Section */}
-        <ServiceSection
-          id="options"
-          icon={TrendingUp}
-          title="Options"
-          description={[
-            "Options flow is the core of Gamma Capital. Our primary edge comes from monitoring and interpreting institutional-grade options flow and unusual activity.",
-            "We connect flow to derivatives mechanics — GEX, delta hedging dynamics, vanna/charm effects, volatility regimes, skew, and term structure — to frame how options markets influence price action.",
-          ]}
-          highlight="Whether the objective is tactical exposure, yield enhancement, convexity management, or hedging, our approach translates complex market signals into clear, risk-aware frameworks — with the structure and precision of a professional derivatives desk."
-          features={optionsFeatures}
-        />
-
-        {/* Structured Products Section */}
-        <ServiceSection
-          id="structured-products"
-          icon={Shield}
-          title="Structured Products"
-          description={[
-            "Our structured-product advisory blends academic depth with institutional insight gained through exposure to portfolio managers at UBS and studies at USI Lugano.",
-            "We help investors evaluate and design a wide range of structures, from autocallables and Phoenix notes to reverse convertibles, express products and capital-protected solutions."
-          ]}
-          highlight="When appropriate, we replicate or enhance these payoffs using options to achieve greater flexibility and efficiency."
-          features={structuredFeatures}
-          bgAlt={true}
-        />
-
-        {/* Real Estate Section */}
-        <ServiceSection
-          id="real-estate"
-          icon={Building2}
-          title="Real Estate & Other Assets"
-          description={[
-            "Our real estate perspective is shaped by direct experience in Switzerland and Italy, with deep familiarity in markets such as Lugano, Chiasso, Venice, Como, Udine and Rome.",
-            "We analyse property opportunities with the same rigor applied to financial assets — cash-flow projections, yield modelling, risk mapping, seasonality, and strategic integration within a broader portfolio."
-          ]}
-          highlight="From short-stay optimisation to long-term capital allocation, we help clients treat real estate not as isolated purchases but as deliberate components of a multi-asset strategy."
-          features={realEstateFeatures}
-        />
-
-        {/* Crypto Section */}
-        <ServiceSection
-          id="crypto"
-          icon={Bitcoin}
-          title="Crypto"
-          description={[
-            "Active in the crypto markets since 2017, we bring historical context and institutional discipline to an asset class often dominated by noise.",
-            "We focus on market structure, liquidity cycles, risk sizing, macro correlations and scenario-based positioning."
-          ]}
-          highlight="Crypto is approached not as speculation, but as an asymmetric asset requiring measured sizing, structural awareness and strategic integration within a diversified portfolio."
-          features={cryptoFeatures}
-          bgAlt={true}
-          iconGradient="from-[#f59e0b] to-[#d97706]"
-          shadowColor="shadow-[#f59e0b]/20"
-        />
+        {/* Service Sections */}
+        {serviceSections.map((section, index) => (
+          <ServiceSection
+            key={section.id}
+            id={section.id}
+            icon={section.icon || 'PieChart'}
+            title={section.title}
+            description={section.description || []}
+            highlight={section.highlight || ''}
+            features={section.features || []}
+            bgAlt={index % 2 !== 0}
+            iconGradient={section.iconGradient}
+            shadowColor={section.shadowColor}
+          />
+        ))}
 
         {/* Final CTA Section */}
         <section className="w-full bg-gradient-to-b from-[#0A1A2F] to-[#111827] py-16 md:py-24 px-6 md:px-12 relative overflow-hidden">
@@ -603,23 +416,22 @@ export default function ConsultingPageClient({ pageData, siteSettings }: Consult
             </div>
 
             <h2 className="text-[32px] md:text-[42px] font-medium text-white mb-6 tracking-[-0.02em]">
-              Ready to Elevate Your<br />Investment Process?
+              {ctaTitle}
             </h2>
             <p className="text-[17px] text-[#9CA3AF] mb-10 leading-relaxed max-w-xl mx-auto">
-              Schedule a consultation to discuss how Gamma Capital can bring institutional-level
-              precision and clarity to your portfolio.
+              {ctaDescription}
             </p>
             <Link
-              href="/contact"
+              href={ctaButtonHref}
               className="inline-flex items-center gap-3 bg-[#2563EB] text-white px-8 py-4 rounded-xl text-[15px] font-semibold hover:bg-[#1E3A8A] transition-all duration-300 group shadow-lg shadow-[#2563EB]/20"
             >
-              Get in Touch
+              {ctaButtonText}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer siteSettings={siteSettings} />
     </div>
   );
 }

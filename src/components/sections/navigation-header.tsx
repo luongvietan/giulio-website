@@ -1,19 +1,18 @@
-"use client";
-
 import React, { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ChevronDown, Menu, X, ChevronRight } from 'lucide-react';
-import type { SiteSettings } from '@/types/sanity';
+import type { SiteSettings, UIStrings } from '@/types/sanity';
 import { urlFor } from '@/sanity/lib/image';
 
 interface NavigationHeaderProps {
   siteSettings?: SiteSettings | null;
+  uiStrings?: UIStrings | null;
 }
 
-export default function NavigationHeader({ siteSettings }: NavigationHeaderProps) {
+export default function NavigationHeader({ siteSettings, uiStrings }: NavigationHeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = React.useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -22,11 +21,8 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
   const ctaRef = useRef<HTMLDivElement>(null);
 
   // Use CMS data or return null/skeleton if critical data is missing
-  // Ideally, if siteSettings is null, layout might handle it, or we render a skeleton.
-  // For now, we assume siteSettings might be partial but if navigation is missing, we render nothing or empty list.
-
-  const siteName = siteSettings?.siteName || 'Gamma Capital';
-  const logoText = siteSettings?.logoText || 'Γ';
+  const siteName = siteSettings?.siteName;
+  const logoText = siteSettings?.logoText;
   const logoImage = siteSettings?.logo;
 
   const navItems = siteSettings?.navItems || [];
@@ -35,6 +31,11 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
   // New mobile fields
   const mobileSecondaryLinks = siteSettings?.mobileSecondaryLinks || [];
   const mobileFooterText = siteSettings?.mobileFooterText;
+
+  // UI Strings
+  const mobileMenuOpenLabel = uiStrings?.mobileMenuOpenLabel;
+  const mobileMenuCloseLabel = uiStrings?.mobileMenuCloseLabel;
+  const navigationBackLabel = uiStrings?.navigationBackLabel;
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
@@ -75,7 +76,7 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
               {logoImage ? (
                 <Image
                   src={urlFor(logoImage).width(36).height(36).url()}
-                  alt={siteName}
+                  alt={siteName || 'Logo'}
                   width={36}
                   height={36}
                   className="rounded"
@@ -85,7 +86,9 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
                   <span className="text-[#2563EB] font-display font-semibold text-lg tracking-tight">{logoText}</span>
                 </div>
               )}
-              <span className="text-[17px] font-display font-semibold text-[#0A1A2F] tracking-tight">{siteName}</span>
+              {siteName && (
+                <span className="text-[17px] font-display font-semibold text-[#0A1A2F] tracking-tight">{siteName}</span>
+              )}
             </Link>
           </div>
 
@@ -138,7 +141,7 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
               <button
                 onClick={toggleMobileMenu}
                 className="p-2 -mr-2 text-[#111827] focus:outline-none"
-                aria-label="Toggle menu"
+                aria-label={isMobileMenuOpen ? mobileMenuCloseLabel : mobileMenuOpenLabel}
               >
                 {isMobileMenuOpen ? (
                   <X className="w-6 h-6" />
@@ -168,9 +171,6 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
                     <span className="text-[25px] font-display font-medium tracking-tight text-[#111827]">{item.text}</span>
                     <ChevronRight className="w-6 h-6 text-[#9CA3AF] group-active:text-[#2563EB] transition-colors" />
                   </Link>
-
-                  {/* Optional: Brief sub-links hint if it has dropdown */}
-
                 </div>
               ))}
             </div>
@@ -192,12 +192,14 @@ export default function NavigationHeader({ siteSettings }: NavigationHeaderProps
             )}
 
             {/* Mobile Footer */}
-            {mobileFooterText && (
+            {(mobileFooterText || siteName) && (
               <div className="mt-auto pt-8 border-t border-gray-100">
-                <p className="text-[12px] text-[#9CA3AF] font-medium mb-1">{siteName.toUpperCase()}</p>
-                <p className="text-[11px] text-[#9CA3AF] leading-relaxed">
-                  {mobileFooterText}
-                </p>
+                {siteName && <p className="text-[12px] text-[#9CA3AF] font-medium mb-1">{siteName.toUpperCase()}</p>}
+                {mobileFooterText && (
+                  <p className="text-[11px] text-[#9CA3AF] leading-relaxed">
+                    {mobileFooterText}
+                  </p>
+                )}
               </div>
             )}
           </div>

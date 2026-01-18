@@ -20,6 +20,8 @@ import page from './documents/page'
 import contactPage from './documents/contactPage'
 import membershipsPage from './documents/membershipsPage'
 import consultingPage from './documents/consultingPage'
+import solutionsPage from './documents/solutionsPage'
+import serviceLandingPage from './documents/serviceLandingPage'
 import uiStrings from './documents/uiStrings'
 
 export const schemaTypes = [
@@ -45,6 +47,8 @@ export const schemaTypes = [
     contactPage,
     membershipsPage,
     consultingPage,
+    solutionsPage,
+    serviceLandingPage,
     uiStrings,
 ]
 
