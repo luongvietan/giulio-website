@@ -20,9 +20,16 @@ export default defineType({
     fields: [
         defineField({
             name: 'language',
+            title: 'Language',
             type: 'string',
-            readOnly: true,
-            hidden: true,
+            description: 'Select the language for this document',
+            options: {
+                list: [
+                    { title: 'English', value: 'en' },
+                    { title: 'Italiano', value: 'it' },
+                ],
+            },
+            validation: (Rule) => Rule.required(),
         }),
         // 404 Page Fields
         defineField({
