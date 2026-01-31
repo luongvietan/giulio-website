@@ -72,8 +72,8 @@ const SEO_PROJECTION = `
 
 export const SITE_SETTINGS_QUERY = defineQuery(`
   *[_type == "siteSettings" && (language == $locale || !defined(language))][0] {
-    "siteName": siteName[]{${LOCALIZED_VALUE}}[0].value,
-    "logoText": logoText[]{${LOCALIZED_VALUE}}[0].value,
+    "siteName": siteName{${LOCALIZED_VALUE}}.value,
+    "logoText": logoText{${LOCALIZED_VALUE}}.value,
     navItems[] {
       text,
       href,
@@ -108,38 +108,38 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
 
 export const UI_STRINGS_QUERY = defineQuery(`
   *[_type == "uiStrings"][0] {
-    "notFoundBadge": notFoundBadge[]{${LOCALIZED_VALUE}}[0].value,
-    "notFoundTitle": notFoundTitle[]{${LOCALIZED_VALUE}}[0].value,
-    "notFoundDescription": notFoundDescription[]{${LOCALIZED_VALUE}}[0].value,
-    "notFoundHomeButtonText": notFoundHomeButtonText[]{${LOCALIZED_VALUE}}[0].value,
-    "notFoundContactButtonText": notFoundContactButtonText[]{${LOCALIZED_VALUE}}[0].value,
-    "notFoundQuickLinksTitle": notFoundQuickLinksTitle[]{${LOCALIZED_VALUE}}[0].value,
+    "notFoundBadge": notFoundBadge{${LOCALIZED_VALUE}}.value,
+    "notFoundTitle": notFoundTitle{${LOCALIZED_VALUE}}.value,
+    "notFoundDescription": notFoundDescription{${LOCALIZED_VALUE}}.value,
+    "notFoundHomeButtonText": notFoundHomeButtonText{${LOCALIZED_VALUE}}.value,
+    "notFoundContactButtonText": notFoundContactButtonText{${LOCALIZED_VALUE}}.value,
+    "notFoundQuickLinksTitle": notFoundQuickLinksTitle{${LOCALIZED_VALUE}}.value,
     
-    "systemLoading": systemLoading[]{${LOCALIZED_VALUE}}[0].value,
-    "systemError": systemError[]{${LOCALIZED_VALUE}}[0].value,
-    "comingSoonTitle": comingSoonTitle[]{${LOCALIZED_VALUE}}[0].value,
+    "systemLoading": systemLoading{${LOCALIZED_VALUE}}.value,
+    "systemError": systemError{${LOCALIZED_VALUE}}.value,
+    "comingSoonTitle": comingSoonTitle{${LOCALIZED_VALUE}}.value,
     
-    "mobileMenuOpenLabel": mobileMenuOpenLabel[]{${LOCALIZED_VALUE}}[0].value,
-    "mobileMenuCloseLabel": mobileMenuCloseLabel[]{${LOCALIZED_VALUE}}[0].value,
-    "logoAriaLabel": logoAriaLabel[]{${LOCALIZED_VALUE}}[0].value,
-    "exploreServicesLabel": exploreServicesLabel[]{${LOCALIZED_VALUE}}[0].value,
-    "navigationBackLabel": navigationBackLabel[]{${LOCALIZED_VALUE}}[0].value,
-    "skipToContentLabel": skipToContentLabel[]{${LOCALIZED_VALUE}}[0].value,
+    "mobileMenuOpenLabel": mobileMenuOpenLabel{${LOCALIZED_VALUE}}.value,
+    "mobileMenuCloseLabel": mobileMenuCloseLabel{${LOCALIZED_VALUE}}.value,
+    "logoAriaLabel": logoAriaLabel{${LOCALIZED_VALUE}}.value,
+    "exploreServicesLabel": exploreServicesLabel{${LOCALIZED_VALUE}}.value,
+    "navigationBackLabel": navigationBackLabel{${LOCALIZED_VALUE}}.value,
+    "skipToContentLabel": skipToContentLabel{${LOCALIZED_VALUE}}.value,
     
-    "readyToStartBadge": readyToStartBadge[]{${LOCALIZED_VALUE}}[0].value,
-    "exploreLabel": exploreLabel[]{${LOCALIZED_VALUE}}[0].value,
-    "paginationPrev": paginationPrev[]{${LOCALIZED_VALUE}}[0].value,
-    "paginationNext": paginationNext[]{${LOCALIZED_VALUE}}[0].value,
+    "readyToStartBadge": readyToStartBadge{${LOCALIZED_VALUE}}.value,
+    "exploreLabel": exploreLabel{${LOCALIZED_VALUE}}.value,
+    "paginationPrev": paginationPrev{${LOCALIZED_VALUE}}.value,
+    "paginationNext": paginationNext{${LOCALIZED_VALUE}}.value,
 
-    "membershipSuccessTitle": membershipSuccessTitle[]{${LOCALIZED_VALUE}}[0].value,
-    "membershipSuccessMessage": membershipSuccessMessage[]{${LOCALIZED_VALUE}}[0].value,
-    "membershipProcessingText": membershipProcessingText[]{${LOCALIZED_VALUE}}[0].value,
+    "membershipSuccessTitle": membershipSuccessTitle{${LOCALIZED_VALUE}}.value,
+    "membershipSuccessMessage": membershipSuccessMessage{${LOCALIZED_VALUE}}.value,
+    "membershipProcessingText": membershipProcessingText{${LOCALIZED_VALUE}}.value,
 
-    "formSubmitButton": formSubmitButton[]{${LOCALIZED_VALUE}}[0].value,
-    "formSubmittingText": formSubmittingText[]{${LOCALIZED_VALUE}}[0].value,
-    "formRequiredError": formRequiredError[]{${LOCALIZED_VALUE}}[0].value,
-    "formEmailError": formEmailError[]{${LOCALIZED_VALUE}}[0].value,
-    "formSuccessTitle": formSuccessTitle[]{${LOCALIZED_VALUE}}[0].value,
+    "formSubmitButton": formSubmitButton{${LOCALIZED_VALUE}}.value,
+    "formSubmittingText": formSubmittingText{${LOCALIZED_VALUE}}.value,
+    "formRequiredError": formRequiredError{${LOCALIZED_VALUE}}.value,
+    "formEmailError": formEmailError{${LOCALIZED_VALUE}}.value,
+    "formSuccessTitle": formSuccessTitle{${LOCALIZED_VALUE}}.value,
     
     contactRoute,
     solutionsRoute,
