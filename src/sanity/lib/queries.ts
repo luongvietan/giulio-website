@@ -1,3 +1,5 @@
+import { defineQuery } from 'next-sanity'
+
 // ============================================
 // Reusable Query Fragments
 // ============================================
@@ -67,7 +69,25 @@ const SEO_PROJECTION = `
 // ============================================
 
 export const SITE_SETTINGS_QUERY = defineQuery(`
-  {
+  *[_type == "siteSettings" && (language == $locale || !defined(language))][0] {
+    "siteName": siteName[]{${LOCALIZED_VALUE}}[0].value,
+    "logoText": logoText[]{${LOCALIZED_VALUE}}[0].value,
+    navItems[] {
+      text,
+      href,
+      hasDropdown,
+      dropdownItems[] { text, description, href }
+    },
+    navCTA { text, href, variant, showArrow },
+    footerDescription,
+    footerColumns[] {
+      title,
+      links[] { text, href, isExternal }
+    },
+    copyrightText,
+    disclaimer,
+    ${SEO_PROJECTION},
+    // Merged Brand Identity
     "brand": *[_type == "brandSettings"][0] {
       siteName,
       logo { ..., asset-> },
@@ -75,25 +95,10 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
       socialLinks[] { platform, url, iconName },
       contactEmail
     },
-    "settings": *[_type == "siteSettings" && (language == $locale || !defined(language))][0] {
-      "siteName": siteName[]{${LOCALIZED_VALUE}}[0].value,
-      "logoText": logoText[]{${LOCALIZED_VALUE}}[0].value,
-      navItems[] {
-        text,
-        href,
-        hasDropdown,
-        dropdownItems[] { text, description, href }
-      },
-      navCTA { text, href, variant, showArrow },
-      footerDescription,
-      footerColumns[] {
-        title,
-        links[] { text, href, isExternal }
-      },
-      copyrightText,
-      disclaimer,
-      ${SEO_PROJECTION}
-    }
+    // Support legacy flat access for global fields
+    "logo": *[_type == "brandSettings"][0].logo { ..., asset-> },
+    "socialLinks": *[_type == "brandSettings"][0].socialLinks[] { platform, url, iconName },
+    "contactEmail": *[_type == "brandSettings"][0].contactEmail
   }
 `)
 
@@ -119,7 +124,17 @@ export const UI_STRINGS_QUERY = defineQuery(`
     "logoAriaLabel": logoAriaLabel[]{${LOCALIZED_VALUE}}[0].value,
     "exploreServicesLabel": exploreServicesLabel[]{${LOCALIZED_VALUE}}[0].value,
     "navigationBackLabel": navigationBackLabel[]{${LOCALIZED_VALUE}}[0].value,
+    "skipToContentLabel": skipToContentLabel[]{${LOCALIZED_VALUE}}[0].value,
     
+    "readyToStartBadge": readyToStartBadge[]{${LOCALIZED_VALUE}}[0].value,
+    "exploreLabel": exploreLabel[]{${LOCALIZED_VALUE}}[0].value,
+    "paginationPrev": paginationPrev[]{${LOCALIZED_VALUE}}[0].value,
+    "paginationNext": paginationNext[]{${LOCALIZED_VALUE}}[0].value,
+
+    "membershipSuccessTitle": membershipSuccessTitle[]{${LOCALIZED_VALUE}}[0].value,
+    "membershipSuccessMessage": membershipSuccessMessage[]{${LOCALIZED_VALUE}}[0].value,
+    "membershipProcessingText": membershipProcessingText[]{${LOCALIZED_VALUE}}[0].value,
+
     "formSubmitButton": formSubmitButton[]{${LOCALIZED_VALUE}}[0].value,
     "formSubmittingText": formSubmittingText[]{${LOCALIZED_VALUE}}[0].value,
     "formRequiredError": formRequiredError[]{${LOCALIZED_VALUE}}[0].value,
@@ -127,7 +142,8 @@ export const UI_STRINGS_QUERY = defineQuery(`
     "formSuccessTitle": formSuccessTitle[]{${LOCALIZED_VALUE}}[0].value,
     
     contactRoute,
-    solutionsRoute
+    solutionsRoute,
+    membershipsRoute
   }
 `)
 

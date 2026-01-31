@@ -139,7 +139,61 @@ export default defineType({
             group: 'system',
         }),
 
-        // Route Paths (Global - Not internationalized because they are internal slugs)
+        // Memberships & Payments
+        defineField({
+            name: 'membershipSuccessTitle',
+            title: 'Membership Success Title',
+            type: 'internationalizedArrayString',
+            group: 'memberships',
+        }),
+        defineField({
+            name: 'membershipSuccessMessage',
+            title: 'Membership Success Message',
+            type: 'internationalizedArrayText',
+            group: 'memberships',
+        }),
+        defineField({
+            name: 'membershipProcessingText',
+            title: 'Processing Text',
+            type: 'internationalizedArrayString',
+            group: 'memberships',
+        }),
+
+        // Accessibility & UX
+        defineField({
+            name: 'skipToContentLabel',
+            title: 'Skip to Content Aria Label',
+            type: 'internationalizedArrayString',
+            group: 'accessibility',
+        }),
+        defineField({
+            name: 'paginationPrev',
+            title: 'Pagination Previous Label',
+            type: 'internationalizedArrayString',
+            group: 'accessibility',
+        }),
+        defineField({
+            name: 'paginationNext',
+            title: 'Pagination Next Label',
+            type: 'internationalizedArrayString',
+            group: 'accessibility',
+        }),
+
+        // General Labels
+        defineField({
+            name: 'exploreLabel',
+            title: 'Explore Button Label',
+            type: 'internationalizedArrayString',
+            group: 'system',
+        }),
+        defineField({
+            name: 'readyToStartBadge',
+            title: 'Ready to Start Badge',
+            type: 'internationalizedArrayString',
+            group: 'system',
+        }),
+
+        // Route Paths
         defineField({
             name: 'contactRoute',
             title: 'Contact Page Route',
@@ -153,6 +207,13 @@ export default defineType({
             type: 'string',
             group: 'routes',
             initialValue: '/solutions',
+        }),
+        defineField({
+            name: 'membershipsRoute',
+            title: 'Memberships Page Route',
+            type: 'string',
+            group: 'routes',
+            initialValue: '/memberships',
         }),
     ],
     preview: {

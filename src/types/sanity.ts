@@ -138,6 +138,8 @@ export type PageSection =
     | TestimonialCTASectionData
     | ThreeCardsSectionData
     | RichTextSectionData
+    | MultiAssetSectionData
+    | WhyGammaSectionData
 
 // ============================================
 // Document Types
