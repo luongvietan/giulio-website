@@ -48,9 +48,13 @@ export default defineType({
                     const { document, getClient } = context
                     const client = getClient({ apiVersion: '2024-01-01' })
                     const id = document?._id?.replace('drafts.', '')
+                    const language = document?.language
+
+                    // Uniqueness check needs to consider the language
+                    // This allows same slug (e.g. "about") for different languages (EN and IT)
                     const result = await client.fetch(
-                        `count(*[_type == "page" && slug.current == $slug && _id != $id && !(_id in path("drafts.**"))])`,
-                        { slug, id }
+                        `count(*[_type == "page" && slug.current == $slug && _id != $id && language == $language && !(_id in path("drafts.**"))])`,
+                        { slug, id, language }
                     )
                     return result === 0
                 },
