@@ -89,7 +89,6 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     copyrightText,
     disclaimer,
     ${SEO_PROJECTION},
-    // Merged Brand Identity
     "brand": *[_type == "brandSettings"][0] {
       siteName,
       logo { ..., asset-> },
@@ -97,7 +96,6 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
       socialLinks[] { platform, url, iconName },
       contactEmail
     },
-    // Support legacy flat access for global fields
     "logo": *[_type == "brandSettings"][0].logo { ..., asset-> },
     "socialLinks": *[_type == "brandSettings"][0].socialLinks[] { platform, url, iconName },
     "contactEmail": *[_type == "brandSettings"][0].contactEmail
