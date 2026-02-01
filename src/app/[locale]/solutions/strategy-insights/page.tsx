@@ -10,15 +10,29 @@ interface PageProps {
   params: Promise<{ locale: Locale }>
 }
 
+import strategyPageEn from '@/data/seeds/strategyPage-en.json';
+import strategyPageIt from '@/data/seeds/strategyPage-it.json';
+
+const STRATEGY_PAGE_IDS: Record<string, string> = {
+  en: 'strategyPage',
+  it: 'strategyPage-it',
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const pageData = await sanityFetch<ServiceLandingPage | null>({
+  const id = STRATEGY_PAGE_IDS[locale] || 'strategyPage';
+
+  let pageData = await sanityFetch<ServiceLandingPage | null>({
     query: SERVICE_LANDING_PAGE_QUERY,
-    params: { id: 'strategyPage', locale },
+    params: { id, locale },
     revalidate: 60,
     tags: ['strategyPage'],
     skipDraftMode: true,
   });
+
+  if (!pageData) {
+    pageData = (locale === 'it' ? strategyPageIt : strategyPageEn) as unknown as ServiceLandingPage;
+  }
 
   return {
     title: pageData?.seoTitle || 'Strategy Insights | Gamma Capital',
@@ -29,11 +43,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function StrategyInsightsPage({ params }: PageProps) {
   const { locale } = await params;
   const { isEnabled: isDraftMode } = await draftMode();
+  const id = STRATEGY_PAGE_IDS[locale] || 'strategyPage';
 
-  const [pageData, siteSettings] = await Promise.all([
+  let [pageData, siteSettings] = await Promise.all([
     sanityFetch<ServiceLandingPage | null>({
       query: SERVICE_LANDING_PAGE_QUERY,
-      params: { id: 'strategyPage', locale },
+      params: { id, locale },
       revalidate: isDraftMode ? 0 : 60,
       tags: ['strategyPage'],
     }),
@@ -44,6 +59,10 @@ export default async function StrategyInsightsPage({ params }: PageProps) {
       tags: ['siteSettings'],
     }),
   ]);
+
+  if (!pageData) {
+    pageData = (locale === 'it' ? strategyPageIt : strategyPageEn) as unknown as ServiceLandingPage;
+  }
 
   return (
     <ServicePageClient

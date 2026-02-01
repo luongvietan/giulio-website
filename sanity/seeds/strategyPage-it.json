@@ -1,0 +1,69 @@
+{
+    "_id": "strategyPage-it",
+    "_type": "serviceLandingPage",
+    "language": "it",
+    "seoTitle": "Strategy Insights - Gamma Capital",
+    "seoDescription": "Insight guidati dai dati, algoritmi e framework istituzionali per comprendere i mercati e gestire il rischio.",
+    "heroBadge": "Strategy Insights",
+    "heroTitle": "Market Intelligence",
+    "heroSubtitle": "Data-driven",
+    "heroDescription": "Insight guidati dai dati, algoritmi e framework istituzionali per comprendere i mercati e gestire il rischio.",
+    "heroCtaText": "Contattaci",
+    "heroCtaLink": "/contact",
+    "services": [
+        {
+            "_key": "market_intelligence",
+            "title": "Market Intelligence (Core)",
+            "description": "Sviluppiamo framework analitici avanzati e algoritmi proprietari per interpretare i mercati, gestire il rischio di portafoglio e identificare opportunità asimmetriche. I nostri modelli si adattano ai regimi di volatilità, liquidità e macro, e possono essere costruiti su misura su richiesta per strategie o portafogli specifici.",
+            "icon": "BarChart3",
+            "features": []
+        },
+        {
+            "_key": "options_intelligence",
+            "title": "Intelligence sulle Opzioni",
+            "description": "Le opzioni sono una fonte chiave di informazioni di mercato. Analizziamo i flussi istituzionali di opzioni, il GEX, il posizionamento dei dealer e le dinamiche della volatilità per capire dove si sta accumulando il rischio o dove viene coperto. Questa intelligence supporta il timing, la gestione del rischio e la progettazione della strategia.",
+            "icon": "TrendingUp",
+            "features": [
+                "Comportamento di mercato guidato dai flussi",
+                "Esposizione Gamma e hedging dei dealer",
+                "Regimi di volatilità e term structure"
+            ]
+        },
+        {
+            "_key": "structured_products",
+            "title": "Intelligence sui Prodotti Strutturati",
+            "description": "Analizziamo e progettiamo payoff strutturati da una prospettiva istituzionale. Il nostro lavoro si concentra su asimmetria del payoff, logica di copertura dell'emittente e performance dipendente dal regime. Replichiamo o miglioriamo anche i payoff strutturati utilizzando opzioni, rimuovendo l'opacità non necessaria.",
+            "icon": "Building2",
+            "features": [
+                "Asimmetria del payoff e opzionalità implicita",
+                "Logica di copertura dell'emittente",
+                "Performance dipendente dal regime",
+                "Efficienza vs complessità"
+            ]
+        },
+        {
+            "_key": "real_estate",
+            "title": "Advisory Immobiliare (Market Intelligence)",
+            "description": "La nostra intelligence immobiliare combina analisi finanziaria con esperienza operativa diretta in Svizzera e Italia. Analizziamo opportunità in mercati come Lugano, Chiasso, Venezia, Como, Udine e Roma, concentrandoci su rendimento, rischio, cash flow e allocazione strategica. L'immobiliare è trattato come parte di un framework multi-asset più ampio, non come un investimento isolato.",
+            "icon": "Building2",
+            "features": []
+        },
+        {
+            "_key": "strategic_network",
+            "title": "Network Strategico & Accesso",
+            "description": "Gamma Capital opera all'interno di un network selettivo di professionisti in finanza, immobiliare e investimenti alternativi. Non un servizio, ma un vantaggio strategico per clienti selezionati.",
+            "icon": "Network",
+            "features": [
+                "Insight di mercato di alto livello",
+                "Operatori esperti",
+                "Allineamento strategico e introduzioni"
+            ]
+        }
+    ],
+    "ctaTitle": "Insight istituzionali, applicati con chiarezza.",
+    "ctaDescription": "Contattaci per discutere come la nostra market intelligence può supportare la tua strategia di investimento.",
+    "primaryCtaText": "Contattaci",
+    "primaryCtaLink": "/contact",
+    "secondaryCtaText": "Vedi Memberships",
+    "secondaryCtaLink": "/memberships"
+}

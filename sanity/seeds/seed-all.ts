@@ -13,6 +13,8 @@ import consultingPageEn from './consultingPage-en.json'
 import consultingPageIt from './consultingPage-it.json'
 import contactPageEn from './contactPage-en.json'
 import contactPageIt from './contactPage-it.json'
+import strategyPageEn from './strategyPage-en.json'
+import strategyPageIt from './strategyPage-it.json'
 
 const client = createClient({
     projectId: 'rm9kkope',
@@ -41,6 +43,8 @@ const documents: SeedDocument[] = [
     consultingPageIt as SeedDocument,
     contactPageEn as SeedDocument,
     contactPageIt as SeedDocument,
+    strategyPageEn as SeedDocument,
+    strategyPageIt as SeedDocument,
 ]
 
 async function seedAll() {
