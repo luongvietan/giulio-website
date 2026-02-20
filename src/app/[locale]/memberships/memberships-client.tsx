@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import NavigationHeader from "@/components/sections/navigation-header";
 import Footer from "@/components/sections/footer";
-import { ArrowRight, Check, ChevronDown, Loader2, Zap, Eye, Users, BookOpen, Target, Sparkles, Clock, Shield, TrendingUp, Bell, MessageSquare, GraduationCap, Award, ChevronRight, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, Zap, Eye, Users, BookOpen, Target, Sparkles, Clock, Shield, TrendingUp, Bell, MessageSquare, GraduationCap, Award, ChevronRight, type LucideIcon } from 'lucide-react';
 import type { MembershipsPage, SiteSettings, UIStrings } from '@/types/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -37,6 +37,21 @@ const defaultPlans = []; // Removed
 const defaultAccessSteps = []; // Removed
 const defaultFaqs = []; // Removed
 const defaultComingSoon = []; // Removed
+
+// Railway checkout URLs – used when plan.checkoutUrl is not set in Sanity (same-tab redirect, no Stripe)
+const RAILWAY_CHECKOUT_BASE = 'https://gammacap-bot-production.up.railway.app/checkout';
+const PLAN_ID_TO_RAILWAY_PATH: Record<string, string> = {
+  monthly: 'mensile',
+  quarterly: 'trimestrale',
+  annual: 'annuale',
+  yearly: 'annuale',
+};
+
+function getCheckoutUrl(plan: { id: string; checkoutUrl?: string }): string {
+  if (plan.checkoutUrl) return plan.checkoutUrl;
+  const path = PLAN_ID_TO_RAILWAY_PATH[plan.id];
+  return path ? `${RAILWAY_CHECKOUT_BASE}/${path}` : RAILWAY_CHECKOUT_BASE;
+}
 
 interface MembershipsPageClientProps {
   pageData?: MembershipsPage | null;
@@ -88,14 +103,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
   const finalCtaDescription = pageData?.finalCtaDescription ?? '';
   const finalCtaButton = pageData?.finalCtaButton ?? '';
 
-  // Checkout state text (CMS cascade: page-specific -> global UI strings)
-  const checkoutProcessingText = uiStrings?.checkoutProcessingText ?? uiStrings?.systemLoading ?? '';
-  const checkoutErrorText = uiStrings?.checkoutErrorText ?? uiStrings?.systemError ?? '';
-
   const [openFaq, setOpenFaq] = React.useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState<string | null>(null);
-  const [checkoutError, setCheckoutError] = useState<string | null>(null);
-
 
   const heroRef = useRef<HTMLElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -109,34 +117,6 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
   const faqRef = useRef<HTMLElement>(null);
   const comingSoonRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
-
-  const handleCheckout = async (planId: string) => {
-    setIsLoading(planId);
-    setCheckoutError(null);
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: planId }),
-      });
-
-      const data = await response.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        console.error('Checkout error:', data.error);
-        setCheckoutError(checkoutErrorText);
-        setIsLoading(null);
-      }
-    } catch (error) {
-      console.error('Checkout error:', error);
-      setCheckoutError(checkoutErrorText);
-      setIsLoading(null);
-    }
-  };
-
-  // Removed misplaced code block
 
   const scrollToPricing = () => {
     pricingRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -522,31 +502,16 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                     {plan.description}
                   </p>
 
-                  <button
-                    onClick={() => handleCheckout(plan.id)}
-                    disabled={isLoading === plan.id}
+                  <a
+                    href={getCheckoutUrl(plan)}
                     className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl text-[14px] font-semibold transition-all duration-200 ${plan.popular
                       ? 'bg-[#2563EB] text-white hover:bg-[#1E3A8A]'
                       : 'bg-[#0A1A2F] text-white hover:bg-[#27272a]'
-                      } disabled:opacity-70 disabled:cursor-not-allowed`}
+                      }`}
                   >
-                    {isLoading === plan.id ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        {checkoutProcessingText}
-                      </>
-                    ) : (
-                      <>
-                        {plan.cta}
-                        <ArrowRight className="w-4 h-4" />
-                      </>
-                    )}
-                  </button>
-                  {checkoutError && isLoading === plan.id && (
-                    <p className="mt-3 text-[13px] text-red-500 text-center font-medium">
-                      {checkoutError}
-                    </p>
-                  )}
+                    {plan.cta}
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
                 </div>
               ))}
             </div>

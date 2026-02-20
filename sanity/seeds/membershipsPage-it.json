@@ -90,7 +90,8 @@
             "description": "Ideale per testare la community e il suo valore.",
             "cta": "Abbonati Mensile",
             "stripePriceId": "price_monthly_id",
-            "popular": false
+            "popular": false,
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/mensile"
         },
         {
             "id": "quarterly",
@@ -101,7 +102,8 @@
             "description": "Risparmia rispetto al piano mensile.",
             "cta": "Abbonati Trimestrale",
             "stripePriceId": "price_quarterly_id",
-            "popular": true
+            "popular": true,
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/trimestrale"
         },
         {
             "id": "annual",
@@ -112,7 +114,8 @@
             "description": "Il miglior valore per membri dedicati.",
             "cta": "Abbonati Annuale",
             "stripePriceId": "price_annual_id",
-            "popular": false
+            "popular": false,
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/annuale"
         }
     ],
     "accessSectionTitle": "Come Funziona l'Accesso",

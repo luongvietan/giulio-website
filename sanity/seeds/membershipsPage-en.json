@@ -90,7 +90,8 @@
             "description": "Best for testing the community and its value.",
             "cta": "Join Monthly",
             "stripePriceId": "price_monthly_id",
-            "popular": false
+            "popular": false,
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/mensile"
         },
         {
             "id": "quarterly",
@@ -101,7 +102,8 @@
             "description": "Saves money compared to the monthly plan.",
             "cta": "Join Quarterly",
             "stripePriceId": "price_quarterly_id",
-            "popular": true
+            "popular": true,
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/trimestrale"
         },
         {
             "id": "annual",
@@ -112,7 +114,8 @@
             "description": "The best value for dedicated members.",
             "cta": "Join Annual",
             "stripePriceId": "price_annual_id",
-            "popular": false
+            "popular": false,
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/annuale"
         }
     ],
     "accessSectionTitle": "How Access Works",

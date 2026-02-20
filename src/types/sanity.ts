@@ -267,6 +267,7 @@ export interface MembershipsPage {
         cta: string
         popular?: boolean
         stripePriceId?: string
+        checkoutUrl?: string
     }>
     popularBadgeText?: string
     accessSectionTitle?: string

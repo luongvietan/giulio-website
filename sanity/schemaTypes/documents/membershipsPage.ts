@@ -230,6 +230,12 @@ export default defineType({
                     defineField({ name: 'cta', title: 'CTA Text', type: 'string' }),
                     defineField({ name: 'popular', title: 'Most Popular', type: 'boolean' }),
                     defineField({ name: 'stripePriceId', title: 'Stripe Price ID', type: 'string' }),
+                    defineField({
+                        name: 'checkoutUrl',
+                        title: 'Checkout URL',
+                        type: 'string',
+                        description: 'External checkout link for this plan (e.g. Railway/bot). Opens in same tab. Leave empty to use legacy Stripe checkout.',
+                    }),
                 ],
                 preview: {
                     select: { title: 'name', subtitle: 'price' },

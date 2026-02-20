@@ -321,7 +321,8 @@ const membershipsPage = {
             description: 'Best for testing the community and its value.',
             cta: 'Join Monthly',
             popular: false,
-            stripePriceId: 'price_monthly_id'
+            stripePriceId: 'price_monthly_id',
+            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/checkout/mensile'
         },
         {
             _key: 'plan-2',
@@ -333,7 +334,8 @@ const membershipsPage = {
             description: 'Saves money compared to the monthly plan.',
             cta: 'Join Quarterly',
             popular: true,
-            stripePriceId: 'price_quarterly_id'
+            stripePriceId: 'price_quarterly_id',
+            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/checkout/trimestrale'
         },
         {
             _key: 'plan-3',
@@ -345,7 +347,8 @@ const membershipsPage = {
             description: 'The best value for dedicated members.',
             cta: 'Join Annual',
             popular: false,
-            stripePriceId: 'price_yearly_id'
+            stripePriceId: 'price_yearly_id',
+            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/checkout/annuale'
         }
     ],
     popularBadgeText: 'Most Popular',
