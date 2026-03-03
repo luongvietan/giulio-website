@@ -9,7 +9,7 @@
     "heroSubtitle": "Institutional Clarity",
     "heroDescription": "Join a private environment dedicated to actionable insights, options flow interpretation, unusual activity monitoring and structured, real-time market guidance — without noise, hype or confusion.",
     "heroPrimaryCta": "Join the Membership",
-    "heroSecondaryCta": "Discover What’s Inside",
+    "heroSecondaryCta": "Discover What's Inside",
     "insideSectionTitle": "What You Will Find Inside the Discord",
     "insideSectionDescription": "The Gamma Capital Discord is designed for investors who want real clarity in fast-moving markets. Inside the private channels you will find:",
     "insideFeatures": [
@@ -62,7 +62,7 @@
             "description": "The same analytical approach used in our consulting work — adapted for daily operational use."
         }
     ],
-    "includedSectionTitle": "What’s Included in the Membership",
+    "includedSectionTitle": "What's Included in the Membership",
     "includedFeatures": [
         "Access to all private Discord channels",
         "Real-time monitoring of institutional options flow",
@@ -116,6 +116,45 @@
             "stripePriceId": "price_annual_id",
             "popular": false,
             "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/annuale"
+        },
+        {
+            "id": "black-label-monthly",
+            "name": "Black Label — Monthly",
+            "price": "€24.99",
+            "priceValue": 24.99,
+            "trial": "3 days free trial",
+            "description": "Access to real-time options flow with algorithmic scoring. Bot-powered alerts on every significant move — filtered and instant.",
+            "cta": "Join Black Label Monthly",
+            "stripePriceId": "price_1T5ZqgEJRFKN7GwZpBsOrU4O",
+            "popular": false,
+            "tier": "black-label",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/mensile_bl"
+        },
+        {
+            "id": "black-label-quarterly",
+            "name": "Black Label — Quarterly",
+            "price": "€68.99",
+            "priceValue": 68.99,
+            "trial": "7 days free trial",
+            "description": "Access to real-time options flow with algorithmic scoring. Bot-powered alerts on every significant move — filtered and instant.",
+            "cta": "Join Black Label Quarterly",
+            "stripePriceId": "price_1T5ZsPEJRFKN7GwZk38rvhCE",
+            "popular": true,
+            "tier": "black-label",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/trimestrale_bl"
+        },
+        {
+            "id": "black-label-annual",
+            "name": "Black Label — Annual",
+            "price": "€269.99",
+            "priceValue": 269.99,
+            "trial": "30 days free trial",
+            "description": "Access to real-time options flow with algorithmic scoring. Bot-powered alerts on every significant move — filtered and instant.",
+            "cta": "Join Black Label Annual",
+            "stripePriceId": "price_1T5ZucEJRFKN7GwZLPDjT2GF",
+            "popular": false,
+            "tier": "black-label",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/annuale_bl"
         }
     ],
     "accessSectionTitle": "How Access Works",
@@ -163,6 +202,10 @@
         {
             "question": "What markets do you focus on?",
             "answer": "Primarily U.S. equities, options and flow-based market signals."
+        },
+        {
+            "question": "What is the Black Label tier?",
+            "answer": "Black Label gives you access to real-time options flow with algorithmic scoring. Every significant market move is detected and notified instantly by our bot, using the same filters we have refined over years of monitoring."
         }
     ],
     "comingSoonTitle": "Coming Soon",
