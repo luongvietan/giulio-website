@@ -2,155 +2,260 @@
     "_id": "membershipsPage-en",
     "_type": "membershipsPage",
     "language": "en",
-    "seoTitle": "Gamma Capital Membership - Private Discord Community",
-    "seoDescription": "Join a private environment dedicated to actionable insights, options flow interpretation, and structured market guidance.",
+    "seoTitle": "Gamma Capital Membership — Choose Your Level of Access",
+    "seoDescription": "Two membership tiers: Premium access to the private Discord community and the Black Label tier with real-time algorithmic flow data and instant bot notifications.",
     "heroBadge": "Membership",
-    "heroTitle": "Premium Discord Access for Serious Market Participants",
-    "heroSubtitle": "Institutional Clarity",
-    "heroDescription": "Join a private environment dedicated to actionable insights, options flow interpretation, unusual activity monitoring and structured, real-time market guidance — without noise, hype or confusion.",
-    "heroPrimaryCta": "Join the Membership",
-    "heroSecondaryCta": "Discover What’s Inside",
-    "insideSectionTitle": "What You Will Find Inside the Discord",
-    "insideSectionDescription": "The Gamma Capital Discord is designed for investors who want real clarity in fast-moving markets. Inside the private channels you will find:",
+    "heroTitle": "Two Tiers. One Mission: Clarity in the Markets.",
+    "heroSubtitle": "Choose the level that fits your style",
+    "heroDescription": "From the manually curated options flow channel to real-time algorithmic monitoring with automatic scoring — choose the depth that matches your operational approach.",
+    "heroPrimaryCta": "Discover Black Label",
+    "heroSecondaryCta": "Compare Plans",
+
+    "insideSectionTitle": "Two Experiences, Two Levels of Depth",
+    "insideSectionDescription": "Every membership gives you access to the private Gamma Capital Discord community. The difference is in the tools available and the intensity of the information flow.",
+
     "insideFeatures": [
         {
+            "icon": "Users",
+            "text": "Access to the private Discord community and shared channels"
+        },
+        {
             "icon": "TrendingUp",
-            "text": "Real-time monitoring of institutional flows and unusual options activity"
+            "text": "Options flow channel with signals manually curated by the Gamma Capital team"
         },
         {
             "icon": "BarChart3",
-            "text": "Daily market analysis on key U.S. equities and macro drivers"
+            "text": "Daily newsletter with the most relevant market news"
         },
         {
-            "icon": "Zap",
-            "text": "Fast alerts on anomalous moves and high-potential setups"
-        },
-        {
-            "icon": "MessageSquare",
-            "text": "Private discussions within a high-quality community of motivated members"
+            "icon": "Calendar",
+            "text": "Daily summary of upcoming macro events that can move the markets"
         },
         {
             "icon": "GraduationCap",
-            "text": "Educational material, including introductory modules on options and flow interpretation"
+            "text": "Introductory educational material on options, flows and smart money logic"
+        },
+        {
+            "icon": "Zap",
+            "text": "Black Label only: real-time algorithmic flow data with automatic scoring and instant bot notifications"
         }
     ],
-    "benefitsSectionTitle": "Key Benefits of Joining",
+
+    "benefitsSectionTitle": "Why Choose Gamma Capital",
     "keyBenefits": [
         {
             "icon": "BookOpen",
-            "title": "Structured Insights",
-            "description": "Receive disciplined, well-organized market insights — not noise or speculation."
+            "title": "Structured Signals, Not Noise",
+            "description": "Every flagged flow passes through filters refined over years. No spam, no hype — only what matters."
         },
         {
             "icon": "Zap",
             "title": "Early Information Advantage",
-            "description": "Monitor institutional behavior and unusual activity before the majority of retail traders even notice."
+            "description": "Monitor institutional behavior before the majority of retail traders even notice."
         },
         {
             "icon": "Users",
-            "title": "A Clean, Serious Community",
-            "description": "A curated space for investors who want focus, clarity and real analysis."
-        },
-        {
-            "icon": "GraduationCap",
-            "title": "Educational Foundation",
-            "description": "Access introductory material that helps you understand options, flows and smart money logic."
+            "title": "A Serious, Curated Community",
+            "description": "A private environment for investors who want focus, real analysis and zero confusion."
         },
         {
             "icon": "Target",
             "title": "Proven Methodology",
-            "description": "The same analytical approach used in our consulting work — adapted for daily operational use."
+            "description": "The same analytical approach used in our institutional consulting — adapted for daily operational use."
+        },
+        {
+            "icon": "GraduationCap",
+            "title": "Educational Foundation Included",
+            "description": "Even if you're just starting, the introductory material guides you through options, flows and the logic behind smart money moves."
         }
     ],
-    "includedSectionTitle": "What’s Included in the Membership",
+
+    "includedSectionTitle": "What Each Tier Includes",
+
     "includedFeatures": [
-        "Access to all private Discord channels",
-        "Real-time monitoring of institutional options flow",
-        "Daily commentary on high-impact market events",
-        "Fast alerts on unusual activity and high-potential setups",
-        "Priority access to community discussions",
-        "Automatic Premium role assignment after purchase"
+        "✅ Access to private Discord community and shared channels",
+        "✅ Options flow channel with manually curated signals from the team",
+        "✅ Daily newsletter with the main market news",
+        "✅ Daily summary of upcoming macro events",
+        "✅ Introductory educational material (options, flows, smart money)"
     ],
-    "educationalMiniCourseTitle": "Educational mini-course:",
+
+    "educationalMiniCourseTitle": "Included educational mini-course:",
     "educationalItems": [
         "how options work",
         "how to read institutional flows",
         "how to operate with smart-money logic"
     ],
-    "includedTagline": "Everything is designed to support your decision-making with clarity and focus.",
-    "pricingSectionTitle": "Membership Tiers",
-    "pricingSectionDescription": "All plans include the full premium experience. The only difference is the duration.",
+    "includedTagline": "The Premium plan gives you access to the community and the team's insights. Black Label puts you ahead of every move before it happens.",
+
+    "pricingSectionTitle": "Choose Your Tier",
+    "pricingSectionDescription": "The Premium plan gives you full access to the community and the content curated by the team. Black Label adds the algorithmic layer: real-time flows, automatic scoring and instant bot notifications on every relevant move — using the proprietary filters we have refined over years of market monitoring.",
+
     "plans": [
         {
             "id": "monthly",
-            "name": "Monthly Plan",
+            "name": "Premium — Monthly",
             "price": "€19.99",
             "priceValue": 19.99,
             "trial": "3 days free trial",
-            "description": "Best for testing the community and its value.",
-            "cta": "Join Monthly",
+            "description": "Full access to the community, manually curated flow signals, daily newsletter and educational material.",
+            "cta": "Join Premium Monthly",
             "stripePriceId": "price_monthly_id",
             "popular": false,
-            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/mensile"
+            "tier": "premium",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/mensile",
+            "features": [
+                "Private Discord channels access",
+                "Manually curated options flow signals",
+                "Daily newsletter",
+                "Daily macro events calendar",
+                "Introductory educational material"
+            ]
         },
         {
             "id": "quarterly",
-            "name": "Quarterly Plan",
+            "name": "Premium — Quarterly",
             "price": "€54.99",
             "priceValue": 54.99,
             "trial": "7 days free trial",
-            "description": "Saves money compared to the monthly plan.",
-            "cta": "Join Quarterly",
+            "description": "Full access to the community, manually curated flow signals, daily newsletter and educational material.",
+            "cta": "Join Premium Quarterly",
             "stripePriceId": "price_quarterly_id",
-            "popular": true,
-            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/trimestrale"
+            "popular": false,
+            "tier": "premium",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/trimestrale",
+            "features": [
+                "Private Discord channels access",
+                "Manually curated options flow signals",
+                "Daily newsletter",
+                "Daily macro events calendar",
+                "Introductory educational material"
+            ]
         },
         {
             "id": "annual",
-            "name": "Annual Plan",
+            "name": "Premium — Annual",
             "price": "€219.99",
             "priceValue": 219.99,
             "trial": "30 days free trial",
-            "description": "The best value for dedicated members.",
-            "cta": "Join Annual",
+            "description": "Full access to the community, manually curated flow signals, daily newsletter and educational material.",
+            "cta": "Join Premium Annual",
             "stripePriceId": "price_annual_id",
             "popular": false,
-            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/annuale"
+            "tier": "premium",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/annuale",
+            "features": [
+                "Private Discord channels access",
+                "Manually curated options flow signals",
+                "Daily newsletter",
+                "Daily macro events calendar",
+                "Introductory educational material"
+            ]
+        },
+        {
+            "id": "black-label-monthly",
+            "name": "Black Label — Monthly",
+            "price": "€24.99",
+            "priceValue": 24.99,
+            "trial": "3 days free trial",
+            "description": "Everything in Premium, plus real-time options flow with algorithmic scoring. The bot notifies you of every relevant move — instantly, using our proprietary filters.",
+            "cta": "Join Black Label Monthly",
+            "stripePriceId": "price_1T5ZqgEJRFKN7GwZpBsOrU4O",
+            "popular": false,
+            "tier": "black-label",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/mensile_bl",
+            "features": [
+                "Everything in Premium included",
+                "Real-time algorithmic options flow",
+                "Automatic scoring on every flow",
+                "Instant bot notifications on every move",
+                "Proprietary filters refined over years"
+            ]
+        },
+        {
+            "id": "black-label-quarterly",
+            "name": "Black Label — Quarterly",
+            "price": "€68.99",
+            "priceValue": 68.99,
+            "trial": "7 days free trial",
+            "description": "Everything in Premium, plus real-time options flow with algorithmic scoring. The bot notifies you of every relevant move — instantly, using our proprietary filters.",
+            "cta": "Join Black Label Quarterly",
+            "stripePriceId": "price_1T5ZsPEJRFKN7GwZk38rvhCE",
+            "popular": true,
+            "tier": "black-label",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/trimestrale_bl",
+            "features": [
+                "Everything in Premium included",
+                "Real-time algorithmic options flow",
+                "Automatic scoring on every flow",
+                "Instant bot notifications on every move",
+                "Proprietary filters refined over years"
+            ]
+        },
+        {
+            "id": "black-label-annual",
+            "name": "Black Label — Annual",
+            "price": "€269.99",
+            "priceValue": 269.99,
+            "trial": "30 days free trial",
+            "description": "Everything in Premium, plus real-time options flow with algorithmic scoring. The bot notifies you of every relevant move — instantly, using our proprietary filters.",
+            "cta": "Join Black Label Annual",
+            "stripePriceId": "price_1T5ZucEJRFKN7GwZLPDjT2GF",
+            "popular": false,
+            "tier": "black-label",
+            "checkoutUrl": "https://gammacap-bot-production.up.railway.app/checkout/annuale_bl",
+            "features": [
+                "Everything in Premium included",
+                "Real-time algorithmic options flow",
+                "Automatic scoring on every flow",
+                "Instant bot notifications on every move",
+                "Proprietary filters refined over years"
+            ]
         }
     ],
+
     "accessSectionTitle": "How Access Works",
     "accessSteps": [
         {
             "step": 1,
-            "title": "Select Plan",
-            "description": "Select the plan you prefer and complete the checkout via Stripe."
+            "title": "Choose Your Tier",
+            "description": "Select Premium or Black Label and choose the duration that works for you."
         },
         {
             "step": 2,
-            "title": "Activation",
-            "description": "Your Premium role on Discord is activated automatically."
+            "title": "Checkout via Stripe",
+            "description": "Secure payment in seconds. No manual data entry required."
         },
         {
             "step": 3,
-            "title": "Access",
-            "description": "You gain instant access to all private channels and educational materials."
+            "title": "Role Activated",
+            "description": "Your Discord role is assigned automatically after payment."
         },
         {
             "step": 4,
-            "title": "Freedom",
-            "description": "At expiration, you can renew or cancel freely — your role adjusts accordingly."
+            "title": "Instant Access",
+            "description": "You're in immediately. At expiration, renew or cancel freely — your role updates accordingly."
         }
     ],
     "accessTagline": "No friction, no manual steps, no waiting.",
+
     "faqSectionTitle": "FAQ",
     "faqs": [
         {
-            "question": "Do I need trading experience to join?",
-            "answer": "Basic market knowledge helps, but the community is designed to be accessible even for investors who are still learning."
+            "question": "What is the difference between Premium and Black Label?",
+            "answer": "The Premium plan includes access to the Discord community, manually curated flow signals from the team, the daily newsletter, the macro calendar and educational material. Black Label adds the full algorithmic layer: real-time flows with automatic scoring and instant bot notifications on every relevant move, filtered using our proprietary parameters."
         },
         {
-            "question": "Are signals provided?",
-            "answer": "No. We offer structure, context and strategic insights — not blind trade calls."
+            "question": "Does Black Label include everything in Premium?",
+            "answer": "Yes. Black Label is a higher tier that includes everything in Premium, plus access to the real-time algorithmic layer."
+        },
+        {
+            "question": "Do I need trading experience to join?",
+            "answer": "Basic market knowledge helps, but the community is designed to be accessible even for investors who are still learning. The educational material is included for exactly this reason."
+        },
+        {
+            "question": "Do you provide trade signals?",
+            "answer": "No. We provide structure, context and strategic insights — not blind trade calls. The operational decision always remains yours."
         },
         {
             "question": "Can I cancel anytime?",
@@ -162,19 +267,21 @@
         },
         {
             "question": "What markets do you focus on?",
-            "answer": "Primarily U.S. equities, options and flow-based market signals."
+            "answer": "Primarily U.S. equities, options and flow-based signals tied to institutional activity."
         }
     ],
+
     "comingSoonTitle": "Coming Soon",
     "comingSoonDescription": "Gamma Capital constantly evolves. New tools and channels will be added progressively, including:",
     "comingSoonFeatures": [
-        "enhanced flow dashboards",
-        "educational modules",
-        "deeper analytical channels",
+        "advanced flow dashboards",
+        "in-depth educational modules",
+        "dedicated analytical channels",
         "periodic market breakdowns"
     ],
-    "comingSoonNote": "Premium members will receive access automatically as these features roll out.",
-    "finalCtaTitle": "Join the Gamma Capital Discord",
-    "finalCtaDescription": "Gain clarity, structure and early insight in markets that reward prepared investors.",
-    "finalCtaButton": "Choose Your Membership Plan"
+    "comingSoonNote": "Both Premium and Black Label members will receive access automatically as these features roll out.",
+
+    "finalCtaTitle": "Ready to See the Markets with More Clarity?",
+    "finalCtaDescription": "Choose the access level that fits your approach. Join the community, or go straight to the algorithmic layer with Black Label.",
+    "finalCtaButton": "Choose Your Plan"
 }
