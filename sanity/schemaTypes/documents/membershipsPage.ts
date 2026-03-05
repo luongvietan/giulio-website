@@ -236,6 +236,12 @@ export default defineType({
                         type: 'string',
                         description: 'External checkout link for this plan (e.g. Railway/bot). Opens in same tab. Leave empty to use legacy Stripe checkout.',
                     }),
+                    defineField({ name: 'tier', title: 'Tier', type: 'string',
+                        description: 'Use "premium" or "black-label"',
+                    }),
+                    defineField({ name: 'features', title: 'Plan Features', type: 'array',
+                        of: [{ type: 'string' }],
+                    }),
                 ],
                 preview: {
                     select: { title: 'name', subtitle: 'price' },
