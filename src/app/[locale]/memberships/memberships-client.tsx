@@ -471,10 +471,13 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
               {plans.map((plan) => (
                 <div
                   key={plan.id}
-                  className={`pricing-card relative bg-white rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl ${plan.popular
-                    ? 'border-[#2563EB] shadow-lg ring-1 ring-[#2563EB]/20'
-                    : 'border-[#E5E7EB] hover:border-[#2563EB]/40'
-                    }`}
+                  className={`pricing-card relative rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl ${
+                    plan.tier === 'black-label'
+                      ? 'bg-[#0A1A2F] border-[#1E3A8A] text-white shadow-lg ring-1 ring-[#2563EB]/30'
+                      : plan.popular
+                        ? 'bg-white border-[#2563EB] shadow-lg ring-1 ring-[#2563EB]/20'
+                        : 'bg-white border-[#E5E7EB] hover:border-[#2563EB]/40'
+                  }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
@@ -484,27 +487,54 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                       </span>
                     </div>
                   )}
-
+                
+                  {plan.tier === 'black-label' && (
+                    <div className="absolute -top-3 right-4">
+                      <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white text-[11px] font-semibold uppercase tracking-wide rounded-full">
+                        Black Label
+                      </span>
+                    </div>
+                  )}
+                
                   <div className="text-center mb-6">
-                    <h3 className="text-[20px] font-semibold text-[#111827] mb-2">{plan.name}</h3>
+                    <h3 className={`text-[20px] font-semibold mb-2 ${plan.tier === 'black-label' ? 'text-white' : 'text-[#111827]'}`}>
+                      {plan.name}
+                    </h3>
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-[42px] font-bold text-[#111827]">{plan.price}</span>
+                      <span className={`text-[42px] font-bold ${plan.tier === 'black-label' ? 'text-white' : 'text-[#111827]'}`}>
+                        {plan.price}
+                      </span>
                     </div>
                     <div className="flex items-center justify-center gap-2 mt-3">
-                      <Clock className="w-4 h-4 text-[#2563EB]" />
-                      <span className="text-[13px] text-[#2563EB] font-medium">
+                      <Clock className={`w-4 h-4 ${plan.tier === 'black-label' ? 'text-blue-400' : 'text-[#2563EB]'}`} />
+                      <span className={`text-[13px] font-medium ${plan.tier === 'black-label' ? 'text-blue-400' : 'text-[#2563EB]'}`}>
                         {plan.trial} {uiStrings?.freeTrialSuffix ?? ''}
                       </span>
                     </div>
                   </div>
-
-                  <p className="text-[14px] text-[#6B7280] text-center mb-6 min-h-[40px]">
+                
+                  <p className={`text-[14px] text-center mb-6 min-h-[40px] ${plan.tier === 'black-label' ? 'text-white/70' : 'text-[#6B7280]'}`}>
                     {plan.description}
                   </p>
-
-                  <a
+                
+                  {plan.features && plan.features.length > 0 && (
+                    <div className="mb-6 space-y-2">
+                      {plan.features.map((feature: string, i: number) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <Check className={`w-4 h-4 flex-shrink-0 ${plan.tier === 'black-label' ? 'text-blue-400' : 'text-[#2563EB]'}`} />
+                          <span className={`text-[13px] ${plan.tier === 'black-label' ? 'text-white/80' : 'text-[#374151]'}`}>
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                
+                  
                     href={getCheckoutUrl(plan)}
-                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl text-[14px] font-semibold transition-all duration-200 ${plan.popular
+                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl text-[14px] font-semibold transition-all duration-200 ${plan.tier === 'black-label'
+                      ? 'bg-[#2563EB] hover:bg-[#1D4ED8] text-white'
+                      : plan.popular
                       ? 'bg-[#2563EB] text-white hover:bg-[#1E3A8A]'
                       : 'bg-[#0A1A2F] text-white hover:bg-[#27272a]'
                       }`}
