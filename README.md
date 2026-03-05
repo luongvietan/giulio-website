@@ -2,6 +2,7 @@
 
 A high-performance, institutional-grade website built with **Next.js 15** and **Sanity CMS v4**, designed for Gamma Capital. The platform delivers market intelligence, strategic advisory, and premium membership services with a focus on visual performance and global accessibility via modern localization patterns.
 
+
 ## 🚀 Tech Stack
 
 - **Framework**: [Next.js 15.1+](https://nextjs.org/) (App Router, Server Components)
