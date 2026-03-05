@@ -268,6 +268,8 @@ export interface MembershipsPage {
         popular?: boolean
         stripePriceId?: string
         checkoutUrl?: string
+        tier?: string
+        features?: string[]
     }>
     popularBadgeText?: string
     accessSectionTitle?: string
