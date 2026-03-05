@@ -232,7 +232,7 @@ export const MEMBERSHIPS_PAGE_QUERY = defineQuery(`
     pricingSectionTitle,
     pricingSectionDescription,
     plans[] {
-      id, name, price, priceValue, trial, description, cta, popular, stripePriceId, checkoutUrl
+      id, name, price, priceValue, trial, description, cta, popular, stripePriceId, checkoutUrl, tier, features
     },
     popularBadgeText,
     accessSectionTitle,
