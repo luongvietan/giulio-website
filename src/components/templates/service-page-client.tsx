@@ -52,56 +52,13 @@ export default function ServicePageClient({ pageData, siteSettings, defaultBadge
     const badgeRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const paragraphRef = useRef<HTMLParagraphElement>(null);
-    const ctaButtonRef = useRef<HTMLAnchorElement>(null);
-    const cardsRef = useRef<HTMLDivElement>(null);
     const ctaRef = useRef<HTMLElement>(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-        tl.fromTo(
-            badgeRef.current,
-            { opacity: 0, y: -20, scale: 0.9 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.7 }
-        )
-            .fromTo(
-                titleRef.current,
-                { opacity: 0, y: 50, clipPath: "inset(100% 0% 0% 0%)" },
-                { opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)", duration: 0.9 },
-                "-=0.4"
-            )
-            .fromTo(
-                paragraphRef.current,
-                { opacity: 0, y: 30 },
-                { opacity: 1, y: 0, duration: 0.7 },
-                "-=0.5"
-            )
-            .fromTo(
-                ctaButtonRef.current,
-                { opacity: 0, y: 20, scale: 0.95 },
-                { opacity: 1, y: 0, scale: 1, duration: 0.6 },
-                "-=0.4"
-            );
-
-        if (cardsRef.current) {
-            gsap.fromTo(
-                cardsRef.current.children,
-                { opacity: 0, y: 50, scale: 0.95 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 0.8,
-                    stagger: 0.15,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: cardsRef.current,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        }
+        const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+        tl.fromTo(badgeRef.current, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.4 })
+            .fromTo(titleRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.2")
+            .fromTo(paragraphRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 }, "-=0.25");
 
         gsap.fromTo(
             ctaRef.current,
@@ -121,70 +78,46 @@ export default function ServicePageClient({ pageData, siteSettings, defaultBadge
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#F8F9FB]">
+        <div className="min-h-screen bg-[#fafafa]">
             <NavigationHeader siteSettings={siteSettings} />
             <main>
-                <section ref={heroRef} className="w-full bg-[#F8F9FB] py-12 md:py-24 px-6 md:px-12">
+                {/* Hero */}
+                <section ref={heroRef} className="w-full bg-[#fafafa] py-16 md:py-24 px-6 md:px-12">
                     <div className="max-w-[1200px] mx-auto text-center">
                         <div ref={badgeRef} className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-full mb-8">
-                            <Network className="w-4 h-4 text-[#2563EB]" />
+                            <TrendingUp className="w-4 h-4 text-[#2563EB]" />
                             <span className="text-[12px] font-medium text-[#2563EB] tracking-wide uppercase">{heroBadge}</span>
                         </div>
                         <h1 ref={titleRef} className="text-[36px] md:text-[48px] font-display font-medium tracking-[-0.03em] leading-[1.1] mb-6 text-[#111827]">
                             {heroTitle.replace(heroSubtitle, '')}
-                            {heroSubtitle && <><br /><span className="text-[#6B7280]">{heroSubtitle}</span></>}
+                            <span className="text-[#6B7280]">{heroSubtitle}</span>
                         </h1>
-                        <p ref={paragraphRef} className="text-[17px] text-[#6B7280] font-normal leading-relaxed max-w-xl mx-auto mb-10">
+                        <p ref={paragraphRef} className="text-[17px] text-[#6B7280] font-normal leading-relaxed max-w-xl mx-auto mb-8">
                             {heroDescription}
                         </p>
                         <Link
-                            ref={ctaButtonRef}
                             href={heroCtaLink}
-                            className="inline-block bg-[#0A1A2F] text-white px-7 py-3.5 rounded-md text-[14px] font-semibold hover:bg-[#1E3A8A] transition-colors"
+                            className="inline-flex items-center gap-2 bg-[#0A1A2F] text-white px-7 py-3.5 rounded-xl text-[14px] font-semibold hover:bg-[#1E3A8A] transition-colors"
                         >
                             {heroCtaText}
+                            <ArrowUpRight className="w-4 h-4" />
                         </Link>
                     </div>
                 </section>
 
-                <div className="flex flex-col">
+                {/* Services */}
+                <div>
                     {services.map((service, index) => {
-                        const IconComponent = iconMap[service.icon || ''] || Briefcase;
-                        const isNetwork = service.title?.toLowerCase().includes('network');
-                        const isCore = service.title?.toLowerCase().includes('(core)');
+                        const IconComponent = iconMap[service.icon || ''] || BarChart3;
+                        const hasLink = !service.linkUrl;
 
-                        // Core Section - Centered, Highlighted
-                        if (isCore) {
+                        // Special "list" layout — first service if layout is list
+                        if (pageData?.layout === 'list' && index === 0) {
                             return (
-                                <section key={index} className="w-full bg-white py-20 md:py-32 px-6 md:px-12 border-b border-[#E5E7EB]">
-                                    <div className="max-w-[900px] mx-auto text-center">
-                                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#eff4ff] text-[#2563EB] mb-8 ring-1 ring-[#dbeafe]">
-                                            <IconComponent className="w-8 h-8" />
-                                        </div>
-                                        <h2 className="text-[32px] md:text-[42px] font-display font-medium text-[#111827] mb-6 leading-tight">
-                                            {service.title}
-                                        </h2>
-                                        <p className="text-[18px] md:text-[20px] text-[#4B5563] leading-relaxed whitespace-pre-wrap">
-                                            {service.description}
-                                        </p>
-                                    </div>
-                                </section>
-                            );
-                        }
-
-                        // Network Section - Dark Mode, Distinctive
-                        if (isNetwork) {
-                            return (
-                                <section key={index} className="w-full bg-[#0B1120] text-white py-20 md:py-32 px-6 md:px-12 relative overflow-hidden">
-                                    <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                                        <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-[#2563EB] rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-                                        <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-[#7C3AED] rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
-                                    </div>
-
+                                <section key={index} className="w-full py-16 md:py-24 px-6 md:px-12 bg-gradient-to-br from-[#0A1A2F] to-[#111827] text-white">
                                     <div className="max-w-[1200px] mx-auto relative z-10">
                                         <div className="flex flex-col lg:flex-row gap-16 items-center">
                                             <div className="flex-1">
-                                                {/* Removed hardcoded "Exclusive Access" badge */}
                                                 <h2 className="text-[36px] md:text-[48px] font-display font-medium mb-6 leading-tight">
                                                     {service.title}
                                                 </h2>
@@ -229,13 +162,13 @@ export default function ServicePageClient({ pageData, siteSettings, defaultBadge
                             );
                         }
 
-                        // Standard Section - Alternating Layout
+                        // Standard Section — Alternating Layout
                         const isEven = index % 2 === 0;
 
                         return (
                             <section key={index} className={`w-full py-16 md:py-24 px-6 md:px-12 ${isEven ? 'bg-[#F8F9FB]' : 'bg-white'}`}>
                                 <div className="max-w-[1200px] mx-auto">
-                                    <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-start`}>
+                                    <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-center`}>
 
                                         {/* Content Side */}
                                         <div className="flex-1">
@@ -274,27 +207,31 @@ export default function ServicePageClient({ pageData, siteSettings, defaultBadge
                                             )}
                                         </div>
 
-                                        {/* Visual Side (Abstract Representation since we don't have images) */}
-                                        <div className="w-full lg:w-[45%]">
-                                            <div className={`aspect-[4/3] rounded-2xl border border-[#E5E7EB] bg-white p-8 flex flex-col justify-between shadow-sm relative overflow-hidden ${isEven ? '' : 'bg-gradient-to-br from-[#eff4ff] to-white'}`}>
-                                                {/* Dictionary/Journal style abstract visual */}
-                                                <div className="absolute top-0 right-0 p-8 opacity-5">
-                                                    <IconComponent className="w-64 h-64" />
-                                                </div>
-
-                                                <div className="relative z-10">
-                                                    <div className="w-12 h-1 bg-[#2563EB] mb-6" />
-                                                    <div className="space-y-4 opacity-30">
-                                                        <div className="h-4 bg-[#111827] rounded w-3/4" />
-                                                        <div className="h-4 bg-[#111827] rounded w-full" />
-                                                        <div className="h-4 bg-[#111827] rounded w-5/6" />
-                                                        <div className="h-4 bg-[#111827] rounded w-2/3" />
+                                        {/* Visual Side — Clean icon card */}
+                                        <div className="w-full lg:w-[42%] flex-shrink-0">
+                                            <div className={`aspect-[4/3] rounded-2xl flex items-center justify-center relative overflow-hidden ${isEven ? 'bg-gradient-to-br from-[#EFF6FF] to-[#F0F7FF] border border-[#DBEAFE]' : 'bg-gradient-to-br from-[#F8F9FB] to-white border border-[#E5E7EB]'}`}>
+                                                {/* Subtle dot grid */}
+                                                <div
+                                                    className="absolute inset-0 opacity-[0.035]"
+                                                    style={{
+                                                        backgroundImage: 'radial-gradient(circle, #2563EB 1px, transparent 0)',
+                                                        backgroundSize: '32px 32px'
+                                                    }}
+                                                />
+                                                {/* Decorative circles */}
+                                                <div className="absolute top-5 right-5 w-20 h-20 rounded-full border border-[#2563EB]/10 bg-[#2563EB]/5" />
+                                                <div className="absolute bottom-5 left-5 w-12 h-12 rounded-full border border-[#2563EB]/10 bg-[#2563EB]/5" />
+                                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-[#2563EB]/5" />
+                                                {/* Icon */}
+                                                <div className="relative z-10 flex flex-col items-center gap-5">
+                                                    <div className="w-24 h-24 rounded-3xl bg-white shadow-xl shadow-[#2563EB]/10 border border-[#E5E7EB]/80 flex items-center justify-center">
+                                                        <IconComponent className="w-12 h-12 text-[#2563EB]" />
                                                     </div>
-                                                </div>
-
-                                                <div className="relative z-10 mt-auto pt-8 border-t border-dashed border-gray-200">
-                                                    {/* Removed hardcoded REF text */}
-                                                    <div className="w-full h-px bg-gray-100" />
+                                                    <div className="flex gap-2 items-center">
+                                                        <div className="w-1.5 h-1.5 rounded-full bg-[#2563EB]/25" />
+                                                        <div className="w-1.5 h-1.5 rounded-full bg-[#2563EB]/60" />
+                                                        <div className="w-1.5 h-1.5 rounded-full bg-[#2563EB]/25" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -306,13 +243,12 @@ export default function ServicePageClient({ pageData, siteSettings, defaultBadge
                     })}
                 </div>
 
+                {/* CTA */}
                 <section ref={ctaRef} className="w-full bg-[#F3F4F6] py-12 md:py-20 px-6 md:px-12 border-t border-[#E5E7EB]">
                     <div className="max-w-[700px] mx-auto text-center">
                         <h2 className="text-[28px] md:text-[36px] font-medium text-[#111827] mb-5">{ctaTitle}</h2>
                         {ctaDescription && (
-                            <p className="text-[16px] text-[#6B7280] mb-8">
-                                {ctaDescription}
-                            </p>
+                            <p className="text-[16px] text-[#6B7280] mb-8">{ctaDescription}</p>
                         )}
                         <div className="flex flex-col sm:flex-row gap-3 justify-center">
                             <Link
