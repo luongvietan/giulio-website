@@ -479,7 +479,7 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                         : 'bg-white border-[#E5E7EB] hover:border-[#2563EB]/40'
                   }`}
                 >
-                  {plan.popular && (
+                  {plan.popular && plan.tier !== 'black-label' && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                       <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#2563EB] text-white text-[11px] font-semibold uppercase tracking-wide rounded-full">
                         <Sparkles className="w-3 h-3" />
@@ -487,15 +487,24 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                       </span>
                     </div>
                   )}
-                
+
+                  {plan.tier === 'black-label' && plan.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                      <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white text-[11px] font-semibold uppercase tracking-wide rounded-full">
+                        <Sparkles className="w-3 h-3" />
+                        {popularBadgeText}
+                      </span>
+                    </div>
+                  )}
+
                   {plan.tier === 'black-label' && (
                     <div className="absolute -top-3 right-4">
-                      <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white text-[11px] font-semibold uppercase tracking-wide rounded-full">
+                      <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-[#1E3A8A] to-[#0A1A2F] border border-[#2563EB]/40 text-white text-[11px] font-semibold uppercase tracking-wide rounded-full">
                         Black Label
                       </span>
                     </div>
                   )}
-                
+
                   <div className="text-center mb-6">
                     <h3 className={`text-[20px] font-semibold mb-2 ${plan.tier === 'black-label' ? 'text-white' : 'text-[#111827]'}`}>
                       {plan.name}
@@ -512,11 +521,11 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                       </span>
                     </div>
                   </div>
-                
+
                   <p className={`text-[14px] text-center mb-6 min-h-[40px] ${plan.tier === 'black-label' ? 'text-white/70' : 'text-[#6B7280]'}`}>
                     {plan.description}
                   </p>
-                
+
                   {plan.features && plan.features.length > 0 && (
                     <div className="mb-6 space-y-2">
                       {plan.features.map((feature: string, i: number) => (
@@ -529,15 +538,16 @@ export default function MembershipsPageClient({ pageData, siteSettings, uiString
                       ))}
                     </div>
                   )}
-                
-                  
+
+                  <a
                     href={getCheckoutUrl(plan)}
-                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl text-[14px] font-semibold transition-all duration-200 ${plan.tier === 'black-label'
-                      ? 'bg-[#2563EB] hover:bg-[#1D4ED8] text-white'
-                      : plan.popular
-                      ? 'bg-[#2563EB] text-white hover:bg-[#1E3A8A]'
-                      : 'bg-[#0A1A2F] text-white hover:bg-[#27272a]'
-                      }`}
+                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl text-[14px] font-semibold transition-all duration-200 ${
+                      plan.tier === 'black-label'
+                        ? 'bg-[#2563EB] hover:bg-[#1D4ED8] text-white'
+                        : plan.popular
+                          ? 'bg-[#0A1A2F] hover:bg-[#1E3A8A] text-white'
+                          : 'bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#111827]'
+                    }`}
                   >
                     {plan.cta}
                     <ArrowRight className="w-4 h-4" />
