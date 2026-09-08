@@ -8,7 +8,7 @@ const client = createClient({
     projectId: 'rm9kkope',
     dataset: 'production',
     apiVersion: '2024-01-01',
-    token: 'skOUtsAh1nD2puWGAGlcM5V9PZ6cYctduaFM9AuTbfoxoG0Jkiiu4hEBF4rZoI1VhLCA5tABIZj83zWdpqrvTl8xiF8d0P4axzEz93nhsl5nbisEwCtKC5JQFezOdAydh0726wEVrhVxEX8zLFwZ6OGqtCmRbg4cXcdSuVG9jnxlKbqtJJ5x',
+    token: process.env.SANITY_WRITE_TOKEN,
     useCdn: false,
 })
 
