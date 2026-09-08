@@ -8,7 +8,7 @@ const client = createClient({
     projectId: 'rm9kkope',
     dataset: 'production',
     apiVersion: '2024-01-01',
-    token: 'skOUtsAh1nD2puWGAGlcM5V9PZ6cYctduaFM9AuTbfoxoG0Jkiiu4hEBF4rZoI1VhLCA5tABIZj83zWdpqrvTl8xiF8d0P4axzEz93nhsl5nbisEwCtKC5JQFezOdAydh0726wEVrhVxEX8zLFwZ6OGqtCmRbg4cXcdSuVG9jnxlKbqtJJ5x',
+    token: process.env.SANITY_WRITE_TOKEN,
     useCdn: false,
 })
 
@@ -322,7 +322,7 @@ const membershipsPage = {
             cta: 'Join Monthly',
             popular: false,
             stripePriceId: 'price_monthly_id',
-            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/upgrade/mensile'
+            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/checkout/mensile'
         },
         {
             _key: 'plan-2',
@@ -335,7 +335,7 @@ const membershipsPage = {
             cta: 'Join Quarterly',
             popular: true,
             stripePriceId: 'price_quarterly_id',
-            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/upgrade/trimestrale'
+            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/checkout/trimestrale'
         },
         {
             _key: 'plan-3',
@@ -348,7 +348,7 @@ const membershipsPage = {
             cta: 'Join Annual',
             popular: false,
             stripePriceId: 'price_yearly_id',
-            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/upgrade/annuale'
+            checkoutUrl: 'https://gammacap-bot-production.up.railway.app/checkout/annuale'
         }
     ],
     popularBadgeText: 'Most Popular',
